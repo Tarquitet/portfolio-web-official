@@ -1,4 +1,3 @@
-- [ ] **Migración Verdad & Fe:** Mover el proyecto "Verdad & Fe" a la infraestructura/hosting de Tarquitet.
 - [ ] DISEÑAR .ICO
 - [ ] **Web In-Mortal:**
   - Terminar diseño en Figma.
