@@ -1,0 +1,516 @@
+/**
+ * ============================================================================
+ * TARQUITET PORTFOLIO ENGINE V4.0 (EXPANDABLE HORIZONTAL FEED)
+ * ============================================================================
+ * Arquitectura: POO + DRY
+ * Dependencias: data.js (mainPortfolio, galleryData, skillsData)
+ * Librerías: Lucide Icons, RSS2JSON
+ */
+
+// 1. CONFIGURACIÓN GLOBAL
+const CONFIG = {
+  DOM: {
+    loader: 'preloader',
+    loaderText: 'load-perc',
+    cursorDot: 'cursor-dot',
+    cursorCircle: 'cursor-circle',
+    lists: {
+      prof: 'list-prof',
+      personal: 'list-personal',
+      univ: 'list-univ',
+    },
+    tickers: { t1: 'hero-ticker-1', t2: 'hero-ticker-2' },
+    footerYear: 'footer-year',
+    toast: 'toast',
+  },
+  API: {
+    youtubeChannel: 'UCbUqReTGxLD78ohs97ylepA',
+    rssBase: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=',
+  },
+};
+
+// 2. UTILIDADES (Helpers puros)
+const Utils = {
+  formatTags: (tags, limit = 2) => tags?.slice(0, limit).join(' / ').toUpperCase() || '',
+
+  copyToClipboard: (text, toastId) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById(toastId);
+        if (toast) {
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+      });
+    }
+  },
+
+  getActionBtn: (link) => (link ? `<a href="${link}" target="_blank" class="btn-sys">VER PROYECTO</a>` : ''),
+};
+
+// 3. CLASE PRINCIPAL
+class PortfolioApp {
+  constructor() {
+    this.data = typeof mainPortfolio !== 'undefined' ? mainPortfolio : [];
+    this.gallery = typeof galleryData !== 'undefined' ? galleryData : [];
+    this.skills = typeof skillsData !== 'undefined' ? skillsData : [];
+    this.init();
+  }
+
+  init() {
+    // 1. Renderizado de Secciones (Motor Dual Preview/Gallery)
+    this.renderDevSection();
+    this.renderVideoSection(); // Async
+    this.renderDesignSection();
+    this.renderGallery();
+
+    // 2. Renderizado de Database (Histórico)
+    this.renderDatabase();
+
+    // 3. Efectos UI & Interacción
+    this.initLoader();
+    this.initTicker();
+    this.initHeroInteraction();
+    this.initCursor();
+    this.initTypewriter();
+    this.initThemeSwitcher();
+    this.initTabs();
+    this.initCopyActions();
+    this.initModals();
+
+    // 4. Lógica de Expansión (Botón VER +)
+    this.initFeedToggles();
+
+    // 5. Scroll Horizontal con Rueda
+    this.initMouseWheelScroll();
+
+    // 6. Iconos y Footer
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+    const yearEl = document.getElementById(CONFIG.DOM.footerYear);
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  }
+
+  // ============================================================
+  // MOTOR DE RENDERIZADO DUAL (PREVIEW + GALLERY)
+  // ============================================================
+
+  /**
+   * Renderiza el contenido en dos lugares:
+   * 1. Preview (Solo el item [0])
+   * 2. Galería (Todos los items)
+   */
+  _renderFeed(config) {
+    const { previewId, galleryId, dataList, templateFn } = config;
+
+    const previewCont = document.getElementById(previewId);
+    const galleryCont = document.getElementById(galleryId);
+
+    if (!dataList || !dataList.length) return;
+
+    // 1. Inyectar Preview (Usamos el primer elemento como destacado)
+    if (previewCont) {
+      previewCont.innerHTML = templateFn(dataList[0]);
+    }
+
+    // 2. Inyectar Galería Completa
+    if (galleryCont) {
+      const fullHTML = dataList.map((item) => templateFn(item)).join('');
+      galleryCont.innerHTML = fullHTML;
+    }
+  }
+
+  // --- 1. SECCIÓN DEV ---
+  renderDevSection() {
+    const devProjects = this.data.filter((p) => p.category === 'DEV');
+
+    const devTemplate = (p) => {
+      const img = p.image || './assets/images/placeholder.webp';
+      const btnHTML = Utils.getActionBtn(p.link);
+
+      return `
+        <article class="prof-card">
+            <img src="${img}" class="pc-img" alt="${p.title}" loading="lazy">
+            <div class="pc-info">
+                <div class="pc-tags">// ${p.context} / ${p.category}</div>
+                <h3>${p.title}</h3>
+                <p style="margin-bottom:2rem; color:#aaa; font-family:'Manrope'; line-height:1.6;">${p.desc}</p>
+                ${btnHTML}
+            </div>
+        </article>`;
+    };
+
+    this._renderFeed({
+      previewId: 'prof-preview-inject',
+      galleryId: 'prof-gallery-inject',
+      dataList: devProjects,
+      templateFn: devTemplate,
+    });
+  }
+
+  // --- 2. SECCIÓN VIDEO ---
+  async renderVideoSection() {
+    let allVideos = this.data
+      .filter((p) => p.category === 'VIDEO')
+      .map((p) => ({ ...p, channel: p.channel || 'ARCHIVO' }));
+
+    try {
+      const res = await fetch(CONFIG.API.rssBase + CONFIG.API.youtubeChannel);
+      const data = await res.json();
+      if (data.status === 'ok') {
+        const ytItems = data.items.map((item) => ({
+          title: item.title,
+          id: item.guid.split(':')[2] || item.link.split('v=')[1],
+          date: item.pubDate.split(' ')[0],
+          channel: 'TARQUITET!',
+          link: item.link,
+          category: 'VIDEO',
+        }));
+        allVideos = [...allVideos, ...ytItems];
+      }
+    } catch (e) {
+      console.warn('Youtube API Error:', e);
+    }
+
+    allVideos.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const videoTemplate = (v) => {
+      const isMain = v.channel === 'TARQUITET!';
+      const thumbUrl = `https://i.ytimg.com/vi_webp/${v.id}/mqdefault.webp`;
+
+      return `
+        <a href="${v.link}" target="_blank" class="video-item">
+            <div class="v-thumb-container">
+                <img src="${thumbUrl}" class="v-thumb-img" alt="${v.title}" loading="lazy">
+                <div class="play-overlay"><i data-lucide="play-circle"></i></div>
+                <span class="channel-badge ${isMain ? 'tag-main' : 'tag-archive'}">${v.channel}</span>
+            </div>
+            <div class="v-info">
+                <span class="v-date">${v.date}</span>
+                <h4 class="v-title">${v.title}</h4>
+                <span class="view-link">VER EN YOUTUBE &rarr;</span>
+            </div>
+        </a>`;
+    };
+
+    this._renderFeed({
+      previewId: 'video-preview-inject',
+      galleryId: 'video-gallery-inject',
+      dataList: allVideos,
+      templateFn: videoTemplate,
+    });
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  }
+
+  // --- 3. SECCIÓN DESIGN ---
+  renderDesignSection() {
+    const designs = this.data.filter((p) => p.category === 'DESIGN');
+
+    const designTemplate = (p) => {
+      const imgSrc = p.image || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+      const tagsStr = Utils.formatTags(p.tools) || 'DESIGN';
+      const linkHTML = p.link
+        ? `<div class="ux-link">VER PROYECTO <i data-lucide="arrow-up-right" style="width:14px;"></i></div>`
+        : '';
+
+      const content = `
+        <div class="ux-img-wrapper">
+            <img src="${imgSrc}" class="ux-img-real" alt="${p.title}" loading="lazy">
+        </div>
+        <div class="ux-info">
+            <span class="ux-meta">[ ${tagsStr} ]</span>
+            <h4>${p.title}</h4>
+            ${linkHTML}
+        </div>`;
+
+      return p.link
+        ? `<a href="${p.link}" target="_blank" class="ux-card">${content}</a>`
+        : `<div class="ux-card" style="cursor:default">${content}</div>`;
+    };
+
+    this._renderFeed({
+      previewId: 'ux-preview-inject',
+      galleryId: 'ux-gallery-inject',
+      dataList: designs,
+      templateFn: designTemplate,
+    });
+  }
+
+  // --- 4. SECCIÓN GALERÍA ---
+  renderGallery() {
+    const sortedGallery = [...this.gallery].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const mediaTemplate = (item) => {
+      const year = item.date.split('-')[0];
+      return `
+        <div class="media-card">
+            <a href="${item.image}" target="_blank" class="media-img-box">
+                <img src="${item.image}" alt="${item.title}" loading="lazy">
+            </a>
+            <div class="media-info">
+                <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <h4 class="media-title">${item.title}</h4>
+                    <span style="font-family:var(--font-tech); color:var(--accent); font-size:0.7rem;">${year}</span>
+                </div>
+            </div>
+        </div>`;
+    };
+
+    this._renderFeed({
+      previewId: 'media-preview-inject',
+      galleryId: 'media-gallery-inject',
+      dataList: sortedGallery,
+      templateFn: mediaTemplate,
+    });
+  }
+
+  // --- 5. DATABASE ---
+  renderDatabase() {
+    const lists = {
+      prof: document.getElementById(CONFIG.DOM.lists.prof),
+      univ: document.getElementById(CONFIG.DOM.lists.univ),
+      pers: document.getElementById(CONFIG.DOM.lists.personal),
+    };
+
+    Object.values(lists).forEach((el) => {
+      if (el) el.innerHTML = '';
+    });
+    const sortedData = [...this.data].sort((a, b) => a.title.localeCompare(b.title));
+
+    sortedData.forEach((p) => {
+      if (!p.context) return;
+
+      let thumb = p.image;
+      if (!thumb && p.id) thumb = `https://img.youtube.com/vi/${p.id}/mqdefault.jpg`;
+      const imgHTML =
+        thumb && !thumb.includes('placeholder')
+          ? `<img src="${thumb}" class="db-preview-img" alt="${p.title}" loading="lazy">`
+          : '';
+
+      const linkHTML = p.link
+        ? `<a href="${p.link}" target="_blank" class="db-link">VER PROYECTO <i data-lucide="arrow-up-right" style="width:14px"></i></a>`
+        : `<span class="db-link" style="opacity:0.5">SIN LINK</span>`;
+
+      const itemHTML = `
+        <div class="db-item">
+            <div class="db-row-header">
+                <div class="db-title"><i data-lucide="chevron-right" class="db-icon"></i> ${p.title}</div>
+                <span class="db-meta">[ ${p.category || 'PROJECT'} ]</span>
+            </div>
+            <div class="db-content">
+                <div class="db-inner">
+                    ${imgHTML}
+                    <div class="db-text-wrap">
+                        <p class="db-desc">${p.desc || 'Sin descripción.'}</p>
+                        <div class="db-action">${linkHTML}</div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+      if (p.context === 'PROFESSIONAL' && lists.prof) lists.prof.innerHTML += itemHTML;
+      else if (p.context === 'UNIVERSITY' && lists.univ) lists.univ.innerHTML += itemHTML;
+      else if (p.context === 'PERSONAL' && lists.pers) lists.pers.innerHTML += itemHTML;
+    });
+
+    // Delegación para Acordeón
+    const viewer = document.querySelector('.db-interface');
+    if (viewer) {
+      viewer.addEventListener('click', (e) => {
+        const header = e.target.closest('.db-row-header');
+        if (!header) return;
+
+        const item = header.parentElement;
+        const isActive = item.classList.contains('active');
+        item.parentElement.querySelectorAll('.db-item').forEach((i) => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    }
+  }
+
+  // ============================================================
+  // INTERACCIÓN & UI
+  // ============================================================
+
+  // Lógica del Botón VER + / CERRAR
+  initFeedToggles() {
+    document.querySelectorAll('.feed-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const section = btn.closest('.feed-section');
+        const textSpan = btn.querySelector('.btn-text');
+
+        // 1. Alternar clase en la sección
+        section.classList.toggle('active');
+
+        // 2. Cambiar Texto del Botón
+        if (section.classList.contains('active')) {
+          textSpan.textContent = 'CERRAR';
+        } else {
+          textSpan.textContent = 'VER +';
+        }
+      });
+    });
+  }
+
+  initMouseWheelScroll() {
+    // Seleccionamos directamente los tracks
+    const tracks = document.querySelectorAll('.feed-track');
+
+    tracks.forEach((track) => {
+      // Necesitamos el contenedor padre para saber si está activo
+      const section = track.closest('.feed-section');
+
+      // Evento sobre el contenedor de la galería para capturar mejor el mouse
+      const galleryContainer = track.parentElement;
+
+      galleryContainer.addEventListener(
+        'wheel',
+        (evt) => {
+          // Solo actuamos si la sección está ABIERTA (clase active)
+          if (!section.classList.contains('active')) return;
+
+          // Detectamos scroll vertical (rueda normal)
+          if (evt.deltaY !== 0) {
+            // Prevenimos que la página baje
+            evt.preventDefault();
+
+            // Movemos el scroll horizontalmente
+            // Multiplicamos por 2 para que sea un poco más rápido y se sienta "suelto"
+            track.scrollLeft += evt.deltaY * 2;
+          }
+        },
+        { passive: false }
+      ); // 'passive: false' es obligatorio para usar preventDefault
+    });
+  }
+
+  // (Resto de funciones utilitarias sin cambios)
+  initLoader() {
+    const loadText = document.getElementById(CONFIG.DOM.loaderText);
+    let loadValue = 0;
+    const interval = setInterval(() => {
+      loadValue++;
+      if (loadText) loadText.textContent = `${loadValue}%`;
+      if (loadValue > 99) {
+        clearInterval(interval);
+        setTimeout(() => {
+          document.getElementById(CONFIG.DOM.loader)?.classList.add('done');
+          document.body.classList.remove('loading');
+        }, 200);
+      }
+    }, 10);
+  }
+
+  initTicker() {
+    const t1 = document.getElementById(CONFIG.DOM.tickers.t1);
+    const t2 = document.getElementById(CONFIG.DOM.tickers.t2);
+    if (!t1 || !t2) return;
+
+    const programs = this.skills.map((s) => s.name.toUpperCase());
+    const roles = typeof identityData !== 'undefined' ? identityData : ['TARQUITET'];
+    const text = [...programs, ...roles].join('  ///  ');
+    const hugeString = new Array(10).fill(text + '  ///  ').join('');
+
+    t1.textContent = hugeString;
+    t2.textContent = hugeString;
+  }
+
+  initCursor() {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    const dot = document.getElementById(CONFIG.DOM.cursorDot);
+    const circle = document.getElementById(CONFIG.DOM.cursorCircle);
+
+    document.addEventListener('mousemove', (e) => {
+      if (dot) {
+        dot.style.left = e.clientX + 'px';
+        dot.style.top = e.clientY + 'px';
+      }
+      if (circle)
+        setTimeout(() => {
+          circle.style.left = e.clientX + 'px';
+          circle.style.top = e.clientY + 'px';
+        }, 50);
+    });
+
+    document.body.addEventListener('mouseover', (e) => {
+      if (e.target.closest('a, button, .interactive')) document.body.classList.add('hovered');
+      else document.body.classList.remove('hovered');
+    });
+  }
+
+  initTypewriter() {
+    const typeText = document.querySelector('.typing-text');
+    if (!typeText) return;
+    const words = typeof identityData !== 'undefined' ? identityData : ['TARQUITET'];
+    let wIdx = 0,
+      cIdx = 0,
+      isDeleting = false;
+
+    const type = () => {
+      const current = words[wIdx];
+      typeText.textContent = current.substring(0, isDeleting ? cIdx - 1 : cIdx + 1);
+      cIdx += isDeleting ? -1 : 1;
+      let speed = isDeleting ? 50 : 150;
+      if (!isDeleting && cIdx === current.length) {
+        speed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && cIdx === 0) {
+        isDeleting = false;
+        wIdx = (wIdx + 1) % words.length;
+        speed = 500;
+      }
+      setTimeout(type, speed);
+    };
+    type();
+  }
+
+  initThemeSwitcher() {
+    const btns = document.querySelectorAll('.theme-btn');
+    btns.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        btns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.body.className = btn.dataset.theme;
+      })
+    );
+  }
+
+  initTabs() {
+    document.querySelectorAll('.db-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.db-btn').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('.db-list').forEach((l) => l.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`list-${btn.dataset.cat}`)?.classList.add('active');
+      });
+    });
+  }
+
+  initCopyActions() {
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('.copy-trigger');
+      if (trigger) Utils.copyToClipboard(trigger.dataset.copy, CONFIG.DOM.toast);
+    });
+  }
+
+  initHeroInteraction() {
+    const hero = document.getElementById('hero-trigger');
+    const profile = document.getElementById('profile-section');
+    if (hero && profile) {
+      hero.addEventListener('click', () => {
+        profile.scrollIntoView({ behavior: 'smooth' });
+        hero.classList.add('brand-contrast-active');
+        setTimeout(() => hero.classList.remove('brand-contrast-active'), 2000);
+      });
+    }
+  }
+
+  initModals() {
+    const btn = document.getElementById('open-duo');
+    const modal = document.getElementById('duo-modal');
+    if (btn && modal) btn.addEventListener('click', () => modal.showModal());
+  }
+}
+
+// 4. INICIALIZACIÓN
+document.addEventListener('DOMContentLoaded', () => new PortfolioApp());

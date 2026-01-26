@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>David Pinto - CV Artístico</title>
+
+    <link rel="icon" type="image/png" href="/assets/ico/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/ico/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/ico/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/ico/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Tarqutiet" />
+    <link rel="manifest" href="/assets/ico/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    <link rel="stylesheet" href="./css/cv-artistico.min.css" />
+  </head>
+  <body>
+    <div class="page" id="invoice">
+      <aside class="sidebar">
+        <div class="profile-area">
+          <div id="cv-image-div" class="profile-img-container"></div>
+        </div>
+
+        <div class="sb-block">
+          <div class="sb-title" id="lbl-contact"></div>
+          <div id="cv-contact-list"></div>
+        </div>
+
+        <div class="sb-block">
+          <div class="sb-title" id="lbl-languages"></div>
+          <div id="cv-languages-list"></div>
+        </div>
+
+        <div class="sb-block">
+          <div class="sb-title" id="lbl-soft"></div>
+          <div id="cv-soft-skills"></div>
+        </div>
+
+        <div class="sb-block">
+          <div class="sb-title" id="lbl-tech"></div>
+          <div id="cv-tech-skills"></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="header-top">
+          <div id="cv-name" class="h1-name"></div>
+          <div id="cv-role" class="h2-role"></div>
+        </div>
+
+        <div class="content-area">
+          <section>
+            <div class="main-sec-title" id="lbl-profile"></div>
+            <p id="cv-summary" class="body-txt"></p>
+          </section>
+
+          <section>
+            <div class="main-sec-title" id="lbl-education"></div>
+            <div id="cv-education-list"></div>
+          </section>
+
+          <section>
+            <div class="main-sec-title" id="lbl-projects"></div>
+            <div id="cv-projects-list"></div>
+          </section>
+        </div>
+
+        <div class="software-sec">
+          <div class="main-sec-title" id="lbl-stack" style="font-size: 14pt; margin-bottom: 15px"></div>
+          <div id="cv-software-grid" class="soft-grid"></div>
+        </div>
+      </main>
+    </div>
+
+    <script src="./js/cv_data.min.js"></script>
+    <script src="./js/utils.min.js"></script>
+    <script src="./js/cv-artistico.min.js"></script>
+  </body>
+</html>

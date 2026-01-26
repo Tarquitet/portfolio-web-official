@@ -1,0 +1,249 @@
+:root {
+  --bg: #f2f0e9;
+  --text: #1a1a1a;
+  --accent: #d93025; /* Rojo Bauhaus */
+  --box-dark: #1a1a1a;
+  --txt-light: #f2f0e9;
+  --f-body: 'Inter', sans-serif;
+  --f-code: 'JetBrains Mono', monospace;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+  font-family: var(--f-body);
+  color: var(--text);
+}
+
+.magazine-page {
+  width: 210mm;
+  height: 297mm;
+  background: var(--bg);
+  padding: 15mm;
+  position: relative;
+  margin-bottom: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.section-label {
+  background: var(--text);
+  color: var(--bg);
+  padding: 10px 45px 10px 15mm;
+  margin: 0 0 25px -15mm;
+  font-size: 18pt;
+  font-weight: 900;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, 96% 0, 100% 50%, 96% 100%, 0 100%);
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 8px 8px 0 var(--accent);
+  position: relative;
+  z-index: 15;
+}
+
+.sub-ribbon {
+  background: var(--accent);
+  color: white;
+  padding: 6px 30px 6px 12mm;
+  margin: 0 0 18px -15mm;
+  font-family: var(--f-code);
+  font-weight: 700;
+  font-size: 9pt;
+  clip-path: polygon(0 0, 95% 0, 100% 50%, 95% 100%, 0 100%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 4px 4px 0 var(--text);
+  z-index: 10;
+  margin-bottom: 20px;
+}
+
+.project-container {
+  display: flex;
+  margin-bottom: 20px;
+  height: 150px;
+  align-items: center;
+  position: relative;
+  break-inside: avoid;
+}
+.project-container:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.img-block {
+  flex: 1.1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-block img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.info-block {
+  flex: 1;
+  position: relative;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+.info-card {
+  background: var(--box-dark);
+  color: var(--txt-light);
+  padding: 15px 15px 15px 25px;
+  width: 110%;
+  margin-left: -10%;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+}
+.project-container:nth-child(even) .info-card {
+  margin-left: 0;
+  margin-right: -10%;
+  padding: 15px 25px 15px 15px;
+}
+
+.p-title-ribbon {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: var(--accent);
+  color: white;
+  padding: 4px 12px;
+  font-weight: 900;
+  font-size: 10pt;
+  text-transform: uppercase;
+  z-index: 3;
+  box-shadow: 3px 3px 0 var(--text);
+}
+.project-container:nth-child(even) .p-title-ribbon {
+  left: auto;
+  right: -10px;
+}
+
+.p-desc {
+  font-size: 8pt;
+  line-height: 1.4;
+  text-align: justify;
+  opacity: 0.9;
+}
+.p-meta {
+  font-family: var(--f-code);
+  font-size: 6.5pt;
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.mag-header {
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--f-code);
+  font-size: 7.5pt;
+  opacity: 0.6;
+}
+
+.mag-footer {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--f-code);
+  font-size: 7.5pt;
+  opacity: 0.6;
+}
+
+/* PORTADA */
+.cover-layout {
+  display: flex;
+  height: 100%;
+  gap: 20px;
+}
+.cover-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: 900;
+  font-size: 110pt;
+  line-height: 0.8;
+  color: var(--accent);
+  letter-spacing: -6px;
+  text-align: right;
+}
+.cover-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.cover-img {
+  flex: 1;
+  background: var(--text);
+  border: 2px solid var(--text);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.cover-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CONTRAPORTADA */
+.back-thank-you {
+  background: var(--box-dark);
+  padding: 45px 20px;
+  margin-top: -35px;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  border: 3px solid var(--accent);
+}
+.back-title {
+  font-size: 55pt;
+  font-weight: 900;
+  color: var(--bg);
+  letter-spacing: 4px;
+  line-height: 1;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  body {
+    background: none;
+    padding: 0;
+  }
+  .magazine-page {
+    box-shadow: none;
+    page-break-after: always;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

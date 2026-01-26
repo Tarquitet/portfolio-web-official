@@ -1,0 +1,35 @@
+- [ ] **Migración Verdad & Fe:** Mover el proyecto "Verdad & Fe" a la infraestructura/hosting de Tarquitet.
+- [ ] DISEÑAR .ICO
+- [ ] **Web In-Mortal:**
+  - Terminar diseño en Figma.
+  - Maquetar y desarrollar la web transmedia.
+
+- [ ] **Sección Comisiones/Tienda:**
+  - Diseñar web para comisiones de arte.
+  - Agregar sección de "Tienda", menú y página específica para comisiones y otros servicios.
+
+- [ ] **Web Instituto:** Agregar el diseño web del Instituto al portafolio.
+- [ ] **Web Juego Diplomado:** Diseñar e integrar la página del proyecto de juego del diplomado.
+- [ ] **Mejora Builtechraft:** Actualizar y mejorar la web existente de Builtechraft.
+- [ ] Morse en python, diseñar su script para Kelly.
+- [ ] Buscar video editado para transmedia electiva. Preguntar a Paula uni.
+- [ ] Agrgar convertidor imagenes preset automatico de etapa 1 - png a jpg - jpg a webp - webp a avif en calidad decente pero bajo peso.
+- [ ] Diseñar imagen portada portafolio
+- [ ] Diseñar imagen final portafolio ultima pagina
+- [ ] Bot linkedin idea discord mok
+- [ ] OGG conversor de texture pack minecraft para subir tambien
+- [ ] intentar mejorar proyectos universidad o completarlos... (no estoy tranquilo sin eso)
+- [ ] Terminar conversor UUID Minecraft
+- [ ] Cambiar el use client a server client (si se puede) - metodo de renderizado
+- [ ] Optimizar funciones js con funciones css
+- [ ] Mejorar imagen diseño dorado papa iglesia tamaño de palabrisas de coche (o similar)
+- [ ] Hacer conteo de elementos automaticamente segun el arreglo usado para las secciones tanto para la web principal como para el portafolio
+- [ ] Hacer menu de web principal, tener las secciones generadas automaticamente desde el cv_data
+- [ ] Contador automatico para evitar poner numeros en las secciones
+- [ ] Poner videos como ultima seccion para contarlo mas facil tanto para la web principal, como portafolio
+- [ ] Agregar miniaturas como seccion separada de diseño, sub separar diseño
+- [ ] Indicar que no uso after effects para efectos super wow como mrbeast, edicion lineal tipo rubius o hermitcraft
+- [ ] Subir trabajos a deviantart y usar tipo api para colocarlos
+- [ ] Filtrar trabajos deviantart +18
+- [ ] Corregir traduccion descripcion en formato harvard seccion educacion
+- [ ] Deteccion de imagenes no por formato, sino por tamaño: Menor peso, sin importar formato, lo carga

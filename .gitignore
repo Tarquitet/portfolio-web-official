@@ -1,0 +1,36 @@
+# ==========================================
+# 📂 Herramientas de Desarrollo (Scripts Python)
+# ==========================================
+# Ignora toda la carpeta dev donde tienes los scripts (Project Manager, minifier, etc.)
+/dev/
+
+# ==========================================
+# 🖼️ Assets Web (Archivos Pesados / Excluidos)
+# ==========================================
+# Ignorar imágenes viejas y backups (Pero MANTIENE a salvo /assets/images/)
+/assets/old_images/
+
+# Ignorar PDFs (Los generas localmente con tu script, no hace falta subirlos)
+/assets/pdf/
+/assets/pdf-tests/
+
+# ==========================================
+# ⚙️ Archivos del Sistema Operativo y Editores
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+
+# ==========================================
+# 📦 Artefactos de Código y Temporales
+# ==========================================
+# Node
+node_modules/
+
+# Python (Por si corres scripts sueltos en la raíz)
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Logs de errores
+*.log

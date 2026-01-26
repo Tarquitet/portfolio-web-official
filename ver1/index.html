@@ -1,0 +1,335 @@
+<!-- Landing Profesional Web Page developed by David Pinto. Includes some details about CV & other projects -->
+<!-- Inspired v1 by https://eszesbalint.github.io/bdstudio -->
+<!-- Inspired v2 by https://www.seanhalpin.xyz -->
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarquitet | David Josué Pinto Gómez | Ingeniero en Multimedia</title>
+    <meta
+      name="description"
+      content="Portafolio profesional de Ingeniería Multimedia. Desarrollo, Diseño y Tecnología."
+    />
+    <link rel="preload" href="./assets/fonts/Outfit-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
+    <link
+      rel="preload"
+      href="./assets/fonts/SpaceGrotesk-VariableFont_wght.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link rel="preload" href="./assets/fonts/Outfit-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
+    <link
+      rel="preload"
+      href="./assets/fonts/SpaceGrotesk-VariableFont_wght.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <!--Fondo animado "lava"-->
+    <canvas id="lava-canvas" class="lava-lamp-canvas"></canvas>
+    <nav>
+      <div class="logo">TARQUITET</div>
+      <div class="nav-actions">
+        <div class="nav-links">
+          <a href="#">¡Hola!</a>
+          <a href="#about">Sobre Mí</a>
+          <a href="#skills">Habilidades</a>
+          <a href="#projects">Proyectos</a>
+          <a href="#contact">Contacto</a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+          <i data-lucide="sun" id="theme-icon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <section id="hero">
+      <div class="hero-badge" data-aos="fade-down">Ingeniero en Multimedia</div>
+      <h1 class="hero-title" data-aos="zoom-in" data-aos-duration="1000">
+        David Josué<br />
+        <span>Pinto Gómez</span>
+      </h1>
+      <p class="hero-subtitle" data-aos="fade-up">
+        <i> "Creando soluciones mediante el uso del ingenio tecnológico y la creatividad artística." </i>
+      </p>
+
+      <div class="cta-group" data-aos="fade-up" data-aos-delay="200">
+        <!-- Botón 1: Portafolio (PDF) -->
+        <a href="/assets/images/Profile/profile.webp" target="_blank" class="btn btn-primary">
+          Portafolio <i data-lucide="file-text"></i>
+        </a>
+
+        <!-- Botón 2: CV -->
+        <div class="cv-dropdown-wrapper">
+          <button id="cv-trigger-hero" class="btn btn-outline" aria-haspopup="true" aria-expanded="false">
+            CV
+            <i data-lucide="file-text" size="18"></i>
+            <i data-lucide="chevron-down" size="16" class="chevron-icon"></i>
+          </button>
+
+          <div class="cv-popup-menu" id="cv-menu-hero">
+            <a href="../assets/pdf/CV-DavidPinto-Harvard.pdf" target="_blank" class="cv-option">
+              <div class="cv-icon-box">
+                <i data-lucide="graduation-cap"></i>
+              </div>
+              <div class="cv-info">
+                <span class="cv-title">Formato Harvard</span>
+                <span class="cv-desc">Técnico y detallado (ATS).</span>
+              </div>
+            </a>
+
+            <div class="cv-divider"></div>
+
+            <a href="../assets/pdf/CV-DavidPinto-Creativo.pdf" target="_blank" class="cv-option">
+              <div class="cv-icon-box"><i data-lucide="palette"></i></div>
+              <div class="cv-info">
+                <span class="cv-title">CV Creativo</span>
+                <span class="cv-desc">Diseño visual resumido.</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Botón 3: Proyectos (Web Section) -->
+        <a href="#projects" class="btn btn-outline"> Proyectos <i data-lucide="folder-open"></i> </a>
+
+        <!-- Botón 4: Contacto -->
+        <a href="#contact" class="btn btn-outline"> Contacto </a>
+      </div>
+    </section>
+
+    <!-- Sobre Mí y Educación -->
+    <section id="about">
+      <h2 class="section-title" data-aos="fade-up">Perfil Profesional</h2>
+
+      <div class="bento-grid">
+        <!-- 1. Tarjeta Perfil (Full Width, Imagen a la Izquierda) -->
+        <div class="bento-card" data-aos="fade-up">
+          <div class="profile-content-row">
+            <!-- Imagen Grande Vertical -->
+            <div class="profile-img-container">
+              <div class="profile-img-wrapper">
+                <div class="profile-img"></div>
+              </div>
+              <div class="profile-location">
+                <i data-lucide="map-pin" size="18"></i>
+                <span id="colombia-text" class="colombia-text">Colombia</span>
+              </div>
+            </div>
+
+            <!-- Contenido Texto Derecha -->
+            <div class="profile-text-content">
+              <h3 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 2.2rem; font-weight: 700">
+                Pasión por la Ingeniería y el Arte
+              </h3>
+              <p style="color: var(--primary); font-weight: 600; margin-bottom: 1.5rem; letter-spacing: 1px">
+                INGENIERO EN MULTIMEDIA
+              </p>
+
+              <div class="profile-text">
+                <p>
+                  <strong style="color: var(--text-main); font-size: 1.2rem">¡Hola, soy David! 👋</strong>
+                  <br /><br />
+                  Soy Ingeniero en Multimedia con una sólida formación académica. Me distingo por mi capacidad en la
+                  gestión de proyectos y mi enfoque creativo, integrando pensamiento estratégico y sensibilidad
+                  artística para desarrollar soluciones innovadoras.
+                </p>
+
+                <p>
+                  Valoro el aprendizaje continuo a través de la experiencia, lo que me permite optimizar procesos y
+                  alcanzar los objetivos propuestos con eficiencia y calidad.
+                </p>
+              </div>
+
+              <div class="stats-container">
+                <div class="stat-box">
+                  <h3>Nativo</h3>
+                  <p>Español</p>
+                </div>
+                <!-- Stats con Popup interactivo -->
+                <div class="stat-box interactive" id="english-stat">
+                  <h3>B1,99</h3>
+                  <p>
+                    Inglés
+                    <i data-lucide="info" size="14"></i>
+                  </p>
+                  <div class="custom-tooltip">
+                    Según Duolingo, mi puntaje es 82. Lo cual es equivalente a un nivel B1 Avanzado, casi B2.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Tarjeta Educación -->
+        <div class="bento-card" data-aos="fade-up">
+          <h3 class="education-title">Formación Académica</h3>
+
+          <div class="timeline-container" id="trajectory-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title" data-aos="fade-up">Habilidades Profesionales</h2>
+
+      <!-- 1. HABILIDADES EN SOFTWARE (INTERACTIVO) -->
+      <div class="skills-category" data-aos="fade-right">
+        <h3>
+          <i data-lucide="monitor-dot" class="skills-icon"></i>
+          Habilidades en Software
+        </h3>
+
+        <!-- Wrapper para la interactividad (Grid + Detalle) -->
+        <div class="skills-wrapper">
+          <!-- VISTA GRID (JS inyectará aquí las píldoras saltarinas) -->
+          <div id="skills-grid" class="skills-grid-container"></div>
+
+          <!-- VISTA DETALLE (Panel Oculto) -->
+          <div id="skill-detail-view" class="skill-detail-view">
+            <button id="close-skill-btn" class="back-btn"><i data-lucide="arrow-left"></i> Regresar</button>
+
+            <div class="detail-content">
+              <div class="detail-header">
+                <div class="detail-icon-box">
+                  <i id="detail-icon" data-lucide="box"></i>
+                </div>
+                <div>
+                  <h3 id="detail-title">Software</h3>
+                  <p id="detail-desc">Descripción.</p>
+                </div>
+              </div>
+              <div id="detail-bars" class="detail-bars-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. HARD SKILLS -->
+      <div class="skills-category" data-aos="fade-left" style="margin-top: 4rem">
+        <h3>
+          <i data-lucide="briefcase" class="skills-icon"></i>
+          Hard Skills
+        </h3>
+        <p class="hard-skills-desc">Competencias técnicas y metodológicas aplicadas.</p>
+        <div class="skill-grid">
+          <div class="skill-pill secondary-border">
+            <i data-lucide="kanban-square" class="secondary-icon"></i><span>Gestión de Proyectos</span>
+          </div>
+          <div class="skill-pill secondary-border">
+            <i data-lucide="pencil-ruler" class="secondary-icon"></i><span>Ilustración & Sketching</span>
+          </div>
+          <div class="skill-pill secondary-border">
+            <i data-lucide="cpu" class="secondary-icon"></i><span>Lógica Programación</span>
+          </div>
+          <div class="skill-pill secondary-border">
+            <i data-lucide="clapperboard" class="secondary-icon"></i><span>Postproducción</span>
+          </div>
+          <div class="skill-pill secondary-border">
+            <i data-lucide="brain-circuit" class="secondary-icon"></i><span>Estrategia Digital</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. SOFT SKILLS -->
+      <div class="soft-skills-header" data-aos="fade-up">
+        <h2>Soft Skills</h2>
+      </div>
+
+      <div class="skills-category" data-aos="fade-up">
+        <div class="skill-grid justify-center">
+          <div class="skill-pill"><i data-lucide="lightbulb"></i><span>Creatividad</span></div>
+          <div class="skill-pill"><i data-lucide="users"></i><span>Trabajo en Equipo</span></div>
+          <div class="skill-pill"><i data-lucide="puzzle"></i><span>Resolución Problemas</span></div>
+          <div class="skill-pill"><i data-lucide="hourglass"></i><span>Gestión del Tiempo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title" data-aos="fade-up">Proyectos Realizados</h2>
+
+      <div class="carousel-container" data-aos="zoom-in-up">
+        <!-- Aquí JS inyectará los slides -->
+        <div id="slides-wrapper"></div>
+
+        <!-- Controles (JS decide si mostrarlos) -->
+        <div class="carousel-nav" id="carousel-controls">
+          <button class="nav-btn" id="prev-btn">
+            <i data-lucide="chevron-left"></i>
+          </button>
+          <button class="nav-btn" id="nextheme-btn">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="color-picker-section">
+      <h3 style="color: var(--text-main); margin-bottom: 0.5rem">Personaliza la Experiencia</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem">
+        Selecciona un color para transformar el ambiente del portafolio
+      </p>
+
+      <div class="picker-container">
+        <div
+          class="color-option active"
+          style="background-color: #ef4444"
+          data-color="#ef4444"
+          data-sec="#f59e0b"
+        ></div>
+        <div class="color-option" style="background-color: #f97316" data-color="#f97316" data-sec="#fcd34d"></div>
+        <div class="color-option" style="background-color: #10b981" data-color="#10b981" data-sec="#34d399"></div>
+        <div class="color-option" style="background-color: #06b6d4" data-color="#06b6d4" data-sec="#67e8f9"></div>
+        <div class="color-option" style="background-color: #8b5cf6" data-color="#8b5cf6" data-sec="#d8b4fe"></div>
+        <div class="color-option" style="background-color: #ec4899" data-color="#ec4899" data-sec="#fbcfe8"></div>
+      </div>
+    </section>
+
+    <button id="scrollToTopBtn" class="scroll-top-btn" aria-label="Volver arriba">
+      <i data-lucide="arrow-up"></i>
+    </button>
+
+    <div id="toast-notification" class="toast-notification">
+      <i data-lucide="check-circle"></i>
+      <span id="toast-message">Copiado al portapapeles</span>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <h2 style="color: var(--footer-text); margin-bottom: 2rem">¿Trabajamos juntos?</h2>
+      <div class="footer-socials">
+        <a href="https://linkedin.com/in/pinto-gomez-david" target="_blank" class="footer-btn"
+          ><i data-lucide="linkedin" size="20"></i> LinkedIn</a
+        >
+        <a href="https://github.com/pintomultimedia2002" target="_blank" class="footer-btn"
+          ><i data-lucide="github" size="20"></i> GitHub</a
+        >
+        <button type="button" class="footer-btn copy-btn" data-copy="pinto.multimedia2002@gmail.com" data-label="Email">
+          <i data-lucide="mail" size="20"></i>
+          Email
+        </button>
+        <button type="button" class="footer-btn copy-btn" data-copy="+57 304 3523490" data-label="Teléfono">
+          <i data-lucide="phone" size="20"></i>
+          Teléfono
+        </button>
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem">David Josué Pinto Gómez</p>
+      <p style="color: var(--footer-text); font-size: 0.8rem; opacity: 0.5">
+        © <span id="current-year">2025</span> TARQUITET
+      </p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

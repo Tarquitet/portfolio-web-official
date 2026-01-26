@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="es" data-theme="theme-bauhaus">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Web Portfolio of Tarquitet" />
+    <meta
+      name="keywords"
+      content="Developer, HTML, CSS, JavaScript, Multimedia, Video, Editor, Video Editor, Code, Developer, Minecraft, Youtube, Python, AI, Figma, Photoshop, Davinci Resolve, OBS Studio, Web Development, UI, UX, Design, Graphic Design, Illustrator, Tarquitet, Comissions, Comision, Wolfox, Furry"
+    />
+    <meta name="author" content="Tarquitet - David Josue Pinto Gómez" />
+    <title>TARQUITET=TRUE</title>
+
+    <link rel="icon" type="image/png" href="/assets/ico/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/ico/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/ico/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/ico/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Tarquitet" />
+    <link rel="manifest" href="/assets/ico/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Manrope:wght@300;600;800&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="../css/styles_v2.min.css" />
+  </head>
+
+  <body class="loading">
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-circle" id="cursor-circle"></div>
+
+    <div class="preloader" id="preloader">
+      <div class="loader-content">
+        <div class="liquid-number" id="load-num">0</div>
+
+        <div class="loader-bar">
+          <div class="bar-fill" id="bar-fill"></div>
+        </div>
+
+        <div class="loader-text" id="random-text">INICIALIZANDO...</div>
+      </div>
+    </div>
+
+    <div class="ui-frame">
+      <a href="#" class="brand">TARQUITET<span class="blink">_</span></a>
+      <nav class="nav-minimal">
+        <a href="#profile-section">PERFIL</a>
+        <div class="nav-group">
+          <span class="nav-trigger">SERVICIOS</span>
+          <div class="nav-dropdown">
+            <a href="#work-section">DESARROLLO</a>
+            <a href="#video-section">VIDEO</a>
+            <a href="#ux-section">DISEÑO</a>
+            <a href="#media-section">ILUSTRACIONES</a>
+          </div>
+        </div>
+        <a href="#archive-section">HISTÓRICO</a>
+        <a href="#contact">CONTACTO</a>
+      </nav>
+      <div class="status-indicator"><span class="status-dot"></span> EN LÍNEA</div>
+    </div>
+
+    <main>
+      <section class="hero">
+        <div class="ticker-center-wrap">
+          <div class="ticker-track" id="hero-ticker-1"></div>
+          <div class="ticker-track reverse" id="hero-ticker-2"></div>
+        </div>
+
+        <div class="hero-center">
+          <h1 class="title-main">
+            <span class="row interactive-brand" id="hero-trigger">TARQUITET</span>
+            <span class="row">IS = TO</span>
+            <span class="row accent-row">> <span class="typing-text"></span><span class="cursor">|</span> </span>
+          </h1>
+          <p class="hero-sub">
+            Creando soluciones de alto impacto mediante la convergencia del ingenio tecnológico y la visión artística.
+          </p>
+          <div class="scroll-hint">
+            <i data-lucide="arrow-down-from-line"></i> PERFIL + PROYECTOS
+            <i data-lucide="arrow-down-from-line"></i>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-section" id="profile-section">
+        <div class="tech-ticker-section">
+          <div class="tech-ticker-wrap">
+            <div class="tech-track"></div>
+          </div>
+        </div>
+
+        <div class="profile-grid">
+          <div class="p-visual" id="profile-trigger"></div>
+
+          <div class="p-content">
+            <h2 class="p-title">MI PERFIL</h2>
+            <div class="p-bio">
+              <p>
+                <strong>¡Hola, soy David Josué Pinto! 👋</strong><br /><br />
+                También conocido como Tarquitet en la internet. Soy Ingeniero en Multimedia, mi trabajo nace donde la
+                <strong>lógica de la ingeniería se encuentra con la sensibilidad artística</strong>. Más que un
+                desarrollador, soy un <strong>arquitecto de experiencias digitales</strong>.
+              </p>
+
+              <p>
+                Mi fortaleza no se limita a la complejidad técnica, sino a la <strong>claridad visual</strong>. Trazo el
+                camino más eficiente entre una gran idea y su ejecución final. Soy un solucionador de problemas por
+                naturaleza; mi enfoque es <strong>pragmático</strong>, priorizando la funcionalidad real para plasmar la
+                creatividad en <strong>productos acabados de alta calidad</strong>.
+              </p>
+
+              <p>
+                Me define la mentalidad <strong>"Always to the next level"</strong>. Soy un profesional en constante
+                evolución, siempre aprendiendo y rompiendo barreras para superar las expectativas estéticas y técnicas.
+                Busco retos que exijan innovación, estrategia y <strong>calidad visual</strong>.
+              </p>
+            </div>
+
+            <div class="p-stats">
+              <div class="stat">
+                <span class="label" id="lang-lbl-1"></span>
+                <span class="val" id="lang-val-1"></span>
+              </div>
+
+              <div class="stat interactive" id="open-duo">
+                <span class="label" id="lang-lbl-2"></span>
+                <span class="val" id="lang-val-2"></span>
+              </div>
+
+              <dialog id="duo-modal" class="native-modal">
+                <div class="modal-inner">
+                  <h3 class="modal-title" id="duo-title"></h3>
+                  <p class="modal-text" id="duo-desc"></p>
+                  <div class="duo-bar-wrap">
+                    <div class="duo-bar-fill" id="duo-bar" style="width: 0%"></div>
+                  </div>
+                  <span class="duo-score" id="duo-score">...</span>
+                  <form method="dialog"><button class="btn-sys">> CERRAR <</button></form>
+                </div>
+              </dialog>
+            </div>
+          </div>
+        </div>
+
+        <div class="specs-table-container">
+          <div class="spec-column">
+            <div class="spec-header">
+              <span class="sh-label">TYPE_A</span>
+              <h3>HARD SKILLS</h3>
+            </div>
+            <ul class="spec-list" id="list-hard"></ul>
+          </div>
+
+          <div class="spec-column">
+            <div class="spec-header">
+              <span class="sh-label">TYPE_B</span>
+              <h3>SOFT SKILLS</h3>
+            </div>
+            <ul class="spec-list" id="list-soft"></ul>
+          </div>
+        </div>
+      </section>
+
+      <div id="dynamic-sections-root"></div>
+
+      <section class="database-section" id="archive-section">
+        <div class="db-header">
+          <h2>HISTÓRICO</h2>
+          <span class="sys-text">ACCEDIENDO A ANTERIORES TRABAJOS...</span>
+        </div>
+
+        <div class="db-interface">
+          <div class="db-menu">
+            <button class="db-btn active" data-cat="prof">PROFESIONAL</button>
+            <button class="db-btn" data-cat="personal">PERSONAL</button>
+            <button class="db-btn" data-cat="univ">UNIVERSITARIO</button>
+          </div>
+
+          <div class="db-viewer">
+            <div class="db-list active" id="list-prof"></div>
+            <div class="db-list" id="list-personal"></div>
+            <div class="db-list" id="list-univ"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer id="contact">
+        <div class="footer-container">
+          <div class="theme-selector-area">
+            <span class="theme-label" id="lbl-theme"></span>
+
+            <div class="theme-grid">
+              <button class="theme-btn active" data-theme="theme-bauhaus" title="Bauhaus Light"></button>
+              <button class="theme-btn" data-theme="theme-fire" title="System Red"></button>
+              <button class="theme-btn" data-theme="theme-pop" title="Vogue Pop"></button>
+              <button class="theme-btn" data-theme="theme-industrial" title="Industrial"></button>
+              <button class="theme-btn" data-theme="theme-cyber" title="Cyber Blue"></button>
+            </div>
+          </div>
+          <span class="footer-section-label" id="lbl-contact"></span>
+          <div class="contact-grid" id="contact-inject"></div>
+
+          <div class="footer-bottom">TARQUITET © <span id="footer-year"></span></div>
+        </div>
+        <div id="toast">COPIADO AL PORTAPAPELES</div>
+      </footer>
+    </main>
+
+    <template id="uni-card-template">
+      <div class="uni-card">
+        <div class="uni-img-box">
+          <div class="card-badges-overlay"></div>
+
+          <a class="card-link-wrapper" target="_blank">
+            <img src="" alt="" class="card-img" loading="lazy" />
+          </a>
+        </div>
+
+        <div class="uni-info">
+          <h3 class="uni-title">_</h3>
+
+          <div class="uni-date"></div>
+
+          <a href="" target="_blank" class="uni-link card-cta">_</a>
+        </div>
+      </div>
+    </template>
+    <template id="see-more-template">
+      <a href="#archive-section" class="uni-card">
+        <div class="card-see-more">
+          <div class="see-more-content">
+            <span class="see-more-sub">EXPLORAR TODO</span>
+            <span class="see-more-text">HISTÓRICO</span>
+            <div class="see-more-icon"><i data-lucide="arrow-right"></i></div>
+          </div>
+        </div>
+      </a>
+    </template>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="../js/utils.min.js"></script>
+    <script src="../js/projects-opti.min.js"></script>
+    <script src="../js/cv_data.min.js"></script>
+
+    <script type="module" src="../js/main-opti.min.js"></script>
+  </body>
+</html>

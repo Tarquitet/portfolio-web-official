@@ -1,0 +1,853 @@
+// 1. CONFIGURACIÓN GLOBAL (Solo DOM y API)
+const CONFIG = {
+  DOM: {
+    loader: 'preloader',
+    injects: { prof: 'prof-inject', video: 'video-inject', ux: 'ux-inject', media: 'media-inject' },
+    lists: { prof: 'list-prof', personal: 'list-personal', univ: 'list-univ' },
+    tickers: { t1: 'hero-ticker-1', t2: 'hero-ticker-2' },
+    footerYear: 'footer-year',
+    toast: 'toast',
+  },
+  API: {
+    youtubeChannel: 'UCbUqReTGxLD78ohs97ylepA',
+    rssBase: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=',
+  },
+};
+
+class PortfolioApp {
+  constructor() {
+    // Referencias a datos globales (cargados en projects.js)
+    this.data = typeof mainPortfolio !== 'undefined' ? mainPortfolio : [];
+    this.gallery = typeof galleryData !== 'undefined' ? galleryData : [];
+    this.init();
+  }
+
+  init() {
+    try {
+      // 1. Renderizado de Datos
+      this.renderAllSections();
+
+      // 2. Efectos UI e Interacciones
+      this.initLoader();
+      this.initTicker();
+      this.initTechTicker();
+      this.initHeroInteraction();
+      this.initCursor();
+      this.initTypewriter();
+      this.initThemeSwitcher();
+      this.initTabs();
+      this.initCopyActions();
+      this.initModals();
+      this.initGlobalSmoothScroll();
+      this.initDuolingoModal();
+      this.initReadMore();
+      this.initSmoothNavigation();
+
+      // 3. Renderizados Específicos
+      this.renderProfileImages();
+      this.renderLanguages();
+      this.renderSkills(); // Nuevo renderizado limpio
+      this.renderFooterDynamic();
+
+      // Easter Eggs
+      this.checkColombiaEasterEgg();
+      this.initProfileWipeEffect();
+
+      this.initVisibilityControl();
+
+      // Listener de Redimensión
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => this.renderAllSections(), 200);
+      });
+
+      // 4. Inicializar Iconos (desde Utils)
+      if (window.Utils) window.Utils.initIcons();
+
+      const yearEl = document.getElementById(CONFIG.DOM.footerYear);
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    } catch (error) {
+      console.error('ERROR CRÍTICO EN INIT:', error);
+      document.body.classList.remove('loading');
+      document.getElementById('preloader').style.display = 'none';
+    }
+  }
+
+  renderAllSections() {
+    this.renderDevSection();
+    this.renderVideoSection();
+    this.renderDesignSection();
+    this.renderGallery();
+    this.renderDatabase();
+    if (window.Utils) window.Utils.initIcons();
+  }
+
+  // ============================================================
+  // SISTEMA UNIFICADO DE RENDERIZADO (SMART GRID)
+  // ============================================================
+  renderSmartGrid(items, containerId, cardTemplateFn) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+    container.className = ''; // Limpiar clases previas
+
+    // Eliminar indicador previo si existe
+    const prevInd = document.querySelector(`.swipe-indicator-wrap[data-for="${containerId}"]`);
+    if (prevInd) prevInd.remove();
+
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+
+    if (isMobile) {
+      // --- MODO MÓVIL (Carrusel) ---
+      container.classList.add('mobile-swipe-mode');
+
+      // Indicador de swipe
+      const indicatorHTML = `<div class="swipe-indicator-wrap" data-for="${containerId}"><span class="swipe-indicator" id="ind-${containerId}">1 / ${items.length}</span></div>`;
+      if (container.parentElement) container.parentElement.insertAdjacentHTML('beforebegin', indicatorHTML);
+
+      container.innerHTML = items
+        .map((item) => `<article class="uni-card">${cardTemplateFn(item, true)}</article>`)
+        .join('');
+
+      // Contador de scroll
+      const indicatorEl = document.getElementById(`ind-${containerId}`);
+      container.addEventListener(
+        'scroll',
+        () => {
+          if (!indicatorEl) return;
+          const index = Math.round(container.scrollLeft / (window.innerWidth * 0.92));
+          indicatorEl.textContent = `${Math.min(Math.max(0, index) + 1, items.length)} / ${items.length}`;
+        },
+        { passive: true }
+      );
+    } else {
+      // --- MODO ESCRITORIO (Masonry Fake) ---
+      container.style.display = 'flex';
+      container.style.gap = '3rem';
+      container.style.marginRight = '1rem';
+
+      const cols = [[], []];
+      items.forEach((item, index) => {
+        cols[index % 2].push(`<article class="uni-card">${cardTemplateFn(item, false)}</article>`);
+      });
+
+      container.innerHTML = `
+        <div class="pin-col">${cols[0].join('')}</div>
+        <div class="pin-col fast-col">${cols[1].join('')}</div>
+      `;
+    }
+  }
+
+  // ============================================================
+  // SECCIONES (Ahora usan window.Utils)
+  // ============================================================
+
+  renderDevSection() {
+    const devs = this.data.filter((p) => p.context === 'PROFESSIONAL');
+    this.renderSmartGrid(devs, CONFIG.DOM.injects.prof, (item, isMobile) => {
+      // Usamos Utils para ruta e imagen
+      const src = window.Utils.getSmartPath(item.fileName, 'DEV');
+      const imgHtml = `<img src="${src}" alt="${item.title}" loading="lazy" onerror="window.Utils.handleImgError(this)">`;
+      const wrapHtml = isMobile ? imgHtml : `<a href="${item.link}" target="_blank">${imgHtml}</a>`;
+      const tags = window.Utils.formatTags(item.tools);
+
+      return `
+        <div class="uni-img-box">${wrapHtml}</div>
+        <div class="uni-info">
+           <span class="uni-meta">[ ${tags} ]</span>
+           <h3 class="uni-title">${item.title}</h3>
+           <a href="${item.link}" target="_blank" class="uni-link">VER PROYECTO -></a>
+        </div>`;
+    });
+  }
+
+  async renderVideoSection() {
+    // Caché simple para no pedir a la API cada vez que se redimensiona
+    if (!this.cachedVideos) {
+      try {
+        const res = await fetch(CONFIG.API.rssBase + CONFIG.API.youtubeChannel);
+        const data = await res.json();
+        if (data.status === 'ok') {
+          this.cachedVideos = data.items
+            .map((item) => ({
+              title: item.title,
+              id: item.guid.split(':')[2] || item.link.split('v=')[1],
+              date: item.pubDate.split(' ')[0],
+              link: item.link,
+              category: 'VIDEO',
+            }))
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
+      } catch (e) {
+        console.warn('Youtube Error', e);
+        this.cachedVideos = [];
+      }
+      this.renderDatabase(); // Actualizar base de datos con videos
+    }
+
+    const videos = this.cachedVideos || [];
+    this.renderSmartGrid(videos, CONFIG.DOM.injects.video, (v, isMobile) => {
+      // Miniatura WebP de YouTube
+      const thumb = v.id ? `https://i.ytimg.com/vi_webp/${v.id}/maxresdefault.webp` : v.fileName;
+      // getSmartPath maneja URLs completas también
+      const src = window.Utils.getSmartPath(thumb, 'VIDEO');
+
+      const imgHtml = `<img src="${src}" alt="${v.title}" loading="lazy" onerror="window.Utils.handleImgError(this)">`;
+      const badge = `<span class="uni-badge">YOUTUBE</span>`;
+      const wrapHtml = isMobile ? `${imgHtml} ${badge}` : `<a href="${v.link}" target="_blank">${imgHtml} ${badge}</a>`;
+
+      return `
+        <div class="uni-img-box">${wrapHtml}</div>
+        <div class="uni-info">
+           <span class="uni-meta">${v.date}</span>
+           <h3 class="uni-title" title="${v.title}">${
+        v.title.length > 35 ? v.title.substring(0, 35) + '...' : v.title
+      }</h3>
+           <a href="${v.link}" target="_blank" class="uni-link">VER EN YOUTUBE -></a>
+        </div>`;
+    });
+  }
+
+  renderDesignSection() {
+    const designs = this.data.filter((p) => p.category === 'DESIGN');
+    this.renderSmartGrid(designs, CONFIG.DOM.injects.ux, (item, isMobile) => {
+      const src = window.Utils.getSmartPath(item.fileName, 'DESIGN');
+      const imgHtml = `<img src="${src}" alt="${item.title}" loading="lazy" onerror="window.Utils.handleImgError(this)">`;
+      const wrapHtml = isMobile ? imgHtml : `<a href="${item.link}" target="_blank">${imgHtml}</a>`;
+      const tags = window.Utils.formatTags(item.tools);
+
+      return `
+        <div class="uni-img-box">${wrapHtml}</div>
+        <div class="uni-info">
+           <span class="uni-meta">[ ${tags} ]</span>
+           <h3 class="uni-title">${item.title}</h3>
+           <a href="${item.link}" target="_blank" class="uni-link">VER DISEÑO -></a>
+        </div>`;
+    });
+  }
+
+  renderGallery() {
+    const sorted = [...this.gallery].sort((a, b) => new Date(b.date) - new Date(a.date));
+    this.renderSmartGrid(sorted, CONFIG.DOM.injects.media, (item, isMobile) => {
+      const src = window.Utils.getSmartPath(item.fileName, 'ART');
+
+      // Lógica de enlace para arte: Si es '=', el link es la propia imagen
+      const linkUrl = item.link === '=' || !item.link ? src : item.link;
+
+      const imgHtml = `<img src="${src}" alt="${item.title}" loading="lazy" onerror="window.Utils.handleImgError(this)">`;
+      const wrapHtml = isMobile ? imgHtml : `<a href="${linkUrl}" target="_blank">${imgHtml}</a>`;
+      const year = item.date.split('-')[0];
+
+      return `
+        <div class="uni-img-box">${wrapHtml}</div>
+        <div class="uni-info">
+           <span class="uni-meta">${year} // ILUSTRACIÓN</span>
+           <h3 class="uni-title">${item.title}</h3>
+           <a href="${linkUrl}" target="_blank" class="uni-link">VER FULLSCREEN -></a>
+        </div>`;
+    });
+  }
+
+  // 5. HISTÓRICO (DATABASE)
+  renderDatabase() {
+    const mapContext = {
+      PROFESSIONAL: document.getElementById(CONFIG.DOM.lists.prof),
+      UNIVERSITY: document.getElementById(CONFIG.DOM.lists.univ),
+      PERSONAL: document.getElementById(CONFIG.DOM.lists.personal),
+    };
+    const catNames = { DEV: 'DESARROLLO', DESIGN: 'DISEÑO', VIDEO: 'AUDIOVISUAL', ART: 'ARTE', OTHER: 'OTROS' };
+
+    // Limpiar contenedores
+    Object.values(mapContext).forEach((el) => {
+      if (el) el.innerHTML = '';
+    });
+
+    Object.keys(mapContext).forEach((contextKey) => {
+      const container = mapContext[contextKey];
+      if (!container) return;
+
+      // Unir proyectos base
+      let items = this.data.filter((p) => p.context === contextKey);
+
+      // Agregar extras si es PERSONAL
+      if (contextKey === 'PERSONAL') {
+        if (this.cachedVideos) {
+          items = [...items, ...this.cachedVideos.map((v) => ({ ...v, context: 'PERSONAL', desc: 'YouTube Upload' }))];
+        }
+        if (this.gallery) {
+          items = [...items, ...this.gallery.filter((g) => (g.context || 'PERSONAL') === 'PERSONAL')];
+        }
+      }
+
+      if (items.length === 0) {
+        container.innerHTML =
+          '<div style="padding:2rem; opacity:0.5; font-family:var(--font-tech)">// SIN REGISTROS</div>';
+        return;
+      }
+
+      // Ordenar y Agrupar
+      items.sort((a, b) => new Date(b.date || '2000') - new Date(a.date || '2000'));
+      const cats = [...new Set(items.map((i) => i.category || 'OTHER'))].sort();
+
+      cats.forEach((cat) => {
+        const groupItems = items.filter((p) => (p.category || 'OTHER') === cat);
+
+        const rowsHTML = groupItems
+          .map((p) => {
+            // Lógica híbrida para imagen de DB
+            let thumb = '';
+            if (p.id) thumb = `https://img.youtube.com/vi/${p.id}/mqdefault.jpg`;
+            else thumb = window.Utils.getSmartPath(p.fileName || p.image, cat);
+
+            const imgHTML = `<img src="${thumb}" class="db-preview-img" loading="lazy" onerror="window.Utils.handleImgError(this)">`;
+
+            let linkHTML = '';
+            if (p.link) {
+              const url = p.link === '=' ? thumb : p.link;
+              linkHTML = `<a href="${url}" target="_blank" class="db-link">VER -></a>`;
+            }
+
+            return `
+            <div class="db-item">
+              <div class="db-row-header">
+                <div class="db-title"><i data-lucide="chevron-right" class="db-icon"></i> ${p.title}</div>
+                <span class="db-meta" style="opacity:0.5">${p.date || '--'}</span>
+              </div>
+              <div class="db-content">
+                <div class="db-inner">
+                  ${imgHTML}
+                  <div class="db-text-wrap">
+                    <p class="db-desc">${p.desc || ''}</p>
+                    <div class="db-action">${linkHTML}</div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+          })
+          .join('');
+
+        container.insertAdjacentHTML(
+          'beforeend',
+          `
+          <div class="db-group">
+            <div class="db-group-header"><span>> ${catNames[cat] || cat}</span> <span>[ ${
+            groupItems.length
+          } ]</span></div>
+            <div class="db-group-content">${rowsHTML}</div>
+          </div>
+        `
+        );
+      });
+    });
+    this.initDatabaseEvents();
+  }
+
+  // --- RENDERIZADO FOOTER ---
+  renderFooterDynamic() {
+    if (!window.cvData) return;
+    const d = window.cvData;
+
+    // Textos
+    ['lbl-download', 'lbl-theme', 'lbl-contact'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el)
+        el.textContent =
+          d.labels[
+            { 'lbl-download': 'footerDownload', 'lbl-theme': 'footerTheme', 'lbl-contact': 'footerContact' }[id]
+          ];
+    });
+
+    // Descargas PDF
+    const dlContainer = document.getElementById('footer-downloads-inject');
+    if (dlContainer && d.footerDownloads) {
+      const pdfBase = d.config?.pdfPath || '';
+      dlContainer.innerHTML = d.footerDownloads
+        .map((item) => {
+          let path = item.file;
+          if (!path.includes('/') && !path.includes('http')) path = `${pdfBase}${item.file}.pdf`;
+
+          return `
+            <div class="btn-column">
+              <a href="${path}" target="_blank" class="neon-btn">${item.title}</a>
+              <a href="${item.webLink}" target="_blank" class="web-mini-btn"><i data-lucide="globe"></i> ${d.labels.btnWeb}</a>
+            </div>`;
+        })
+        .join('');
+    }
+
+    // Contacto (Usando Utils.copyText)
+    const contactContainer = document.getElementById('contact-inject');
+    if (contactContainer && d.contact) {
+      contactContainer.innerHTML =
+        d.contact
+          .map((c) => {
+            if (c.icon === 'mail' || c.icon === 'at-sign') {
+              return `<div class="c-item"><span class="c-label">${c.icon === 'mail' ? 'CORREO' : 'USUARIO'}</span>
+                       <div class="c-value copy-trigger" data-copy="${c.text}">${
+                c.text
+              } <i data-lucide="copy" class="copy-icon"></i></div></div>`;
+            }
+            if (c.icon === 'linkedin' || c.icon === 'github') return ''; // Se manejan en "Otras Redes"
+            return '';
+          })
+          .join('') +
+        `<div class="c-item"><span class="c-label">REDES</span><div class="social-links">` +
+        d.contact
+          .filter((c) => ['linkedin', 'github'].includes(c.icon))
+          .map((c) => `<a href="${c.link}" target="_blank">${c.text.toUpperCase()}</a>`)
+          .join('') +
+        `</div></div>`;
+    }
+    if (window.Utils) window.Utils.initIcons();
+  }
+
+  // --- RENDERIZADO PERFIL ---
+  renderProfileImages() {
+    const basic = window.cvData?.basics;
+    const conf = window.cvData?.config;
+    if (!basic || !conf) return;
+
+    // Rutas centralizadas con Utils
+    const secretSrc = window.Utils.getSmartPath(basic.secretImageName, 'PROFILE');
+    const frontSrc = window.Utils.getSmartPath(basic.imageName, 'PROFILE');
+
+    const container = document.querySelector('.p-visual');
+    if (container) {
+      container.innerHTML = `
+        <img src="${secretSrc}" class="p-img-back" alt="Egg" onerror="window.Utils.handleImgError(this)">
+        <img src="${frontSrc}" class="p-img-front" alt="Profile" onerror="window.Utils.handleImgError(this)">
+        <div class="colombia-tag" id="colombia-tag">BOGOTÁ, COLOMBIA 🇨🇴</div>
+       `;
+    }
+  }
+
+  renderLanguages() {
+    if (!window.cvData?.languages) return;
+    const [es, en] = window.cvData.languages;
+
+    // Español
+    if (es) {
+      document.getElementById('lang-lbl-1').textContent = es.name.toUpperCase();
+      document.getElementById('lang-val-1').textContent = es.level;
+    }
+    // Inglés
+    if (en) {
+      document.getElementById('lang-lbl-2').textContent = en.name.toUpperCase();
+
+      // Calcular etiqueta rango
+      let label = `${en.score} pts`;
+      if (en.levelRanges) {
+        const range = en.levelRanges.find((r) => en.score <= r.limit) || en.levelRanges[en.levelRanges.length - 1];
+        label = `${range.code} ${range.label}`;
+      }
+      document.getElementById('lang-val-2').textContent = `${label} ℹ️`;
+
+      // Datos del Modal
+      const bar = document.getElementById('duo-bar');
+      const scoreEl = document.getElementById('duo-score');
+      if (bar) bar.style.width = `${Math.round((en.score / en.maxScore) * 100)}%`;
+      if (scoreEl)
+        scoreEl.innerHTML = `<div style="font-size:2.5rem">${en.score} / ${en.maxScore}</div><div>${label}</div>`;
+
+      if (en.modalTitle) document.getElementById('duo-title').textContent = en.modalTitle;
+      if (en.modalText) document.getElementById('duo-desc').textContent = en.modalText;
+    }
+  }
+
+  renderSkills() {
+    if (!window.cvData?.skills) return;
+    const { hard, soft } = window.cvData.skills;
+
+    const fill = (items, id) => {
+      const el = document.getElementById(id);
+      if (el && items) el.innerHTML = items.map((i) => `<li>${i.name || i}</li>`).join('');
+    };
+    fill(hard, 'list-hard');
+    fill(soft, 'list-soft');
+  }
+
+  // ============================================================
+  // INTERACCIONES UI (Loader, Ticker, Eventos) - SIN CAMBIOS
+  // ============================================================
+  initCopyActions() {
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('.copy-trigger');
+      if (t && window.Utils) window.Utils.copyText(t.dataset.copy, t);
+    });
+  }
+
+  getCombinedTickerData() {
+    if (!window.cvData) return [];
+    const softNames = (window.cvData.software || []).map((s) => s.name);
+    const manualItems = window.cvData.tickerItems || [];
+    return [...new Set([...softNames, ...manualItems].map((i) => i.toUpperCase()))];
+  }
+
+  initTicker() {
+    const items = this.getCombinedTickerData();
+    const t1 = document.getElementById(CONFIG.DOM.tickers.t1);
+    const t2 = document.getElementById(CONFIG.DOM.tickers.t2);
+    if (t1 && t2 && items.length > 0) {
+      const createStream = () => {
+        const offset = Math.floor(Math.random() * items.length);
+        const list = [...items.slice(offset), ...items.slice(0, offset)];
+        return Array(20)
+          .fill(list.join(' /// ') + ' /// ')
+          .join('');
+      };
+      t1.textContent = createStream();
+      t2.textContent = createStream();
+    }
+  }
+
+  initTechTicker() {
+    const track = document.querySelector('.tech-track');
+    const items = this.getCombinedTickerData();
+    if (track && items.length > 0) {
+      const set = items.map((i) => `<span class="tech-item">${i}</span> <span class="tech-sep">///</span>`).join(' ');
+      track.innerHTML = Array(4).fill(set).join(' ');
+    }
+  }
+
+  initTypewriter() {
+    const el = document.querySelector('.typing-text');
+    const words = window.cvData?.identityData;
+    if (el && words) {
+      let wIdx = 0,
+        cIdx = 0,
+        isDel = false;
+      const type = () => {
+        const word = words[wIdx];
+        el.textContent = word.substring(0, isDel ? cIdx - 1 : cIdx + 1);
+        cIdx = isDel ? cIdx - 1 : cIdx + 1;
+
+        let speed = isDel ? 50 : 150;
+        if (!isDel && cIdx === word.length) {
+          speed = 2000;
+          isDel = true;
+        } else if (isDel && cIdx === 0) {
+          isDel = false;
+          wIdx = (wIdx + 1) % words.length;
+          speed = 500;
+        }
+
+        setTimeout(type, speed);
+      };
+      type();
+    }
+  }
+
+  // --- Helpers UI puros ---
+  initLoader() {
+    // 1. OBTENER ELEMENTOS Y VERIFICAR
+    const l = document.getElementById('preloader');
+    const num = document.getElementById('load-num');
+    const bar = document.getElementById('bar-fill');
+    const textEl = document.getElementById('random-text');
+
+    if (!l) return console.error('❌ Error: No se encontró #preloader en el HTML');
+    if (!num) console.warn('⚠️ Advertencia: No se encontró #load-num');
+    if (!textEl) console.warn('⚠️ Advertencia: No se encontró #random-text');
+
+    // 2. FRASES (Modo Hacker)
+    const phrases = [
+      'CARGANDO ASSETS...',
+      'SINTETIZANDO...',
+      'CALCULANDO VECTORES...',
+      'INICIANDO MOTORES...',
+      'OPTIMIZANDO...',
+      'LEAYENDO DATOS...',
+      'DESCOMPRIMIENDO...',
+      'CONECTANDO...',
+      'VERIFICANDO...',
+    ];
+
+    // Texto inicial
+    if (textEl) textEl.textContent = phrases[0];
+
+    // CICLO DE TEXTO RÁPIDO (120ms) -> Para que se note que cambia
+    let textInterval = setInterval(() => {
+      if (textEl) {
+        const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+        textEl.textContent = randomPhrase;
+      }
+    }, 120);
+
+    // 3. VARIABLES DE PROGRESO
+    let visualProgress = 0;
+    let realLoadedPercent = 0;
+
+    // DETECCIÓN DE IMÁGENES
+    const imgs = Array.from(document.images);
+    const total = imgs.length;
+    let loadedCount = 0;
+
+    const updateRealLoad = () => {
+      loadedCount++;
+      realLoadedPercent = total === 0 ? 100 : Math.floor((loadedCount / total) * 100);
+    };
+
+    if (total === 0) realLoadedPercent = 100;
+    else {
+      imgs.forEach((img) => {
+        if (img.complete) updateRealLoad();
+        else {
+          img.addEventListener('load', updateRealLoad);
+          img.addEventListener('error', updateRealLoad);
+        }
+      });
+    }
+
+    // 4. BUCLE DE ANIMACIÓN PRINCIPAL
+    const animInterval = setInterval(() => {
+      // Lógica de avance:
+      // Si es menor a 85, avanza lento (simulación)
+      if (visualProgress < 85) {
+        if (Math.random() > 0.5) visualProgress += 1;
+      }
+
+      // Si la carga real es mayor, salta para alcanzarla
+      if (realLoadedPercent > visualProgress) {
+        visualProgress += (realLoadedPercent - visualProgress) * 0.2; // Suavizado
+      }
+
+      // Si ya cargó todo, corre al 100
+      if (realLoadedPercent >= 100) {
+        visualProgress += 4;
+      }
+
+      // Tope
+      if (visualProgress > 100) visualProgress = 100;
+
+      // ACTUALIZAR UI
+      if (num) {
+        const val = Math.floor(visualProgress);
+        num.textContent = val;
+        // IMPORTANTE: Variable CSS para el líquido
+        num.style.setProperty('--progress', val + '%');
+      }
+      if (bar) bar.style.width = visualProgress + '%';
+
+      // FIN
+      if (visualProgress >= 100) {
+        clearInterval(animInterval);
+        clearInterval(textInterval); // Detener textos
+
+        if (textEl) {
+          textEl.textContent = 'ACCESO CONCEDIDO';
+          textEl.style.color = '#2ecc71'; // Verde éxito
+          textEl.style.fontWeight = 'bold';
+        }
+
+        // Pausa final antes de abrir
+        setTimeout(() => {
+          l.classList.add('zoom-out');
+          document.body.classList.remove('loading');
+          setTimeout(() => (l.style.display = 'none'), 1000);
+        }, 500);
+      }
+    }, 30); // 30ms = 33fps aprox
+
+    // Fallback de seguridad (5 seg)
+    setTimeout(() => {
+      realLoadedPercent = 100;
+    }, 5000);
+  }
+
+  initCursor() {
+    if (!window.matchMedia('(hover:hover)').matches) return;
+    const d = document.getElementById('cursor-dot');
+    const c = document.getElementById('cursor-circle');
+    document.addEventListener('mousemove', (e) => {
+      if (d) {
+        d.style.left = e.clientX + 'px';
+        d.style.top = e.clientY + 'px';
+      }
+      if (c)
+        setTimeout(() => {
+          c.style.left = e.clientX + 'px';
+          c.style.top = e.clientY + 'px';
+        }, 50);
+    });
+  }
+
+  initThemeSwitcher() {
+    document.querySelectorAll('.theme-btn').forEach((b) =>
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.theme-btn').forEach((btn) => btn.classList.remove('active'));
+        b.classList.add('active');
+        document.documentElement.setAttribute('data-theme', b.dataset.theme);
+      })
+    );
+  }
+
+  initTabs() {
+    document.querySelectorAll('.db-btn').forEach((b) =>
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.db-btn, .db-list').forEach((x) => x.classList.remove('active'));
+        b.classList.add('active');
+        document.getElementById(`list-${b.dataset.cat}`)?.classList.add('active');
+      })
+    );
+  }
+
+  initModals() {
+    const btn = document.getElementById('open-duo'),
+      m = document.getElementById('duo-modal');
+    if (btn && m) btn.addEventListener('click', () => m.showModal());
+  }
+
+  initHeroInteraction() {
+    const h = document.getElementById('hero-trigger');
+    if (h)
+      h.addEventListener('click', () => {
+        document.getElementById('profile-section')?.scrollIntoView({ behavior: 'smooth' });
+        h.classList.add('brand-contrast-active');
+        setTimeout(() => h.classList.remove('brand-contrast-active'), 2000);
+      });
+  }
+
+  initGlobalSmoothScroll() {
+    if (typeof Lenis === 'undefined') return;
+    this.lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
+    this.lenis.on('scroll', ({ scroll }) => {
+      document
+        .querySelectorAll('.fast-col')
+        .forEach((c) => (c.style.transform = `translate3d(0, -${scroll * 0.05}px, 0)`));
+      if (window.innerWidth > 1024) {
+        document.querySelectorAll('.sticky-container').forEach((c) => {
+          const title = c.querySelector('.h-card.intro');
+          const track = c.querySelector('.horizontal-track');
+          if (title && track) {
+            const limit = track.offsetHeight - title.offsetHeight - 50;
+            const val = Math.max(0, Math.min(-c.getBoundingClientRect().top, limit));
+            title.style.transform = `translate3d(0, ${val}px, 0)`;
+          }
+        });
+      }
+    });
+    const raf = (time) => {
+      this.lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }
+
+  initDuolingoModal() {
+    const t = document.getElementById('open-duo'),
+      d = document.getElementById('duo-modal');
+    if (!t || !d) return;
+    t.addEventListener('click', () => {
+      d.showModal();
+      document.body.classList.add('no-scroll');
+      if (this.lenis) this.lenis.stop();
+    });
+    d.addEventListener('close', () => {
+      document.body.classList.remove('no-scroll');
+      if (this.lenis) this.lenis.start();
+    });
+    d.addEventListener('click', (e) => {
+      const r = d.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close();
+    });
+  }
+
+  checkColombiaEasterEgg() {
+    const tag = document.getElementById('colombia-tag');
+    if (!tag) return;
+    const now = new Date();
+    if (now.getMonth() === 6 && now.getDate() === 20) {
+      tag.classList.add('colombia-mode');
+      tag.title = '¡Que viva Colombia!';
+    }
+  }
+
+  initProfileWipeEffect() {
+    const t = document.getElementById('profile-trigger');
+    if (!t) return;
+    const start = (e) => {
+      if (e.cancelable && e.type !== 'mousedown') e.preventDefault();
+      t.classList.add('is-wiping');
+    };
+    const end = () => t.classList.remove('is-wiping');
+    ['mousedown', 'touchstart'].forEach((e) => t.addEventListener(e, start, { passive: false }));
+    ['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach((e) => t.addEventListener(e, end));
+  }
+
+  initVisibilityControl() {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        document.body.classList.add('is-paused');
+        if (this.lenis) this.lenis.stop();
+      } else {
+        document.body.classList.remove('is-paused');
+        if (this.lenis) this.lenis.start();
+      }
+    });
+  }
+
+  initReadMore() {
+    const bio = document.querySelector('.p-bio');
+    if (!bio || !window.matchMedia('(max-width: 1024px)').matches) return;
+    bio.classList.add('bio-collapsed');
+    const btn = document.createElement('button');
+    btn.id = 'read-more-btn';
+    btn.textContent = '< LEER MÁS >';
+    bio.parentNode.insertBefore(btn, bio.nextSibling);
+    btn.addEventListener('click', () => {
+      if (bio.classList.contains('bio-collapsed')) {
+        bio.classList.remove('bio-collapsed');
+        btn.textContent = '> LEER MENOS <';
+      } else {
+        bio.classList.add('bio-collapsed');
+        btn.textContent = '< LEER MÁS >';
+        document.getElementById('profile-section')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  initSmoothNavigation() {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href');
+        if (id === '#') {
+          if (this.lenis) this.lenis.scrollTo(0);
+          else window.scrollTo(0, 0);
+          return;
+        }
+        const el = document.querySelector(id);
+        if (el && this.lenis) this.lenis.scrollTo(el, { offset: 0, duration: 1.5 });
+      });
+    });
+  }
+
+  initDatabaseEvents() {
+    const v = document.querySelector('.db-interface');
+    if (!v) return;
+    v.querySelectorAll('.db-group-header').forEach((h) => {
+      h.replaceWith(h.cloneNode(true)); // Limpiar listeners previos
+      // Re-seleccionar tras el replace
+    });
+    // Re-bind simple
+    document
+      .querySelectorAll('.db-group-header')
+      .forEach((h) => h.addEventListener('click', () => h.parentElement.classList.toggle('active')));
+    document.querySelectorAll('.db-row-header').forEach((h) =>
+      h.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const item = h.parentElement;
+        const active = item.classList.contains('active');
+        item
+          .closest('.db-group-content')
+          .querySelectorAll('.db-item')
+          .forEach((i) => i.classList.remove('active'));
+        if (!active) item.classList.add('active');
+      })
+    );
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => new PortfolioApp());
