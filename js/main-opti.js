@@ -1,6 +1,6 @@
-import { CONFIG } from '../../js/modules/config.min.js';
-import { UI } from '../../js/modules/ui.min.js';
-import { Renderer } from '../../js/modules/renderer.min.js';
+import { CONFIG } from '/js/modules/config.min.js';
+import { UI } from '/js/modules/ui.min.js';
+import { Renderer } from '/js/modules/renderer.min.js';
 
 class PortfolioApp {
   constructor() {
