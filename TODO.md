@@ -32,3 +32,4 @@
 - [ ] Filtrar trabajos deviantart +18
 - [ ] Corregir traduccion descripcion en formato harvard seccion educacion
 - [ ] Deteccion de imagenes no por formato, sino por tamaño: Menor peso, sin importar formato, lo carga
+- [ ] Agrgar soporte al compresor de imagenes svg y pdf
