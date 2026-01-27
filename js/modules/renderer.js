@@ -419,35 +419,71 @@ export class Renderer {
   }
 
   async renderVideo() {
+    // 1. OBTENER VIDEOS MANUALES (Desde tu archivo de datos)
+    // Filtramos todo lo que sea categoría VIDEO.
+    // Nota: Si SOLO quieres los de contexto 'PERSONAL', agrega: && p.context === 'PERSONAL'
+    const manualVideos = this.data
+      .filter((p) => 'VIDEO' === p.category && p.context !== 'UNIVERSITY')
+      .map((p) => ({
+        ...p, // Mantenemos título, desc, tools, etc.
+        id: this._extractYoutubeId(p.link), // Generamos ID para la miniatura
+        date: p.date || '2022-01-01', // Fecha por defecto si falta
+        isManual: true, // Marca interna por si quieres estilizarlos diferente
+      }));
+
+    // 2. OBTENER VIDEOS DE YOUTUBE (Solo si no están en caché)
     if (!this.cachedVideos) {
-      // ... (Tu código de fetch existente) ...
-      // Asegúrate de que al final del fetch llames a renderVideo de nuevo o sigas aquí
+      let youtubeVideos = [];
       try {
         const res = await fetch(CONFIG.API.rssBase + CONFIG.API.youtubeChannel);
         const data = await res.json();
+
         if (data.status === 'ok') {
-          this.cachedVideos = data.items
-            .map((item) => ({
-              title: item.title,
-              link: item.link,
-              date: item.pubDate.split(' ')[0],
-              category: 'VIDEO',
-              id: this._extractYoutubeId(item.link),
-            }))
-            .sort((a, b) => new Date(b.date) - new Date(a.date));
+          youtubeVideos = data.items.map((item) => ({
+            title: item.title,
+            link: item.link,
+            date: item.pubDate.split(' ')[0], // Formato YYYY-MM-DD
+            category: 'VIDEO',
+            id: this._extractYoutubeId(item.link),
+            desc: 'Video reciente de YouTube',
+            tools: ['YouTube'], // Etiqueta automática
+            isManual: false,
+          }));
         }
       } catch (e) {
-        this.cachedVideos = [];
+        console.warn('⚠️ No se pudo cargar el feed de YouTube. Mostrando solo manuales.');
+        youtubeVideos = [];
       }
-      this.renderDatabase();
+
+      // 3. FUSIÓN INTELIGENTE (Merge)
+      // Usamos un Map por ID para evitar duplicados.
+      // Prioridad: El video Manual sobrescribe al de YouTube (así conservas tus descripciones personalizadas).
+      const videoMap = new Map();
+
+      // A. Primero llenamos con los de YouTube
+      youtubeVideos.forEach((v) => {
+        if (v.id) videoMap.set(v.id, v);
+      });
+
+      // B. Luego sobrescribimos/añadimos los Manuales
+      manualVideos.forEach((v) => {
+        if (v.id) videoMap.set(v.id, v);
+      });
+
+      // 4. ORDENAR POR FECHA (Más reciente arriba)
+      this.cachedVideos = Array.from(videoMap.values()).sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
     }
 
+    // 5. RENDERIZADO
     const allItems = this.cachedVideos || [];
 
     const limit = 12;
     const hasMore = allItems.length > limit;
     const dataToShow = allItems.slice(0, limit);
 
+    // Renderizamos pasando la data mezclada
     this._renderSmartGrid(dataToShow, CONFIG.DOM.injects.video, 'VIDEO', hasMore);
   }
 
