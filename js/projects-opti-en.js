@@ -36,6 +36,10 @@ window.T = {
   YT: 'YouTube',
   THUMB: 'Miniaturas',
   TW: 'Twitch',
+  COM: 'Comunitario',
+  PY: 'Python',
+  SCR: 'Script',
+  SOFT: 'Software',
 };
 
 window.PROJECT_CONFIG = {
@@ -117,7 +121,8 @@ window.mainPortfolio = [
   },
   {
     title: 'Minecraft UUID Converter',
-    fileName: 'https://raw.githubusercontent.com/Tarquitet/minecraft_uuid_converter/refs/heads/main/images/README/1769448117738.png',
+    fileName:
+      'https://raw.githubusercontent.com/Tarquitet/minecraft_uuid_converter/refs/heads/main/images/README/1769448117738.png',
     link: 'https://github.com/Tarquitet/minecraft_uuid_converter.git',
     desc: 'Python program that allows to renaming uuid players files or finding uuids from mojang, elyby, offline auth',
     tools: [T.COM, T.PY, T.SCR, T.SOFT],
@@ -341,7 +346,8 @@ window.mainPortfolio = [
   {
     title: '3D Virtual Gym App',
     desc: 'Mobile app with exercises in 360° view and biomechanical explanation.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/GymApp_1_2024/refs/heads/main/Assets/prototipo-demo.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/GymApp_1_2024/refs/heads/main/Assets/prototipo-demo.png',
     link: 'https://github.com/pintomultimedia2002/GymApp_1_2024',
     tools: [T.UNITY, T.CS, 'UI Mobile'],
     category: CAT.DEV,
@@ -350,7 +356,8 @@ window.mainPortfolio = [
   {
     title: 'Intelligent Sudoku Solver',
     desc: 'AI that generates and solves Sudokus through efficient Backtracking.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking/refs/heads/master/sudokugenerado.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking/refs/heads/master/sudokugenerado.png',
     link: 'https://github.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking',
     tools: [T.CS, 'Backtracking', 'IA'],
     category: CAT.DEV,
@@ -359,7 +366,8 @@ window.mainPortfolio = [
   {
     title: 'C.I.P.S Puzzle Solver',
     desc: 'Minigame about experimental AI that solves numerical puzzles.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver/refs/heads/master/puzzle-solved.jpg',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver/refs/heads/master/puzzle-solved.jpg',
     link: 'https://github.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver',
     tools: [T.CS, 'Heurística', 'IA'],
     category: CAT.DEV,
@@ -368,7 +376,8 @@ window.mainPortfolio = [
   {
     title: 'Wumpus World Agent',
     desc: 'Simulation of a Rational Agent based on propositional logic.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/wumpus-world-javascript/refs/heads/main/src/resources/wampus.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/wumpus-world-javascript/refs/heads/main/src/resources/wampus.png',
     link: 'https://github.com/pintomultimedia2002/wumpus-world-javascript',
     tools: [T.JS, 'Lógica', 'IA Clásica'],
     category: CAT.DEV,
@@ -377,7 +386,8 @@ window.mainPortfolio = [
   {
     title: 'A* Pathfinder Algorithm',
     desc: 'Implementation of the A* algorithm for optimal path search.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/A_star_algorithm_Javascript/refs/heads/main/wampus-ia.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/A_star_algorithm_Javascript/refs/heads/main/wampus-ia.png',
     link: 'https://github.com/pintomultimedia2002/A_star_algorithm_Javascript',
     tools: [T.JS, 'Pathfinding', 'Algoritmos'],
     category: CAT.DEV,
@@ -386,7 +396,8 @@ window.mainPortfolio = [
   {
     title: 'CarVoice Assistant',
     desc: 'Virtual assistant for vehicles with voice control.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/carvoice-assist/refs/heads/main/assets/asistant-2.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/carvoice-assist/refs/heads/main/assets/asistant-2.png',
     link: 'https://github.com/pintomultimedia2002/carvoice-assist',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Voiceflow', 'Chatbot', T.WEB],
     category: CAT.DEV,
@@ -395,7 +406,8 @@ window.mainPortfolio = [
   {
     title: 'Algebrain Mobile App',
     desc: 'Educational app for algebra focused on user experience.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/Algebrain-App/refs/heads/main/resources/images/algebrain-demo-4.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/Algebrain-App/refs/heads/main/resources/images/algebrain-demo-4.png',
     link: 'https://github.com/pintomultimedia2002/Algebrain-App',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'eLearning', 'Web App', 'Mobile', T.WEB],
     category: CAT.DEV,
@@ -449,7 +461,8 @@ window.mainPortfolio = [
   {
     title: 'In-Mortal Transmedia',
     desc: 'Transmedia narrative exploration of the evolution of ideas.',
-    fileName: 'https://static.wixstatic.com/media/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg/v1/fill/w_2146,h_1229,al_c,q_90,enc_avif,quality_auto/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg',
+    fileName:
+      'https://static.wixstatic.com/media/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg/v1/fill/w_2146,h_1229,al_c,q_90,enc_avif,quality_auto/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg',
     link: 'https://pintodavid2002.wixsite.com/in-mortal',
     tools: ['Storytelling', 'Wix', 'Concept Art', 'Narrative', 'Transmedia', 'Web Design', T.WEB, T.UX],
     category: CAT.DEV,
@@ -590,7 +603,8 @@ window.mainPortfolio = [
     link: 'https://www.youtube.com/watch?v=qIxRbcXezWU',
     category: CAT.VID,
     context: CTX.UNIV,
-  },];
+  },
+];
 
 /* ========================================================================
    2. GALERÍA VISUAL (ARTE)
@@ -635,4 +649,5 @@ window.galleryData = [
     tags: ['WIP'],
     context: CTX.PERS,
     category: CAT.ART,
-  },];
+  },
+];

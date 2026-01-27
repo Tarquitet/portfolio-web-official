@@ -32,3 +32,4 @@
 - [ ] Filtrar trabajos deviantart +18
 - [ ] Corregir traduccion descripcion en formato harvard seccion educacion
 - [ ] Agrgar soporte al compresor de imagenes svg y pdf
+- [ ] Arreglar actualizacion al documento con las variables constantes de memoria a disco (archivo, no se estan guardadno)
