@@ -395,7 +395,7 @@ export class Renderer {
   // --- SECCIONES INDIVIDUALES ---
   renderDev() {
     // 1. Filtrar todos los posibles
-    const allItems = this.data.filter((p) => p.category === 'DEV' && p.context !== 'UNIVERSITY');
+    const allItems = this.data.filter((p) => 'DEV' === p.category && p.context !== 'UNIVERSITY');
 
     // 2. Detectar si hay más de 10
     const limit = 10;
