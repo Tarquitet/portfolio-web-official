@@ -398,7 +398,7 @@ export class Renderer {
     const allItems = this.data.filter((p) => 'DEV' === p.category && p.context !== 'UNIVERSITY');
 
     // 2. Detectar si hay más de 10
-    const limit = 10;
+    const limit = 12;
     const hasMore = allItems.length > limit;
 
     // 3. Cortar solo los 10 primeros para mostrar
@@ -411,7 +411,7 @@ export class Renderer {
   renderDesign() {
     const allItems = this.data.filter((e) => 'DESIGN' === e.category && e.context !== 'UNIVERSITY');
 
-    const limit = 10;
+    const limit = 12;
     const hasMore = allItems.length > limit;
     const dataToShow = allItems.slice(0, limit);
 
@@ -444,7 +444,7 @@ export class Renderer {
 
     const allItems = this.cachedVideos || [];
 
-    const limit = 10;
+    const limit = 12;
     const hasMore = allItems.length > limit;
     const dataToShow = allItems.slice(0, limit);
 
@@ -454,7 +454,7 @@ export class Renderer {
   renderGallery() {
     const allItems = [...this.gallery].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    const limit = 10;
+    const limit = 12;
     const hasMore = allItems.length > limit;
     const dataToShow = allItems.slice(0, limit);
 
