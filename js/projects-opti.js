@@ -58,21 +58,21 @@ window.PROJECT_CONFIG = {
 window.mainPortfolio = [
   {
     title: 'Universal Portfolio Local DB Manager',
-    category: CAT.DEV,
-    context: CTX.PERS,
     fileName: 'https://raw.githubusercontent.com/Tarquitet/portfolio-updater/main/images/README/1769443128324.png',
     link: 'https://github.com/Tarquitet/portfolio-updater',
     desc: 'Helper for updating my profile website automated',
     tools: [T.COM, T.PY, T.SCR, T.SOFT],
+    category: CAT.DEV,
+    context: CTX.PERS,
   },
   {
     title: 'Project Manager & Build Orchestrator',
-    category: CAT.DEV,
-    context: CTX.PERS,
     fileName: 'https://raw.githubusercontent.com/Tarquitet/web-portfolio-manager/main/images/README/1769443877856.png',
     link: 'https://github.com/Tarquitet/web-portfolio-manager',
     desc: 'Automatized helper (translator + minify + portfolio updater) for my official website',
     tools: [T.COM, T.PY, T.SCR, T.SOFT],
+    category: CAT.DEV,
+    context: CTX.PERS,
   },
   {
     title: 'JSON Auto-Translator (i18n Tool)',
