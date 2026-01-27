@@ -68,13 +68,12 @@ export class Renderer {
 
     const clone = this.template.content.cloneNode(true);
 
-    // --- SELECTORES ACTUALIZADOS A LA ESTRUCTURA ORIGINAL ---
-    const visualBox = clone.querySelector('.uni-img-box'); // Antes card-visual
+    const visualBox = clone.querySelector('.uni-img-box');
     const img = clone.querySelector('.card-img');
     const title = clone.querySelector('.uni-title');
     const dateEl = clone.querySelector('.uni-date');
     const cta = clone.querySelector('.card-cta');
-    const linkWrap = clone.querySelector('.card-link-wrapper'); // El enlace que envuelve la img
+    const linkWrap = clone.querySelector('.card-link-wrapper');
     const badgeContainer = clone.querySelector('.card-badges-overlay');
 
     let imgSrc = '';
@@ -86,6 +85,7 @@ export class Renderer {
 
     // --- LÓGICA DE CONTENIDO ---
     if (type === 'VIDEO') {
+      // ... (Lógica de video se mantiene igual) ...
       const videoId = item.id || this._extractYoutubeId(item.link);
       imgSrc = videoId
         ? `https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`
@@ -96,11 +96,11 @@ export class Renderer {
       ctaText = 'VER EN YOUTUBE ->';
     } else if (type === 'ART') {
       imgSrc = window.Utils.getSmartPath(item.fileName, 'ART');
+
+      // Lógica original de Arte
       if (mainLink === '=' || !mainLink) mainLink = imgSrc;
 
-      // APLICAMOS EL MODO ARTE A LA CAJA CORRECTA
       if (visualBox) visualBox.classList.add('is-art-mode');
-
       if (item.tags && item.tags.length > 0) {
         badgesToShow.push(item.tags[0].toUpperCase());
       }
@@ -110,6 +110,12 @@ export class Renderer {
       // DEV & DESIGN
       imgSrc = window.Utils.getSmartPath(item.fileName, type === 'DESIGN' ? 'DESIGN' : 'DEV');
 
+      // 🔥 LÓGICA AGREGADA AQUÍ: Soporte para '=' en Dev y Design
+      if (mainLink === '=') {
+        mainLink = imgSrc;
+        ctaText = 'VER IMAGEN ->'; // Opcional: Cambiar texto si es imagen
+      }
+
       const tools = item.tools || [];
       if (tools.some((t) => t.includes('HTML') || t.includes('Web'))) badgesToShow.push('WEB');
       else if (tools.some((t) => t.includes('Figma'))) badgesToShow.push('FIGMA');
@@ -117,22 +123,20 @@ export class Renderer {
       else if (tools.length > 0) badgesToShow.push(tools[0]);
 
       if (item.date) dateText = item.date;
-      ctaText = type === 'DESIGN' ? 'VER DISEÑO ->' : 'VER PROYECTO ->';
+      // Mantiene el texto por defecto si no es imagen
+      if (mainLink !== imgSrc) ctaText = type === 'DESIGN' ? 'VER DISEÑO ->' : 'VER PROYECTO ->';
     }
 
-    // --- RENDERIZADO ---
+    // --- RENDERIZADO (El resto sigue igual) ---
 
-    // 1. Badges
     if (badgeContainer && badgesToShow.length > 0) {
       badgeContainer.innerHTML = badgesToShow
         .map((tag) => `<div class="overlay-badge" data-type="${tag}">${tag}</div>`)
         .join('');
     }
 
-    // 2. Fecha
     if (dateEl) dateEl.textContent = dateText;
 
-    // 3. Imagen y Textos
     if (img) {
       img.src = imgSrc;
       img.alt = item.title;
@@ -140,33 +144,31 @@ export class Renderer {
         window.Utils.handleImgError(this);
       };
     }
-    // 4. TÍTULO CON LIMITADOR DE CARACTERES
-    if (title) {
-      const maxLen = 40; // Máximo de letras antes de cortar
 
+    if (title) {
+      const maxLen = 40;
       if (item.title.length > maxLen) {
-        // Si es muy largo: Cortamos y añadimos "..."
         title.textContent = item.title.substring(0, maxLen) + '...';
-        // Guardamos el título completo en el tooltip para que se lea al pasar el mouse
         title.title = item.title;
       } else {
-        // Si es corto: Se deja igual
         title.textContent = item.title;
-        title.removeAttribute('title'); // Limpieza por si acaso
+        title.removeAttribute('title');
       }
     }
 
-    // 4. Enlaces (Ambos apuntan al mismo sitio)
+    // Links
     if (cta) {
       cta.href = mainLink;
       cta.textContent = ctaText;
+      // Si es imagen, forzar target blank para que no cierre el portafolio
+      if (mainLink === imgSrc) cta.target = '_blank';
     }
     if (linkWrap) {
       linkWrap.href = mainLink;
-      // Importante: aseguramos que sea display block para cubrir la imagen
       linkWrap.style.display = 'block';
       linkWrap.style.width = '100%';
       linkWrap.style.height = '100%';
+      if (mainLink === imgSrc) linkWrap.target = '_blank';
     }
 
     return clone;
