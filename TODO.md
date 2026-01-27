@@ -28,8 +28,7 @@
 - [ ] Poner videos como ultima seccion para contarlo mas facil tanto para la web principal, como portafolio
 - [ ] Agregar miniaturas como seccion separada de diseño, sub separar diseño
 - [ ] Indicar que no uso after effects para efectos super wow como mrbeast, edicion lineal tipo rubius o hermitcraft
-- [ ] Subir trabajos a deviantart y usar tipo api para colocarlos
+- [ ] Subir trabajos a deviantart y usar tipo api/links para colocarlos
 - [ ] Filtrar trabajos deviantart +18
 - [ ] Corregir traduccion descripcion en formato harvard seccion educacion
-- [ ] Deteccion de imagenes no por formato, sino por tamaño: Menor peso, sin importar formato, lo carga
 - [ ] Agrgar soporte al compresor de imagenes svg y pdf
