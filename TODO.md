@@ -33,3 +33,6 @@
 - [ ] Corregir traduccion descripcion en formato harvard seccion educacion
 - [ ] Agrgar soporte al compresor de imagenes svg y pdf
 - [ ] Arreglar actualizacion al documento con las variables constantes de memoria a disco (archivo, no se estan guardadno)
+- [ ] Cambiar boton de ver más proyectos no debajo de los proyectos sino debajo del texto de la seccion
+- [ ] Agregar dominios para pdfs actualizados tipo cv para cada uno (mini pagina web para descargar cada uno tipo boton flotante)
+- [ ] Automatizar subida a repositorio de pdfs cuando estos se actualicen (usando otra version del generador de pdf o unirlo con el project manager)
