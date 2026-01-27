@@ -58,21 +58,21 @@ window.PROJECT_CONFIG = {
 window.mainPortfolio = [
   {
     title: 'Universal Portfolio Local DB Manager',
-    category: CAT.DEV,
-    context: CTX.PERS,
     fileName: 'https://raw.githubusercontent.com/Tarquitet/portfolio-updater/main/images/README/1769443128324.png',
     link: 'https://github.com/Tarquitet/portfolio-updater',
     desc: 'Helper for updating my profile website automated',
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
+    category: CAT.DEV,
+    context: CTX.PERS,
   },
   {
     title: 'Project Manager & Build Orchestrator',
-    category: CAT.DEV,
-    context: CTX.PERS,
     fileName: 'https://raw.githubusercontent.com/Tarquitet/web-portfolio-manager/main/images/README/1769443877856.png',
     link: 'https://github.com/Tarquitet/web-portfolio-manager',
     desc: 'Automated helper (translator + minify + portfolio updater) for my official website',
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
+    category: CAT.DEV,
+    context: CTX.PERS,
   },
   {
     title: 'JSON Auto-Translator (i18n Tool)',
@@ -239,7 +239,7 @@ window.mainPortfolio = [
     title: 'Multiemdia Day Mockup Proposal',
     fileName: 'smartmockups_l7w4oeot',
     link: '=',
-    desc: "Proposal for a logo with its respective mockup for the multimedia engineer's day in 2022",
+    desc: 'Proposal for a logo with its respective mockup for the multimedia engineer\'s day in 2022',
     tools: [T.ILUS, T.PHOTO],
     category: CAT.DES,
     context: CTX.UNIV,
@@ -451,7 +451,7 @@ window.mainPortfolio = [
   },
   {
     title: 'Rappi UI Redesign',
-    desc: "Redesign proposal to improve Rappi's UX.",
+    desc: 'Redesign proposal to improve Rappi\'s UX.',
     fileName: 'RedisenoRappi-Figma',
     link: 'https://www.figma.com/design/W8tY2RtS3hM7B9BQjJgpiB/David-Pinto---Redise%C3%B1o-Rappi?node-id=0-1&t=UmSvMcQEsiyU7y4s-1',
     tools: [T.FIGMA, 'UI Kit', 'Redesign', T.UI, T.UX, 'App Design'],
