@@ -11,8 +11,7 @@
 /assets/old_images/
 
 # Ignorar PDFs (Los generas localmente con tu script, no hace falta subirlos)
-/assets/pdf/
-/assets/pdf-tests/
+#/assets/pdf/
 
 # ==========================================
 # ⚙️ Archivos del Sistema Operativo y Editores

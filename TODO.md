@@ -1,4 +1,4 @@
-- [ ] DISEÑAR .ICO
+- [ ] RE-DISEÑAR .ICO
 - [ ] **Web In-Mortal:**
   - Terminar diseño en Figma.
   - Maquetar y desarrollar la web transmedia.
@@ -37,3 +37,43 @@
 - [ ] Agregar dominios para pdfs actualizados tipo cv para cada uno (mini pagina web para descargar cada uno tipo boton flotante)
 - [ ] Automatizar subida a repositorio de pdfs cuando estos se actualicen (usando otra version del generador de pdf o unirlo con el project manager)
 - [ ] Reemplazar png/webp de instituto biblico y verdad y fe, se ve raro su fondo
+- [ ] Agregar acerca de en linkedin ejemplo de [Leidy](https://www.linkedin.com/in/leidy-stephanie-aponte-mu%C3%B1oz-6167282b1/)
+- [ ] Agregar servicios linkedin como ejemplo de [aquí](https://www.linkedin.com/services/page/a81b60328626a40977/)
+- [ ] Mejorar fondo banner de linkedin donde este el tarquitet escondido en la zona lateral izquierda, un efecto de texto grande y gordo con puntos haciendo contraste entre un rojo y gris claro con mi nombre pero debajo este una frase y servicios, la frase es tipo "Artistical Ingeneering for your ideas" o similar, y agrgar los servicios arriba y debajo del titulo, entre ambos.
+- [ ] Rediseñar y optimizar pagin web papa
+- [ ] Agregar SEO pagian papa
+- [ ] Agrgar SEO para busquedas de mi pagina tarquitet.com
+- [ ] Agregar dominios como portfolio.tarquitet.com o cv.tarquitet.com para mis hojas de vida (creo que es enrutamiento)
+- [ ] Agregar enrutamiento de www.tarquitet.com a web.tarquitet.com
+- [ ] Agregar palabras de busqueda para google en mi pagina web tarquitet
+- [ ] Mejorar nombres y descripciones de proyectos pagin tarquitet
+- [ ] Agrear readmes faltantes para imagenes alta calidad para links que no lleven = para portafolio en pagina web tarquitet
+- [ ] Solucionar traduccion ingles no translada a ingles descripciones de progreso academico ni una palabra de stack tecnológico
+- [ ] Revsiar proque google elimina las animaciones de la pagina web
+- [ ] Corregir chat gpt de cv data a no ser traducido para que no de la vuelta a las palabras en las cv en ingles
+- [ ] Corregir Ingeniero en Multimedia en ingles (esta en español)
+- [ ] Retomar idea de lang para descargar version web en español o ingles con la idea ?lang y usando javascript tomo "diccionario"
+- [ ] LEER BIBLIA
+- [ ] Agregar pdf a repositorio principal web, para faciltiar enrutamiento de web por medio de carpetas
+- [ ] Control tema de pagina web segun tema de dispositivo.
+- [ ] Como hay varios temas oscuros, colocarlo por medio de una probabilidad muy baja su cambio (primero la probabilidad bajisima en ser elegido el cambio, luego, probabilidades bajas para elegir entre temas oscuros). Lo mismo para viceversa.
+- [ ] Readme de proyectos github en ingles
+- [ ] CARTEL DE ORO PAPA TAMAÑO PALABRISAS
+- [ ] Hacer la palabra tarquitet mas chica en el header porque se ve gigante, ejemplo en whatsapp
+- [ ] Para mostrar al menos los 10 a 12 primeros proyectos, usar los badges para mostrar lo equivalente. Si hay unos mas que otros que sea un tercio para que el resto lo rellene de esos proyectos
+- [ ] Botones en tema movil para elegir un poco mas pegados
+- [ ] Quitar efecto hover en movil de tabla habilidades
+- [ ] Agregar titulo de servicios y proyectos entregados despues de la tabla de habildades
+- [ ] Aveces las imagenes en movil no cargan, puede ser por el navegador o la misma internet, revisarlo.
+- [ ] QUITAR IMAGEN SECRETA, ESO NO SIRVE
+- [ ] Dejar boton de ver mas proyectos al superar sus limites debajo de texto de seccion
+- [ ] Subir un poco el texto de seccion para que no este tan abajo de los proyectos de la seccion, tal vez sea aumentar mas el margin
+- [ ] Cmabiar el hover de la tabla de habilidades, que no sea ese rojo en la caja de contenido sino solo el texto de rojo algo oscuro o mas pastel pero mas grueso
+- [ ] fancy land, mejorar titulo de L por F
+- [ ] Cambiar seccion 4 por KINDA ART
+- [ ] En seccion footer de contacto, cambiar de usuario por usuario en redes y dejar redes como linkedin profesional
+- [ ] Mejor quitar efecto hover en contenido tabla de hablidades
+- [ ] Quitar hover en texto horizontal de herramientas
+- [ ] Agrgar iconos en texto animado horizontal de perfil
+- [ ] Tratar de optimizar la web utilizando algun truco para que, la imagen ya descargada, sea la misma mostrada, no que se vuelva a descargar para mostrarla tanto en servicios de secciones como en historico (evitar hacer eso)
+- [ ] Corregir .avif .extension a imagenes que no existen, solo se forman en los links pero realmente no existen
