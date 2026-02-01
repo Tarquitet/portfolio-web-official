@@ -12,7 +12,6 @@
 - [ ] **Mejora Builtechraft:** Actualizar y mejorar la web existente de Builtechraft.
 - [ ] Morse en python, diseñar su script para Kelly.
 - [ ] Buscar video editado para transmedia electiva. Preguntar a Paula uni.
-- [ ] Agrgar convertidor imagenes preset automatico de etapa 1 - png a jpg - jpg a webp - webp a avif en calidad decente pero bajo peso.
 - [ ] Diseñar imagen portada portafolio
 - [ ] Diseñar imagen final portafolio ultima pagina
 - [ ] Bot linkedin idea discord mok
@@ -21,7 +20,6 @@
 - [ ] Terminar conversor UUID Minecraft
 - [ ] Cambiar el use client a server client (si se puede) - metodo de renderizado
 - [ ] Optimizar funciones js con funciones css
-- [ ] Mejorar imagen diseño dorado papa iglesia tamaño de palabrisas de coche (o similar)
 - [ ] Hacer conteo de elementos automaticamente segun el arreglo usado para las secciones tanto para la web principal como para el portafolio
 - [ ] Hacer menu de web principal, tener las secciones generadas automaticamente desde el cv_data
 - [ ] Contador automatico para evitar poner numeros en las secciones
@@ -32,7 +30,7 @@
 - [ ] Filtrar trabajos deviantart +18
 - [ ] Corregir traduccion descripcion en formato harvard seccion educacion
 - [ ] Agrgar soporte al compresor de imagenes svg y pdf
-- [ ] Arreglar actualizacion al documento con las variables constantes de memoria a disco (archivo, no se estan guardadno)
+- [ ] Arreglar actualizacion al documento portfolio o cv_data con las variables constantes de memoria a disco (archivo, no se estan guardadno)
 - [ ] Cambiar boton de ver más proyectos no debajo de los proyectos sino debajo del texto de la seccion
 - [ ] Agregar dominios para pdfs actualizados tipo cv para cada uno (mini pagina web para descargar cada uno tipo boton flotante)
 - [ ] Automatizar subida a repositorio de pdfs cuando estos se actualicen (usando otra version del generador de pdf o unirlo con el project manager)
@@ -53,15 +51,14 @@
 - [ ] Corregir chat gpt de cv data a no ser traducido para que no de la vuelta a las palabras en las cv en ingles
 - [ ] Corregir Ingeniero en Multimedia en ingles (esta en español)
 - [ ] Retomar idea de lang para descargar version web en español o ingles con la idea ?lang y usando javascript tomo "diccionario"
-- [ ] LEER BIBLIA
 - [ ] Agregar pdf a repositorio principal web, para faciltiar enrutamiento de web por medio de carpetas
 - [ ] Control tema de pagina web segun tema de dispositivo.
 - [ ] Como hay varios temas oscuros, colocarlo por medio de una probabilidad muy baja su cambio (primero la probabilidad bajisima en ser elegido el cambio, luego, probabilidades bajas para elegir entre temas oscuros). Lo mismo para viceversa.
 - [ ] Readme de proyectos github en ingles
-- [ ] CARTEL DE ORO PAPA TAMAÑO PALABRISAS
 - [ ] Hacer la palabra tarquitet mas chica en el header porque se ve gigante, ejemplo en whatsapp
-- [ ] Para mostrar al menos los 10 a 12 primeros proyectos, usar los badges para mostrar lo equivalente. Si hay unos mas que otros que sea un tercio para que el resto lo rellene de esos proyectos
-- [ ] Botones en tema movil para elegir un poco mas pegados
+- [ ] Para mostrar al menos los 10 a 12 o 20 primeros proyectos, usar los badges para mostrar lo equivalente. Si hay unos mas que otros que sea un tercio para que el resto lo rellene de esos proyectos
+- [ ] Boton de ver mas proyectos si hay mas de 10 en escritorio, no en movil
+- [ ] Botones en tema movil para elegir tema o cambio de color de la pagina un poco mas pegados
 - [ ] Quitar efecto hover en movil de tabla habilidades
 - [ ] Agregar titulo de servicios y proyectos entregados despues de la tabla de habildades
 - [ ] Aveces las imagenes en movil no cargan, puede ser por el navegador o la misma internet, revisarlo.
@@ -77,3 +74,20 @@
 - [ ] Agrgar iconos en texto animado horizontal de perfil
 - [ ] Tratar de optimizar la web utilizando algun truco para que, la imagen ya descargada, sea la misma mostrada, no que se vuelva a descargar para mostrarla tanto en servicios de secciones como en historico (evitar hacer eso)
 - [ ] Corregir .avif .extension a imagenes que no existen, solo se forman en los links pero realmente no existen
+- [ ] quitar @ de cv
+- [ ] Corregir traduccion en ingles de desc en español del formato harvard agregando degree
+- [ ] Traducir todos los textos al ingles, para version web en ingles por deteccion automatica
+- [ ] Agregar mini web para descargar documentos portafolio, cv actualizados (retomar idea)
+- [ ] restructurar carpetas para formatos de documentos de html a pdf para enrutamiento con cloudflare
+- [ ] Corregir extension de imagenes de pagian web (no funciona metodo avif contra webp)
+- [ ] Actualizar lista mods btc google excel
+- [ ] Subir anuncio dorado iglesia a portafolio
+- [ ] Actualizar pdfs
+- [ ] Optimizar aun mas la imagen de anuncio dorado
+- [ ] Cobrar por anuncio dorado papa
+- [ ] Cambiar mod de armor-stand por armor-poser en servidor fabric builtechraft
+- [ ] Determinar cantidad de mods a utilizar (si es posible, menos de 20)
+- [ ] Actualizar foto de perfil de pagian web y cv al de whatsapp por selfie de castillo
+- [ ] En perfil de web tarquitet, cambiar 1 parrafo en la internet por en internet
+- [ ] En perfil segundo parrafo frase de solucionador e problemas por naturaleza por lago como me enfoco en solucionar problemas o priorizo a solucionar problemas
+- [ ] Corregir traductor translator nativo y tecnologias y habilidades en EN

@@ -121,8 +121,7 @@ window.mainPortfolio = [
   },
   {
     title: 'Minecraft UUID Converter',
-    fileName:
-      'https://raw.githubusercontent.com/Tarquitet/minecraft_uuid_converter/refs/heads/main/images/README/1769448117738.png',
+    fileName: 'https://raw.githubusercontent.com/Tarquitet/minecraft_uuid_converter/refs/heads/main/images/README/1769448117738.png',
     link: 'https://github.com/Tarquitet/minecraft_uuid_converter.git',
     desc: 'Python program that allows to renaming uuid players files or finding uuids from mojang, elyby, offline auth',
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
@@ -346,8 +345,7 @@ window.mainPortfolio = [
   {
     title: 'App Gimnasio 3D Virtual',
     desc: 'App móvil con ejercicios en vista 360° y explicación biomecánica.',
-    fileName:
-      'https://raw.githubusercontent.com/pintomultimedia2002/GymApp_1_2024/refs/heads/main/Assets/prototipo-demo.png',
+    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/GymApp_1_2024/refs/heads/main/Assets/prototipo-demo.png',
     link: 'https://github.com/pintomultimedia2002/GymApp_1_2024',
     tools: [T.UNITY, T.CS, 'UI Mobile'],
     category: CAT.DEV,
@@ -356,8 +354,7 @@ window.mainPortfolio = [
   {
     title: 'Sudoku Intelligent Solver',
     desc: 'IA que genera y resuelve Sudokus mediante Backtracking eficiente.',
-    fileName:
-      'https://raw.githubusercontent.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking/refs/heads/master/sudokugenerado.png',
+    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking/refs/heads/master/sudokugenerado.png',
     link: 'https://github.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking',
     tools: [T.CS, 'Backtracking', 'IA'],
     category: CAT.DEV,
@@ -366,8 +363,7 @@ window.mainPortfolio = [
   {
     title: 'C.I.P.S Puzzle Solver',
     desc: 'Minijuego sobre IA experimental que resuelve puzzles numéricos.',
-    fileName:
-      'https://raw.githubusercontent.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver/refs/heads/master/puzzle-solved.jpg',
+    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver/refs/heads/master/puzzle-solved.jpg',
     link: 'https://github.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver',
     tools: [T.CS, 'Heurística', 'IA'],
     category: CAT.DEV,
@@ -376,8 +372,7 @@ window.mainPortfolio = [
   {
     title: 'Wumpus World Agent',
     desc: 'Simulación de un Agente Racional basado en lógica proposicional.',
-    fileName:
-      'https://raw.githubusercontent.com/pintomultimedia2002/wumpus-world-javascript/refs/heads/main/src/resources/wampus.png',
+    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/wumpus-world-javascript/refs/heads/main/src/resources/wampus.png',
     link: 'https://github.com/pintomultimedia2002/wumpus-world-javascript',
     tools: [T.JS, 'Lógica', 'IA Clásica'],
     category: CAT.DEV,
@@ -386,8 +381,7 @@ window.mainPortfolio = [
   {
     title: 'A* Pathfinder Algorithm',
     desc: 'Implementación del algoritmo A* para búsqueda de caminos óptimos.',
-    fileName:
-      'https://raw.githubusercontent.com/pintomultimedia2002/A_star_algorithm_Javascript/refs/heads/main/wampus-ia.png',
+    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/A_star_algorithm_Javascript/refs/heads/main/wampus-ia.png',
     link: 'https://github.com/pintomultimedia2002/A_star_algorithm_Javascript',
     tools: [T.JS, 'Pathfinding', 'Algoritmos'],
     category: CAT.DEV,
@@ -396,8 +390,7 @@ window.mainPortfolio = [
   {
     title: 'CarVoice Assistant',
     desc: 'Asistente virtual para vehículos con control por voz.',
-    fileName:
-      'https://raw.githubusercontent.com/pintomultimedia2002/carvoice-assist/refs/heads/main/assets/asistant-2.png',
+    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/carvoice-assist/refs/heads/main/assets/asistant-2.png',
     link: 'https://github.com/pintomultimedia2002/carvoice-assist',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Voiceflow', 'Chatbot', T.WEB],
     category: CAT.DEV,
@@ -406,8 +399,7 @@ window.mainPortfolio = [
   {
     title: 'Algebrain Mobile App',
     desc: 'App educativa para álgebra enfocada en la experiencia de usuario.',
-    fileName:
-      'https://raw.githubusercontent.com/pintomultimedia2002/Algebrain-App/refs/heads/main/resources/images/algebrain-demo-4.png',
+    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/Algebrain-App/refs/heads/main/resources/images/algebrain-demo-4.png',
     link: 'https://github.com/pintomultimedia2002/Algebrain-App',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'eLearning', 'Web App', 'Mobile', T.WEB],
     category: CAT.DEV,
@@ -461,8 +453,7 @@ window.mainPortfolio = [
   {
     title: 'In-Mortal Transmedia',
     desc: 'Exploración narrativa transmedia sobre la evolución de las ideas.',
-    fileName:
-      'https://static.wixstatic.com/media/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg/v1/fill/w_2146,h_1229,al_c,q_90,enc_avif,quality_auto/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg',
+    fileName: 'https://static.wixstatic.com/media/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg/v1/fill/w_2146,h_1229,al_c,q_90,enc_avif,quality_auto/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg',
     link: 'https://pintodavid2002.wixsite.com/in-mortal',
     tools: ['Storytelling', 'Wix', 'Concept Art', 'Narrative', 'Transmedia', 'Web Design', T.WEB, T.UX],
     category: CAT.DEV,
@@ -603,51 +594,10 @@ window.mainPortfolio = [
     link: 'https://www.youtube.com/watch?v=qIxRbcXezWU',
     category: CAT.VID,
     context: CTX.UNIV,
-  },
-];
+  },];
 
 /* ========================================================================
    2. GALERÍA VISUAL (ARTE)
    ======================================================================== */
 window.galleryData = [
-  {
-    title: 'Alika Christmas Pose',
-    desc: 'Reto de ilustración combinando referencias festivas.',
-    date: '2024-01-05',
-    fileName: '2024_Alika_pose_Watermark_Muestra_JPG',
-    link: '=',
-    tags: ['Ilustration'],
-    context: CTX.PERS,
-    category: CAT.ART,
-  },
-  {
-    title: 'Akiko Princess Pose',
-    desc: 'Ilustración de personaje estilo princesa.',
-    date: '2024-10-14',
-    fileName: '2024_Akiko_princess_pose_Watermark_Muestra_JPG',
-    link: '=',
-    tags: ['Ilustration'],
-    context: CTX.PERS,
-    category: CAT.ART,
-  },
-  {
-    title: 'Atila Wolf Frente',
-    desc: 'Vista frontal de personaje (Character Design).',
-    date: '2025-01-12',
-    fileName: 'atila-frente-watermark',
-    link: '=',
-    tags: ['Sketch'],
-    context: CTX.PERS,
-    category: CAT.ART,
-  },
-  {
-    title: 'Another Renamon Pose',
-    desc: 'Intento de una renamon combinando diversas referencias.',
-    date: '2025-11-22',
-    fileName: 'wip-renamon',
-    link: '=',
-    tags: ['WIP'],
-    context: CTX.PERS,
-    category: CAT.ART,
-  },
 ];

@@ -117,13 +117,13 @@ window.cvData = {
     {
       title: 'NEW GRANADA MILITARY UNIVERSITY',
       date: '2020 - 2025',
-      degree: 'Ingeniero en Multimedia.',
+      degree: 'Multimedia Engineer.',
       desc: 'Focus on development, design and audiovisual media.',
     },
     {
       title: 'SANTA ANA SCHOOL',
       date: '2006 - 2019',
-      degree: 'Bachiller Académico con énfasis en Sistemas.',
+      degree: 'Academic Bachelor with emphasis in Systems.',
       desc: '',
     },
   ],
