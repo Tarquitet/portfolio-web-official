@@ -42,13 +42,6 @@ window.cvData = {
       subtitle: 'Figma / Photoshop',
       injectTarget: 'ux-inject',
     },
-    {
-      id: 'media-section',
-      index: '04',
-      title: 'SKETCH<br/>DRAWS',
-      subtitle: 'Dibujos e Ilustraciones',
-      injectTarget: 'media-inject',
-    },
   ],
   // Basic info about profile (me)
   basics: {
