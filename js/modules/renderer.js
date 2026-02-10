@@ -580,11 +580,21 @@ export class Renderer {
     const basic = window.cvData?.basics;
     if (!basic) return;
     const container = document.querySelector('.p-visual');
+
     if (container) {
-      const secretSrc = window.Utils.getSmartPath(basic.secretImageName, 'PROFILE');
+      // 1. Solo obtenemos la imagen frontal
       const frontSrc = window.Utils.getSmartPath(basic.imageName, 'PROFILE');
-      container.innerHTML = `<img src="${secretSrc}" class="p-img-back" alt="Egg" onerror="window.Utils.handleImgError(this)"><img src="${frontSrc}" class="p-img-front" alt="Profile" onerror="window.Utils.handleImgError(this)"><div class="colombia-tag" id="colombia-tag">BOGOTÁ, COLOMBIA 🇨🇴</div>`;
+
+      // 2. Generamos HTML LIMPIO: Solo una imagen y el tag de Colombia
+      container.innerHTML = `
+      <img src="${frontSrc}" class="p-img-front" alt="Profile" onerror="window.Utils.handleImgError(this)">
+      <div class="colombia-tag" id="colombia-tag">BOGOTÁ, COLOMBIA 🇨🇴</div>
+    `;
+
+      // 3. Aseguramos que el cursor sea el normal
+      container.style.cursor = 'default';
     }
+
     this._renderProfileStats();
   }
 

@@ -13,6 +13,42 @@
   --card-height: 55vh;
 }
 
+/* ================== PUENTE AUTOMÁTICO ================== */
+/* Si el celular está en Modo Oscuro, aplica los colores de 'theme-fire' automáticamente */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* COPIADO EXACTO DE TU TEMA 'theme-fire' */
+    --bg: #050202;
+    --card: #0f0505;
+    --text: #e0e0e0;
+    --accent: #ff3300;
+    --accent-sec: #ff8800;
+    --dim: #775555;
+    --border: rgba(255, 51, 0, 0.2);
+    --card-shadow: rgba(255, 51, 0, 0.25);
+
+    /* EXTRA: Invertir iconos negros para que se vean blancos en el fondo oscuro */
+    --icon-filter: grayscale(100%) invert(1) brightness(2);
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    /* COPIADO EXACTO DE TU TEMA 'theme-fire' */
+    --bg: #f2f0e9;
+    --card: #e6e2d6;
+    --text: #1a1a1a;
+    --accent: #d93025;
+    --accent-sec: #8e1c1c;
+    --dim: #666666;
+    --border: rgba(28, 68, 142, 0.15);
+    --card-shadow: rgba(0, 0, 0, 0.2);
+
+    /* EXTRA: Invertir iconos negros para que se vean blancos en el fondo oscuro */
+    --icon-filter: grayscale(100%) invert(1) brightness(2);
+  }
+}
+
 /* ================== TEMAS ================== */
 :root[data-theme='theme-bauhaus'] {
   --bg: #f2f0e9;
@@ -1086,47 +1122,19 @@ body.hovered .cursor-circle {
 }
 .p-visual {
   position: relative;
-  /* Esto evita que se seleccione la imagen al arrastrar/clic */
-  user-select: none;
-  cursor: grab; /* Manita abierta */
-  overflow: hidden; /* Mantiene bordes limpios */
-}
-.p-visual:active {
-  cursor: grabbing; /* Manita cerrada al agarrar */
+  overflow: hidden;
+  border-radius: 4px; /* O el radio que prefieras */
+  /* Borramos user-select, cursor grab, etc. */
 }
 
-/* ESTILOS BASE PARA AMBAS IMÁGENES */
-.p-visual img {
+/* Solo dejamos estilos para la imagen frontal */
+.p-visual .p-img-front {
   width: 100%;
   display: block;
   max-height: 700px;
+  object-fit: cover;
   object-position: center;
   border: 1px solid var(--border);
-  transition: 0.5s;
-}
-
-/* 1. IMAGEN DE FONDO (La sorpresa) */
-.p-img-back {
-  position: absolute; /* Se pega al fondo */
-  top: 0;
-  left: 0;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1; /* Nivel 1 */
-  filter: contrast(120%) brightness(110%); /* Efecto visual opcional */
-}
-
-/* 2. IMAGEN FRONTAL (La actual) */
-.p-img-front {
-  position: relative; /* Mantiene la altura del contenedor (IMPORTANTE) */
-  z-index: 2; /* Nivel 2 (Tapa a la de atrás) */
-  clip-path: inset(0 0 0 0); /* Imagen completa */
-}
-
-/* --- CLASE DE ACTIVACIÓN JS --- */
-/* Cuando JS agrega 'is-wiping', recortamos la imagen frontal hacia abajo */
-.p-visual.is-wiping .p-img-front {
-  clip-path: inset(100% 0 0 0); /* Se recorta desde arriba al 100% */
 }
 
 /* BOGOTÁ COLOMBIA */
@@ -1213,11 +1221,20 @@ body.hovered .cursor-circle {
   color: var(--dim);
   transition: 0.2s;
   list-style: none;
+  transition: all 0.3s ease-in-out;
 }
 .spec-list li:hover {
-  background: var(--accent);
-  color: var(--bg);
-  padding-left: 2rem;
+  background: transparent !important;
+  color: var(--accent) !important;
+
+  /* TRUCO: En lugar de font-weight: 800 (que salta), 
+     usamos esto para engrosar suavemente sin cambiar el tamaño */
+  text-shadow: 0 0 1px var(--accent);
+
+  /* Opcional: Un micro desplazamiento a la derecha muy elegante */
+  transform: translateX(10px);
+  padding-left: 1.5rem !important; /* Mantiene la base */
+  cursor: default;
 }
 .spec-column {
   border-right: 1px solid var(--border);
@@ -1249,10 +1266,7 @@ body.hovered .cursor-circle {
   white-space: nowrap;
   transition: 0.3s;
 }
-.tech-item:hover {
-  color: var(--text);
-  text-shadow: 0 0 20px var(--accent);
-}
+
 .tech-sep {
   color: var(--accent);
   font-size: 1.25rem;
@@ -1440,7 +1454,7 @@ footer {
 }
 .theme-grid {
   display: flex;
-  gap: 2rem;
+  gap: 0.5rem;
 }
 .theme-btn {
   width: 50px;
@@ -1658,8 +1672,9 @@ body.no-scroll {
    OPTIMIZACIÓN Y ACCESIBILIDAD
    ========================================================= */
 
+/*
 /* 1. Respetar preferencia de usuario (Accesibilidad) */
-@media (prefers-reduced-motion: reduce) {
+/*@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -1669,6 +1684,7 @@ body.no-scroll {
     scroll-behavior: auto !important;
   }
 }
+*/
 
 /* Agrega esto al final de tu CSS */
 body.is-paused * {
@@ -1705,6 +1721,68 @@ body.is-paused * {
 }
 
 @media (max-width: 1024px) {
+  .hero-divider {
+    padding: 3rem 0 !important;
+    width: 100% !important;
+    overflow: hidden !important; /* Seguridad: corta cualquier desborde invisible */
+  }
+
+  .hd-content {
+    width: 100% !important;
+    padding: 0 !important; /* Eliminamos padding lateral para dar máximo espacio al texto */
+  }
+
+  .hd-title {
+    width: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* TEXTOS GIGANTES (SERVICIOS / PROYECTOS) */
+  .hd-row.big-text,
+  .hd-row.accent-text {
+    /* CALIBRACIÓN MATEMÁTICA: 
+       Bajamos de 13vw a 11vw. 
+       "PROYECTOS" tiene 9 letras. Con 11vw, el texto ocupará aprox el 90-95% de la pantalla.
+       Es el tamaño seguro para la fuente Syne. */
+    font-size: 11vw !important;
+
+    line-height: 0.9 !important;
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+
+    /* IMPORTANTE: Evita scroll horizontal y márgenes fantasma */
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important; /* Fuerza a que se mantenga en línea */
+  }
+
+  /* CONECTOR "&" */
+  .hd-row.mid-text {
+    font-size: 3rem !important;
+    margin: 0.2rem 0 !important;
+    line-height: 1 !important;
+  }
+
+  /* SUBTÍTULO */
+  .hd-sub {
+    font-size: 0.75rem !important;
+    margin-top: 1.5rem !important;
+    opacity: 0.8;
+    padding: 0 1rem;
+    white-space: normal !important; /* El subtítulo sí puede tener varias líneas */
+  }
+  .spec-list li:hover {
+    background: transparent !important; /* Sin fondo rojo */
+    color: var(--dim) !important; /* Mantiene el color gris original */
+    padding-left: 1.5rem !important; /* Mantiene la posición original (sin empujón) */
+    font-weight: 600 !important; /* Mantiene el grosor original */
+    cursor: default !important; /* Quita el icono de manito */
+  }
+
   /* 1. Apuntamos directo al enlace del botón (el contenedor padre) */
   .mobile-swipe-mode a[href='#archive-section'] {
     display: flex !important;
@@ -1964,30 +2042,48 @@ body.is-paused * {
     padding: 1rem !important;
   }
 
-  /* 2. EL "BOTÓN" DEL HERO SE DESACTIVA */
+  /* 1. TARQUITET: GIGANTE (15% del ancho de pantalla) */
   .interactive-brand {
-    pointer-events: none !important; /* Desactiva el click */
-    cursor: default !important;
+    font-size: 15vw !important;
+    line-height: 0.9 !important;
+    width: 100% !important;
+    display: block !important;
+    text-align: center !important;
+    margin: 0 !important;
+  }
+
+  /* 2. IS = TO: AHORA SÍ GRANDE (Igualando al texto rojo) */
+  .title-main .row {
+    font-size: 10vw !important; /* Aumentado drásticamente */
+    margin: 0.5rem 0 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important; /* Que no se parta */
+    display: block !important;
+  }
+
+  /* 3. TEXTO ROJO: IGUAL DE GRANDE QUE "IS = TO" */
+  .accent-row {
+    font-size: 10vw !important; /* Mismo tamaño que el de arriba */
+    margin-top: 0 !important;
+    line-height: 1 !important;
+    width: 100% !important;
+    justify-content: center !important;
+    display: flex !important;
+  }
+
+  /* 4. CONTENEDOR: QUE AGUANTE EL TAMAÑO */
+  .title-main {
+    width: 100% !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
   /* Opcional: Quitar efecto hover visual en móvil */
   .interactive-brand:hover {
     text-shadow: none !important;
     color: var(--text) !important;
-  }
-
-  /* 3. TYPEWRITER (TEXTO MÁQUINA DE ESCRIBIR) AJUSTADO */
-  .accent-row {
-    font-size: 0.5em !important; /* Reducimos drásticamente el tamaño relativo */
-    white-space: nowrap !important; /* Fuerza a que se quede en una línea */
-    flex-wrap: nowrap !important;
-    margin-top: 0 !important;
-    width: 100%;
-    justify-content: center;
-  }
-  /* Ajustamos el contenedor padre para que no empuje */
-  .title-main {
-    width: 100%;
-    overflow: hidden; /* Evita scroll horizontal si algo sobresale */
   }
 
   /* 4. TABLA DE SKILLS (ANCHARLA) */
@@ -2385,4 +2481,146 @@ body.is-paused * {
   border-color: var(--bg);
   color: var(--accent);
   transform: translateX(10px);
+}
+/* ================== TICKER: SOPORTE TOTAL (IMG + LUCIDE + FONT) ================== */
+
+/* 1. CONTENEDOR FLEX (Alineación Perfecta) */
+.tech-item {
+  display: inline-flex !important;
+  align-items: center !important; /* Centro vertical matemático */
+  justify-content: center;
+  gap: 12px;
+
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dim) !important; /* Color base GRIS */
+  white-space: nowrap;
+}
+
+/* 2. CLASE COMÚN PARA TODOS LOS ICONOS */
+/* Esto asegura que Lucide, Font y PNG midan lo mismo */
+.ticker-icon-img,
+.ticker-icon-font,
+.ticker-icon-lucide {
+  display: block !important;
+  height: 1.2em !important; /* Altura consistente */
+  width: auto !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+  transition: 0.3s;
+}
+
+/* 3. AJUSTES ESPECÍFICOS POR TIPO */
+
+/* A. LOCAL (Imágenes negras -> Gris) */
+.ticker-icon-img {
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.6; /* Bajamos opacidad para igualar el gris del texto */
+}
+
+/* B. FUENTE (Devicon -> Heredar Gris) */
+.ticker-icon-font {
+  font-size: 1.3em !important; /* Ajuste óptico leve */
+  color: inherit !important;
+}
+
+/* C. LUCIDE (SVG -> Heredar Gris) */
+.ticker-icon-lucide {
+  width: 1.2em !important;
+  stroke-width: 2.5; /* Un poco más gruesos para que se vean bien */
+  color: inherit !important; /* Hereda el gris del padre */
+}
+/* ================== SEPARADOR ESTILO HERO ================== */
+
+.hero-divider {
+  padding: 8rem 0; /* Espacio generoso arriba y abajo */
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hd-content {
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hd-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.9;
+  margin-bottom: 2rem;
+}
+
+/* 1. TEXTO GIGANTE "SERVICIOS" (Estilo TARQUITET) */
+.hd-row.big-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--text);
+  text-transform: uppercase;
+
+  /* Responsive: Se adapta igual que el header */
+  font-size: clamp(3.5rem, 12vw, 9rem);
+  letter-spacing: -2px;
+}
+
+/* 2. TEXTO MEDIO "&" (Estilo IS = TO) */
+.hd-row.mid-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+  font-size: clamp(2rem, 6vw, 4rem);
+  margin: 0.5rem 0;
+}
+
+/* 3. TEXTO ACENTO "PROYECTOS" (Estilo CONTENT CREATOR) */
+.hd-row.accent-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--accent); /* Rojo (o el color del tema actual) */
+  text-transform: uppercase;
+
+  /* Un poco más pequeño que el principal para jerarquía */
+  font-size: clamp(3rem, 10vw, 8rem);
+}
+
+/* 4. SUBTÍTULO "ENTREGADOS" (Estilo Descripción) */
+.hd-sub {
+  font-family: var(--font-tech);
+  color: var(--dim);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+/* AJUSTES PARA MÓVIL (Para que no se corte como nos pasó antes) */
+@media (max-width: 768px) {
+  .hero-divider {
+    padding: 4rem 0;
+  }
+
+  .hd-row.big-text {
+    font-size: 13vw; /* Ancho seguro */
+    width: 100%;
+  }
+
+  .hd-row.accent-text {
+    font-size: 11vw;
+  }
+
+  .hd-row.mid-text {
+    font-size: 8vw;
+    margin: 0.2rem 0;
+  }
 }

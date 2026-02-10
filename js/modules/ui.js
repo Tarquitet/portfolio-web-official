@@ -60,11 +60,48 @@ export class UI {
 
   initTechTicker() {
     const track = document.querySelector('.tech-track');
-    const items = this.getCombinedTickerData();
-    if (track && items.length > 0) {
-      const set = items.map((i) => `<span class="tech-item">${i}</span> <span class="tech-sep">///</span>`).join(' ');
-      track.innerHTML = Array(4).fill(set).join(' ');
-    }
+    const d = window.cvData;
+
+    if (!track || !d) return;
+
+    const iconsBase = d.config && d.config.iconsPath ? d.config.iconsPath : '../assets/icons/';
+
+    // 1. MAPEO DE SOFTWARE (Soporte Triple: Local, Lucide, Devicon)
+    const softHTML = (d.software || [])
+      .map((soft) => {
+        let iconHTML = '';
+
+        // A. LOCAL (IMG) - Tu logo de Unity, Davinci, etc.
+        if (soft.iconType === 'local') {
+          const src = `${iconsBase}${soft.iconName}`;
+          iconHTML = `<img src="${src}" class="ticker-icon-img" alt="${soft.name}" onerror="this.style.display='none'">`;
+        }
+        // B. LUCIDE (SVG) - ¡ESTO ES LO QUE FALTABA!
+        else if (soft.iconType === 'lucide') {
+          // El script buscará este data-lucide y lo convertirá en <svg>
+          iconHTML = `<i data-lucide="${soft.iconName}" class="ticker-icon-lucide"></i>`;
+        }
+        // C. DEVICON (Font) - Photoshop, HTML, etc.
+        else {
+          iconHTML = `<i class="${soft.iconClass} ticker-icon-font"></i>`;
+        }
+
+        return `<span class="tech-item">${soft.name.toUpperCase()} ${iconHTML}</span> <span class="tech-sep">///</span>`;
+      })
+      .join(' ');
+
+    // 2. ITEMS MANUALES (Solo texto)
+    const manualHTML = (d.tickerItems || [])
+      .map((item) => `<span class="tech-item">${item.toUpperCase()}</span> <span class="tech-sep">///</span>`)
+      .join(' ');
+
+    // 3. INYECTAR Y REPETIR (Loop infinito)
+    const fullContent = softHTML + ' ' + manualHTML;
+    track.innerHTML = Array(4).fill(fullContent).join(' ');
+
+    // 4. ¡CRUCIAL! RENDERIZAR LUCIDE
+    // Si no ejecutas esto, los iconos de Lucide serán etiquetas <i> vacías
+    if (window.Utils && window.Utils.initIcons) window.Utils.initIcons();
   }
 
   initTypewriter() {

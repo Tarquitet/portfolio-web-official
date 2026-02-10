@@ -39,27 +39,29 @@ window.Utils = {
    * 2. SISTEMA DE RESPALDO DE IMÁGENES (CASCADA)
    * Orden: AVIF -> WEBP -> JPG -> PNG
    */
-  handleImgError: (img) => {
-    const currentSrc = img.src;
-    if (img.dataset.tried === 'all') return;
+  handleImgError: function (img) {
+    // 1. Evitar bucles infinitos o reintentos en imágenes que ya murieron
+    if (img.dataset.dead === 'true') return;
 
-    let nextExt = '';
-    if (currentSrc.endsWith('.avif')) nextExt = '.webp';
-    else if (currentSrc.endsWith('.webp')) nextExt = '.jpg';
-    else if (currentSrc.endsWith('.jpg')) nextExt = '.png';
-    else {
-      img.dataset.tried = 'all';
-      // Mantiene el espacio pero baja la opacidad para no ensuciar el diseño
-      img.style.opacity = '0.3';
-      img.style.filter = 'grayscale(100%)';
-      return;
-    }
+    const src = img.src;
 
-    // Reemplazar extensión
-    const dotIndex = currentSrc.lastIndexOf('.');
-    if (dotIndex !== -1) {
-      const basePath = currentSrc.substring(0, dotIndex);
-      img.src = basePath + nextExt;
+    // 2. Lógica de cascada: AVIF -> WEBP -> PNG -> JPG
+    if (src.includes('.avif')) {
+      console.warn('AVIF no encontrado, intentando WEBP...', img.alt);
+      img.src = src.replace('.avif', '.webp');
+    } else if (src.includes('.webp')) {
+      console.warn('WEBP no encontrado, intentando PNG...', img.alt);
+      img.src = src.replace('.webp', '.png');
+    } else if (src.includes('.png')) {
+      console.warn('PNG no encontrado, intentando JPG...', img.alt);
+      img.src = src.replace('.png', '.jpg');
+    } else {
+      // 3. Si llega aquí, no existe en ningún formato.
+      console.error('Imagen irrecuperable:', img.alt);
+      img.dataset.dead = 'true';
+      img.style.display = 'none'; // Ocultamos la imagen rota
+      // Opcional: poner una imagen por defecto
+      // img.src = './assets/placeholder.png';
     }
   },
 
