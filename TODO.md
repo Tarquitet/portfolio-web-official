@@ -2,26 +2,20 @@
 
 _(Orden: De cambios rápidos de texto/CSS → Diseño gráfico → Lógica compleja)_
 
-- [ ] Subir un poco el texto de seccion para que no este tan abajo de los proyectos de la seccion, tal vez sea aumentar mas el margin
-- [ ] Cambiar boton de ver más proyectos no debajo de los proyectos sino debajo del texto de la seccion
-- [ ] Boton de ver mas proyectos si hay mas de 10 en escritorio, no en movil, en movil con el boton de ver mas en el historico al final
 - [ ] Diseñar imagen portada portafolio
 - [ ] Diseñar imagen final portafolio ultima pagina
-- [ ] PENDIENTE REVISAR ACTUALIZACION DE IMAGENES LPM
-- [ ] Revisar carga lenta de imagenes, lazyloading o decoding async
+- [ ] Agregar icons para redes artisticas footer, lucide no tiene todas
+- [ ] Actualizar deviantart perfil y fondo + agregar comisiones intentos
 
 ### 2. Desarrollo Técnico y Optimización
 
 _(Orden: De ajustes simples → Optimización → Cambios de arquitectura)_
 
-- [ ] Poner videos como ultima seccion para contarlo mas facil tanto para la web principal, como portafolio
 - [ ] Agrgar soporte al compresor de imagenes svg y pdf
 - [ ] Optimizar funciones js con funciones css
 - [ ] Contador automatico para evitar poner numeros en las secciones
-- [ ] Hacer conteo de elementos automaticamente segun el arreglo usado para las secciones tanto para la web principal como para el portafolio
 - [ ] Hacer menu de web principal, tener las secciones generadas automaticamente desde el cv_data
 - [ ] Corregir .avif .extension a imagenes que no existen, solo se forman en los links pero realmente no existen
-- [ ] Corregir extension de imagenes de pagian web (no funciona metodo avif contra webp)
 - [ ] Tratar de optimizar la web utilizando algun truco para que, la imagen ya descargada, sea la misma mostrada, no que se vuelva a descargar para mostrarla tanto en servicios de secciones como en historico (evitar hacer eso)
 - [ ] Cambiar el use client a server client (si se puede) - metodo de renderizado
 
@@ -44,8 +38,7 @@ _(Orden: De configuración básica → Configuración de dominios → Automatiza
 
 _(Orden: De correcciones de texto → Actualización de perfiles → Traducción compleja)_
 
-- [ ] quitar @ de cv
-- [ ] Actualizar foto de perfil de pagian web y cv al de whatsapp por selfie de castillo
+- [ ] Actualizar foto linkedin por el actual de la pagina web
 - [ ] Actualizar pdfs
 - [ ] En seccion footer de contacto, cambiar de usuario por usuario en redes y dejar redes como linkedin profesional
 - [ ] Agregar servicios linkedin como ejemplo de [aquí](https://www.linkedin.com/services/page/a81b60328626a40977/)
@@ -71,7 +64,6 @@ _(Orden: De tareas rápidas/administrativas → Scripts/Mods → Desarrollo Web 
 - [ ] Subir anuncio dorado iglesia a portafolio
 - [ ] Cobrar por anuncio dorado papa
 - [ ] Optimizar aun mas la imagen de anuncio dorado
-- [ ] Buscar video editado para transmedia electiva. Preguntar a Paula uni.
 - [ ] Filtrar trabajos deviantart +18
 - [ ] Subir trabajos a deviantart y usar tipo api/links para colocarlos
 - [ ] Morse en python, diseñar su script para Kelly.

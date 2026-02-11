@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     imgDiv.innerHTML = `
         <img src="${imgPath}" 
              alt="Profile" 
-             style="width: 100%; height: 100%; object-fit: cover; transform: scale(4.0); transform-origin: 55% 28%;" 
+             style="width: 100%; height: 100%; object-fit: cover; object-position: 40% 42%; transform: scale(1.35);" 
              onerror="window.Utils.handleImgError(this)">
       `;
   }

@@ -4,64 +4,49 @@
  */
 
 window.Utils = {
-  /**
-   * 1. RESOLUCIÓN DE RUTAS (SMART PATH)
-   * Construye la ruta de la imagen basada en la categoría y configuración.
-   */
-  getSmartPath: (fileName, category = 'DEFAULT', defaultExt = '.avif') => {
+  // 1. CONSTRUCCIÓN DE RUTA (Inicia con AVIF por defecto)
+  getSmartPath: (fileName, category = 'DEFAULT') => {
     if (!fileName) return '';
-
-    // A. Si es link externo o data base64, devolver tal cual
     if (fileName.includes('://') || fileName.startsWith('data:')) return fileName;
 
-    // B. Obtener configuración de rutas
-    // Aseguramos que existan los objetos para evitar errores si projects.js falla
+    // Configuración de carpetas
     const projConfig = typeof PROJECT_CONFIG !== 'undefined' ? PROJECT_CONFIG.paths : {};
     const cvConfig = window.cvData && window.cvData.config ? window.cvData.config : {};
 
-    // C. Determinar Carpeta Base
-    let basePath = '../assets/images/'; // Fallback por defecto
+    let basePath = '../assets/images/';
 
     if (category === 'PORTFOLIO') basePath = cvConfig.portfolioPath || projConfig.DEFAULT || basePath;
     else if (category === 'PROFILE') basePath = cvConfig.profilePath || basePath;
     else if (projConfig[category]) basePath = projConfig[category];
     else basePath = projConfig.DEFAULT || basePath;
 
-    // D. Manejo de Extensión
-    // Si ya tiene extensión (ej: .png), se deja. Si no, se pone la default (.avif)
-    const hasExt = fileName.includes('.');
-    const finalName = hasExt ? fileName : `${fileName}${defaultExt}`;
+    // SI NO TIENE EXTENSIÓN, LE PONEMOS .avif PARA ARRANCAR LA CASCADA
+    const finalName = fileName.includes('.') ? fileName : `${fileName}.avif`;
 
     return `${basePath}${finalName}`;
   },
 
-  /**
-   * 2. SISTEMA DE RESPALDO DE IMÁGENES (CASCADA)
-   * Orden: AVIF -> WEBP -> JPG -> PNG
-   */
+  // 2. SISTEMA DE CASCADA (Detecta el formato correcto automáticamente)
   handleImgError: function (img) {
-    // 1. Evitar bucles infinitos o reintentos en imágenes que ya murieron
+    // Si ya probamos todo y falló, paramos para evitar bucles
     if (img.dataset.dead === 'true') return;
 
     const src = img.src;
+    console.warn('Probando siguiente formato para:', src);
 
-    // 2. Lógica de cascada: AVIF -> WEBP -> PNG -> JPG
+    // SECUENCIA: AVIF -> WEBP -> PNG -> JPG
     if (src.includes('.avif')) {
-      console.warn('AVIF no encontrado, intentando WEBP...', img.alt);
       img.src = src.replace('.avif', '.webp');
     } else if (src.includes('.webp')) {
-      console.warn('WEBP no encontrado, intentando PNG...', img.alt);
       img.src = src.replace('.webp', '.png');
     } else if (src.includes('.png')) {
-      console.warn('PNG no encontrado, intentando JPG...', img.alt);
       img.src = src.replace('.png', '.jpg');
     } else {
-      // 3. Si llega aquí, no existe en ningún formato.
+      // Si llega aquí, no existe en ningún formato.
       console.error('Imagen irrecuperable:', img.alt);
       img.dataset.dead = 'true';
-      img.style.display = 'none'; // Ocultamos la imagen rota
-      // Opcional: poner una imagen por defecto
-      // img.src = './assets/placeholder.png';
+      img.style.display = 'none'; // Se oculta
+      // Opcional: img.style.backgroundColor = '#222'; // Dejar cuadro gris
     }
   },
 

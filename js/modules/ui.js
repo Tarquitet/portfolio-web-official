@@ -74,7 +74,7 @@ export class UI {
         // A. LOCAL (IMG) - Tu logo de Unity, Davinci, etc.
         if (soft.iconType === 'local') {
           const src = `${iconsBase}${soft.iconName}`;
-          iconHTML = `<img src="${src}" class="ticker-icon-img" alt="${soft.name}" onerror="this.style.display='none'">`;
+          iconHTML = `<img src="${src}" class="ticker-icon-img" alt="${soft.name}" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.style.backgroundColor='#1a1a1a';>`;
         }
         // B. LUCIDE (SVG) - ¡ESTO ES LO QUE FALTABA!
         else if (soft.iconType === 'lucide') {

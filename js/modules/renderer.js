@@ -175,61 +175,68 @@ export class Renderer {
   }
 
   // --- Renderizado SmartGrid (Responsive) ---
-  // Modificamos la firma para aceptar 'hasMore' (por defecto false)
-  // Reemplaza _renderSmartGrid en js/modules/renderer.js
 
+  // --- 1. FUNCIÓN MAESTRA DE RENDERIZADO (SmartGrid) ---
   _renderSmartGrid(items, targetId, type, hasMore = false) {
     const container = document.getElementById(targetId);
     if (!container) return;
 
+    // Limpiamos el contenedor
     container.innerHTML = '';
     container.className = '';
 
     const isMobile = window.matchMedia('(max-width: 1024px)').matches;
     const fragment = document.createDocumentFragment();
 
-    // --- MODO MÓVIL (SWIPE) ---
+    // =========================================================
+    // MODO MÓVIL (SWIPE / CARRUSEL) -> Botón al final del carril
+    // =========================================================
     if (isMobile) {
       container.classList.add('mobile-swipe-mode');
 
-      // Indicador de posición (1 / 10)
+      // 1. Mostrar siempre el botón "Ver más" en móvil (para navegar fácil)
+      const showSeeMoreMobile = true;
+      const totalCount = items.length + (showSeeMoreMobile ? 1 : 0);
+
+      // 2. Indicador (1 / X)
       const indicatorWrap = document.querySelector(`.swipe-indicator-wrap[data-for="${targetId}"]`);
       if (indicatorWrap) indicatorWrap.remove();
 
-      // Si hay más, sumamos 1 al total para contar la tarjeta de Histórico
-      const totalCount = items.length + (hasMore ? 1 : 0);
       const newInd = `<div class="swipe-indicator-wrap" data-for="${targetId}"><span class="swipe-indicator" id="ind-${targetId}">1 / ${totalCount}</span></div>`;
       if (container.parentElement) container.parentElement.insertAdjacentHTML('beforebegin', newInd);
 
-      // Renderizar los 10 items
+      // 3. Renderizar items
       items.forEach((item) => {
         const node = this._createCardNode(item, type);
         if (node) fragment.appendChild(node);
       });
 
-      // INYECTAR TARJETA "VER MÁS" EN MÓVIL
-      if (hasMore) {
+      // 4. Renderizar TARJETA FINAL "Ver más"
+      if (showSeeMoreMobile) {
         const seeMoreCard = this._createSeeMoreCard(true);
         fragment.appendChild(seeMoreCard);
       }
 
       container.appendChild(fragment);
 
-      // Lógica del Indicador al hacer Scroll
+      // 5. Evento Scroll
       const indicatorEl = document.getElementById(`ind-${targetId}`);
       container.addEventListener(
         'scroll',
         () => {
           if (!indicatorEl) return;
           const index = Math.round(container.scrollLeft / (window.innerWidth * 0.92));
-          // Si el usuario llega a la tarjeta extra, mostramos "HIST" en el contador
-          const label = hasMore && index >= items.length ? 'HIST' : Math.min(Math.max(0, index) + 1, totalCount);
+          const label = index >= items.length ? 'HIST' : Math.min(Math.max(0, index) + 1, totalCount);
           indicatorEl.textContent = `${label} / ${totalCount}`;
         },
         { passive: true },
       );
     } else {
-      // --- MODO ESCRITORIO (GRILLA / COLUMNAS) ---
+      // =========================================================
+      // MODO ESCRITORIO (GRILLA) -> Botón en el Sidebar Izquierdo
+      // =========================================================
+
+      // 1. Configuración de Grilla
       container.style.display = 'flex';
       container.style.gap = '3rem';
       container.style.marginRight = '1rem';
@@ -250,124 +257,37 @@ export class Renderer {
       container.appendChild(col1);
       container.appendChild(col2);
 
-      // INYECTAR TARJETA "VER MÁS" EN ESCRITORIO
-      if (hasMore) {
-        const seeMoreCard = this._createSeeMoreCard(false);
-        seeMoreCard.classList.remove('uni-card');
-        seeMoreCard.style.width = '300px';
-        seeMoreCard.style.flexShrink = '0';
-        container.appendChild(seeMoreCard);
-      }
-    }
+      // 2. LÓGICA DEL BOTÓN LATERAL
+      // Buscamos el contenedor "padre" (sticky-viewport) para encontrar el sidebar (.h-card)
+      // Estructura: .sticky-viewport > .h-card (sidebar) + .horizontal-track (donde estamos)
 
-    if (window.Utils && window.Utils.initIcons) window.Utils.initIcons();
-  }
+      const viewport = container.closest('.sticky-viewport');
+      const sidebar = viewport ? viewport.querySelector('.h-card') : null;
 
-  // --- 1. FUNCIÓN MAESTRA DE RENDERIZADO (SmartGrid) ---
-  _renderSmartGrid(items, targetId, type, hasMore = false) {
-    const container = document.getElementById(targetId);
-    if (!container) return;
+      if (sidebar) {
+        // Limpieza: Si ya existía un botón viejo (por re-render), bórralo
+        const oldBtn = sidebar.querySelector('.sidebar-btn');
+        if (oldBtn) oldBtn.remove();
 
-    // Limpiamos el contenedor
-    container.innerHTML = '';
-    container.className = '';
+        // Si hay más proyectos, inyectamos el botón DEBAJO del texto
+        if (hasMore) {
+          const btn = document.createElement('a');
+          btn.className = 'sidebar-btn';
+          btn.href = '#archive-section'; // El ID de tu sección de Histórico
+          btn.innerHTML = 'VER MÁS PROYECTOS <i data-lucide="arrow-right"></i>';
 
-    const isMobile = window.matchMedia('(max-width: 1024px)').matches;
-    const fragment = document.createDocumentFragment();
+          // Opcional: Smooth scroll manual si el href es un ancla
+          btn.onclick = (e) => {
+            // Si quieres un scroll suave por JS descomenta esto, si no CSS scroll-behavior sirve
+            // e.preventDefault();
+            // document.getElementById('archive-section').scrollIntoView({behavior: 'smooth'});
+          };
 
-    // --- MODO MÓVIL (SWIPE / CARRUSEL) ---
-    if (isMobile) {
-      container.classList.add('mobile-swipe-mode');
-
-      // REGLA DE ORO: En móvil SIEMPRE mostramos el botón al final
-      // (Para que el usuario siempre tenga la opción de ir al histórico fácil)
-      const showSeeMore = true;
-
-      // Ajustamos el contador (1 / Total + 1)
-      const totalCount = items.length + (showSeeMore ? 1 : 0);
-
-      // Eliminamos indicador viejo si existe y creamos uno nuevo
-      const indicatorWrap = document.querySelector(`.swipe-indicator-wrap[data-for="${targetId}"]`);
-      if (indicatorWrap) indicatorWrap.remove();
-
-      const newInd = `<div class="swipe-indicator-wrap" data-for="${targetId}"><span class="swipe-indicator" id="ind-${targetId}">1 / ${totalCount}</span></div>`;
-      if (container.parentElement) container.parentElement.insertAdjacentHTML('beforebegin', newInd);
-
-      // A. Renderizar los proyectos
-      items.forEach((item) => {
-        const node = this._createCardNode(item, type);
-        if (node) fragment.appendChild(node);
-      });
-
-      // B. Renderizar el botón final (Siempre en móvil)
-      if (showSeeMore) {
-        const seeMoreCard = this._createSeeMoreCard(true);
-        fragment.appendChild(seeMoreCard);
-      }
-
-      container.appendChild(fragment);
-
-      // Evento Scroll para actualizar el numerito (1/5)
-      const indicatorEl = document.getElementById(`ind-${targetId}`);
-      container.addEventListener(
-        'scroll',
-        () => {
-          if (!indicatorEl) return;
-          const index = Math.round(container.scrollLeft / (window.innerWidth * 0.92));
-          const label = index >= items.length ? 'HIST' : Math.min(Math.max(0, index) + 1, totalCount);
-          indicatorEl.textContent = `${label} / ${totalCount}`;
-        },
-        { passive: true },
-      );
-    } else {
-      // --- MODO ESCRITORIO (GRILLA + BOTÓN ABAJO) ---
-
-      // 1. Configuramos el contenedor principal en formato vertical (Columna)
-      container.style.display = 'flex';
-      container.style.flexDirection = 'column';
-      container.style.gap = '3rem'; // Espacio entre la grilla y el botón de abajo
-
-      // 2. Creamos un sub-contenedor para las dos columnas (La grilla)
-      const gridWrapper = document.createElement('div');
-      gridWrapper.style.display = 'flex';
-      gridWrapper.style.gap = '3rem';
-      gridWrapper.style.marginRight = '1rem';
-
-      const col1 = document.createElement('div');
-      col1.className = 'pin-col';
-      const col2 = document.createElement('div');
-      col2.className = 'pin-col fast-col';
-
-      // Llenamos las columnas con los proyectos
-      items.forEach((item, index) => {
-        const node = this._createCardNode(item, type);
-        if (node) {
-          if (index % 2 === 0) col1.appendChild(node);
-          else col2.appendChild(node);
+          sidebar.appendChild(btn);
         }
-      });
-
-      // Insertamos las columnas en el sub-contenedor
-      gridWrapper.appendChild(col1);
-      gridWrapper.appendChild(col2);
-
-      // 3. Añadimos la grilla al contenedor principal
-      container.appendChild(gridWrapper);
-
-      // 4. Añadimos el botón DEBAJO de la grilla (si hay más proyectos)
-      if (hasMore) {
-        const seeMoreCard = this._createSeeMoreCard(false);
-        seeMoreCard.classList.remove('pin-col-item'); // Quitamos clases de columna
-
-        // Ajustes para que el botón ocupe todo el ancho inferior
-        seeMoreCard.style.width = '100%';
-        seeMoreCard.style.marginRight = '1rem';
-
-        container.appendChild(seeMoreCard);
       }
     }
 
-    // Reiniciar íconos (Lucide)
     if (window.Utils && window.Utils.initIcons) window.Utils.initIcons();
   }
 
@@ -400,7 +320,7 @@ export class Renderer {
     const allItems = this.data.filter((p) => 'DEV' === p.category && p.context !== 'UNIVERSITY');
 
     // 2. Detectar si hay más de 10
-    const limit = 8;
+    const limit = 10;
     const hasMore = allItems.length > limit;
 
     // 3. Cortar solo los 10 primeros para mostrar
@@ -413,7 +333,7 @@ export class Renderer {
   renderDesign() {
     const allItems = this.data.filter((e) => 'DESIGN' === e.category && e.context !== 'UNIVERSITY');
 
-    const limit = 8;
+    const limit = 10;
     const hasMore = allItems.length > limit;
     const dataToShow = allItems.slice(0, limit);
 
@@ -490,7 +410,7 @@ export class Renderer {
     // 5. RENDERIZADO FINAL
     const allItems = this.cachedVideos || [];
 
-    const limit = 8;
+    const limit = 10;
     const hasMore = allItems.length > limit;
     const dataToShow = allItems.slice(0, limit);
 
@@ -500,7 +420,7 @@ export class Renderer {
   renderGallery() {
     const allItems = [...this.gallery].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    const limit = 8;
+    const limit = 10;
     const hasMore = allItems.length > limit;
     const dataToShow = allItems.slice(0, limit);
 
@@ -560,7 +480,7 @@ export class Renderer {
             return `<div class="db-item">
                   <div class="db-row-header"><div class="db-title"><i data-lucide="chevron-right" class="db-icon"></i> ${p.title}</div><span class="db-meta" style="opacity:0.5">${p.date || '--'}</span></div>
                   <div class="db-content"><div class="db-inner">
-                      <img src="${thumb}" class="db-preview-img" loading="lazy" onerror="window.Utils.handleImgError(this)">
+                      <img src="${thumb}" class="db-preview-img" loading="lazy" decoding="async" onerror="window.Utils.handleImgError(this)">
                       <div class="db-text-wrap"><p class="db-desc">${p.desc || ''}</p><div class="db-action">${linkHTML}</div></div>
                   </div></div>
               </div>`;
@@ -587,7 +507,7 @@ export class Renderer {
 
       // 2. Generamos HTML LIMPIO: Solo una imagen y el tag de Colombia
       container.innerHTML = `
-      <img src="${frontSrc}" class="p-img-front" alt="Profile" onerror="window.Utils.handleImgError(this)">
+      <img src="${frontSrc}" class="p-img-front" alt="Profile" loading="lazy" decoding="async" onerror="window.Utils.handleImgError(this)">
       <div class="colombia-tag" id="colombia-tag">BOGOTÁ, COLOMBIA 🇨🇴</div>
     `;
 
@@ -634,32 +554,66 @@ export class Renderer {
   }
 
   // --- FOOTER ---
+  /* EN js/renderer.js */
+
   renderFooter() {
     if (!window.cvData) return;
     const d = window.cvData;
-    ['lbl-theme', 'lbl-contact'].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = d.labels[{ 'lbl-theme': 'footerTheme', 'lbl-contact': 'footerContact' }[id]];
-    });
-
     const contactContainer = document.getElementById('contact-inject');
-    if (contactContainer && d.contact) {
-      contactContainer.innerHTML =
-        d.contact
-          .map((c) => {
-            if (c.icon === 'mail' || c.icon === 'at-sign') {
-              return `<div class="c-item"><span class="c-label">${c.icon === 'mail' ? 'CORREO' : 'USUARIO'}</span><div class="c-value copy-trigger" data-copy="${c.text}">${c.text} <i data-lucide="copy" class="copy-icon"></i></div></div>`;
-            }
-            return '';
-          })
-          .join('') +
-        `<div class="c-item"><span class="c-label">REDES</span><div class="social-links">` +
-        d.contact
-          .filter((c) => ['linkedin', 'github'].includes(c.icon))
-          .map((c) => `<a href="${c.link}" target="_blank">${c.text.toUpperCase()}</a>`)
-          .join('') +
-        `</div></div>`;
-    }
+
+    // Texto del tema
+    const lblTheme = document.getElementById('lbl-theme');
+    if (lblTheme) lblTheme.textContent = 'SELECCIONA UN TEMA';
+
+    if (!contactContainer || !d.contact) return;
+
+    // 1. OBTENER DATOS
+    // Correo (Izquierda)
+    const emailVal = d.contact.find((c) => c.icon === 'mail')?.text || 'contact@tarquitet.com';
+
+    // Redes Profesionales (Derecha) - Filtramos LinkedIn y Github
+    const profLinks = d.contact.filter((c) => c.icon === 'linkedin' || c.icon === 'github');
+
+    // Redes Artísticas (Centro) - Filtramos por tipo 'ART' o por los iconos nuevos
+    const artLinks = d.contact.filter((c) => c.type === 'ART');
+
+    // 2. RENDERIZAR (Mantenemos la estructura de 3 divs flotantes)
+    contactContainer.innerHTML = `
+    
+    <div class="c-item">
+      <span class="c-label">CORREO</span>
+      <div class="c-value copy-trigger" onclick="window.Utils.copyText('${emailVal}', this)">
+        ${emailVal} <i data-lucide="copy"></i>
+      </div>
+    </div>
+
+    <div class="c-item">
+      <span class="c-label">REDES ARTÍSTICAS</span>
+      <div style="display: flex; justify-content: center; gap: 25px; align-items: center; margin-top: 5px;">
+    
+    ${artLinks
+      .map(
+        (l) => `
+      <a href="${l.link}" target="_blank" class="icon-link" title="${l.text}" style="display: flex;">
+        <i data-lucide="${l.icon}" style="width: 24px; height: 24px;"></i>
+      </a>
+    `,
+      )
+      .join('')}
+
+  </div>
+    </div>
+
+    <div class="c-item">
+      <span class="c-label">REDES PROFESIONALES</span>
+      <div class="social-links">
+        ${profLinks.map((l) => `<a href="${l.link}" target="_blank">${l.text.toUpperCase()}</a>`).join('')}
+      </div>
+    </div>
+  `;
+
+    // Inicializar iconos
+    if (window.Utils && window.Utils.initIcons) window.Utils.initIcons();
   }
 
   initDatabaseEvents() {

@@ -59,6 +59,13 @@ window.cvData = {
     { icon: 'link', text: 'Portfolio Web', link: 'https://web.tarquitet.com' },
     { icon: 'linkedin', text: 'Linkedin', link: 'https://linkedin.com/in/pinto-gomez-david' },
     { icon: 'github', text: 'GitHub', link: 'https://github.com/tarquitet' },
+    // --- LAS NUEVAS PARA EL CENTRO ---
+    { icon: 'youtube', text: 'YouTube', link: 'https://youtube.com/@tarquitet', type: 'ART' },
+    { icon: 'palette', text: 'VGen', link: 'https://vgen.co/tarquitet', type: 'ART' },
+    { icon: 'message-circle', text: 'Discord', link: 'https://discord.gg/REMWQJRpnH', type: 'ART' },
+    { icon: 'twitter', text: 'Twitter', link: 'https://twitter.com/tarquitet', type: 'ART' },
+    { icon: 'image', text: 'ArtStation', link: 'https://artstation.com/tarquitet', type: 'ART' },
+    { icon: 'brush', text: 'DeviantArt', link: 'https://www.deviantart.com/tarquitet2002', type: 'ART' },
   ],
   // Languages data
   languages: [

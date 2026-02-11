@@ -112,12 +112,12 @@ window.mainPortfolio = [
   },
   {
     title: 'Offline Image Compressor',
-    fileName: 'https://raw.githubusercontent.com/Tarquitet/image-conversor/main/images/README/1769206951282.png',
+    category: CAT.DEV,
+    context: CTX.PERS,
+    fileName: 'https://raw.githubusercontent.com/Tarquitet/image-conversor/main/images/README/1769206951282.avif',
     link: 'https://github.com/Tarquitet/image-conversor',
     desc: 'This project was made to optimize some images for my personal website. Of course, there are so many websites that can do the same thing, but- You need to pay for more. So. Why not trying myself?',
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
-    category: CAT.DEV,
-    context: CTX.PERS,
   },
   {
     title: 'Minecraft UUID Converter',
@@ -262,7 +262,7 @@ window.mainPortfolio = [
     context: CTX.PERS,
   },
   {
-    title: 'Lancy Land Logo',
+    title: 'Fancy Land Logo',
     fileName: 'Texto-Fancy-Land',
     link: '=',
     desc: 'Logo design for a Minecraft series',
@@ -599,5 +599,4 @@ window.mainPortfolio = [
 /* ========================================================================
    2. GALERÍA VISUAL (ARTE)
    ======================================================================== */
-window.galleryData = [
-];
+window.galleryData = [];

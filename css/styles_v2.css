@@ -675,7 +675,7 @@ body.hovered .cursor-circle {
   display: flex !important;
   align-items: flex-start !important;
   position: relative !important;
-  padding-top: 20vh;
+  padding-top: 2vh;
 }
 
 /* 3. EL TÍTULO/INTRO (Sidebar Fijo a la Izquierda) */
@@ -1721,6 +1721,19 @@ body.is-paused * {
 }
 
 @media (max-width: 1024px) {
+  /*FOOTER*/
+  #contact-inject {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .social-links-grid {
+    grid-template-columns: 1fr; /* 1 sola columna en móvil */
+    text-align: center;
+  }
+  .footer-link-item {
+    justify-content: center;
+  }
+  /*HERO*/
   .hero-divider {
     padding: 3rem 0 !important;
     width: 100% !important;
@@ -2623,4 +2636,88 @@ body.is-paused * {
     font-size: 8vw;
     margin: 0.2rem 0;
   }
+}
+/* ================== CORRECCIÓN LAZY LOADING ================== */
+/* Esto obliga a la caja a ocupar espacio ANTES de que llegue la imagen */
+
+.uni-img-box {
+  display: block; /* Asegura que sea un bloque */
+  width: 100%; /* Ancho completo de la tarjeta */
+
+  /* LA CLAVE: Reserva el hueco vertical (Formato 16:9 estándar) */
+  aspect-ratio: 16 / 9;
+
+  /* Fallback por si el navegador es viejo */
+  min-height: 200px;
+
+  /* Estilos visuales */
+  background-color: var(--card); /* Color de fondo mientras carga (Gris/Beige/Negro) */
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+
+  /* Evita parpadeos */
+  transform: translateZ(0);
+}
+
+/* Opcional: Para imágenes verticales (Dibujos/Retratos) */
+.uni-img-box.is-art-mode {
+  aspect-ratio: 3 / 4 !important; /* Más alto que ancho */
+  min-height: 400px !important;
+}
+/* ================== BOTÓN SIDEBAR (ESCRITORIO) ================== */
+
+/* Estilo del botón que aparece bajo el texto en escritorio */
+.sidebar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2.5rem; /* Separación del texto de arriba */
+
+  font-family: var(--font-tech);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text);
+
+  padding: 1rem 2rem;
+  border: 1px solid var(--accent);
+  background: transparent;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  /* Aseguramos que no se rompa el ancho */
+  max-width: 100%;
+}
+
+.sidebar-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 4px 4px 0 var(--text); /* Sombra dura estilo retro */
+  transform: translateY(-2px);
+}
+
+/* IMPORTANTE: En móvil este botón específico NO debe existir/verse */
+@media (max-width: 1024px) {
+  .sidebar-btn {
+    display: none !important;
+  }
+}
+/* EFECTO HOVER PARA ICONOS ARTÍSTICOS */
+.icon-link {
+  color: var(--text); /* Color base del tema */
+  transition: color 0.2s ease-in-out; /* Transición corta */
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon-link:hover {
+  color: var(--accent) !important; /* El rojo del tema al pasar el mouse */
+}
+
+.icon-link i {
+  width: 20px;
+  height: 20px;
 }

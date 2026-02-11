@@ -49,8 +49,7 @@ window.cvData = {
     role: 'Multimedia Engineer',
     imageName: 'profile',
     secretImageName: 'profile-secret',
-    summary:
-      'Multimedia Engineer with solid academic training and experience in digital production. Noted for his skill in project management and strategic creativity for innovative solutions. <br><br>Mastery of tools focused on editing and post-production, allowing the creation of high-quality visual content. Always attentive to continuous learning to achieve the proposed objectives.',
+    summary: 'Multimedia Engineer with solid academic training and experience in digital production. Noted for his skill in project management and strategic creativity for innovative solutions. <br><br>Mastery of tools focused on editing and post-production, allowing the creation of high-quality visual content. Always attentive to continuous learning to achieve the proposed objectives.',
   },
   // Contact details
   contact: [
@@ -136,7 +135,7 @@ window.cvData = {
     {
       title: 'Tarquitet Website',
       stack: 'FRONTEND / HTML & CSS / JavaScript',
-      desc: 'Responsive web portfolio development for the creator/artist Tarquitet.',
+      desc: 'Responsive web development focused on the professional portfolio of the creator/artist Tarquitet.',
     },
   ],
   // Software and tools
