@@ -6,12 +6,16 @@ _(Orden: De cambios rápidos de texto/CSS → Diseño gráfico → Lógica compl
 - [ ] Diseñar imagen final portafolio ultima pagina
 - [ ] Agregar icons para redes artisticas footer, lucide no tiene todas
 - [ ] Actualizar deviantart perfil y fondo + agregar comisiones intentos
+- [ ] actualizar link imagen de convertidor imagenes python
+- [ ] problema web desplegada, toca eliminar las cookies para estar viendo sus ultimos cambios, al entrar, por mas que se hayan subido los cambios, se ven los anteriore
+- [ ] revisar porque aveces google o otros navegadores quitan las animaciones de la pagina web (forzar le uso aunque tenga la opcion de optimizacion o ahorro de bateria en el navegador)
 
 ### 2. Desarrollo Técnico y Optimización
 
 _(Orden: De ajustes simples → Optimización → Cambios de arquitectura)_
 
-- [ ] Agrgar soporte al compresor de imagenes svg y pdf
+- [ ] Agrgar soporte al compresor de imagenes svg
+- [ ] mejorar optimizacion de compresor imagnes para png, no se nota mucha diferencia al bajar la calidad
 - [ ] Optimizar funciones js con funciones css
 - [ ] Contador automatico para evitar poner numeros en las secciones
 - [ ] Hacer menu de web principal, tener las secciones generadas automaticamente desde el cv_data
