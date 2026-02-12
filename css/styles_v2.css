@@ -14,11 +14,8 @@
 }
 
 /* ================== PUENTE AUTOMÁTICO ================== */
-/* Si el celular está en Modo Oscuro, aplica los colores de 'theme-fire' automáticamente */
-
 @media (prefers-color-scheme: dark) {
   :root {
-    /* COPIADO EXACTO DE TU TEMA 'theme-fire' */
     --bg: #050202;
     --card: #0f0505;
     --text: #e0e0e0;
@@ -27,14 +24,14 @@
     --dim: #775555;
     --border: rgba(255, 51, 0, 0.2);
     --card-shadow: rgba(255, 51, 0, 0.25);
-
-    /* EXTRA: Invertir iconos negros para que se vean blancos en el fondo oscuro */
     --icon-filter: grayscale(100%) invert(1) brightness(2);
+    --dim-filter: invert(37%) sepia(16%) saturate(464%) hue-rotate(314deg) brightness(93%) contrast(89%); /* Gris Fire */
+    --accent-filter: invert(18%) sepia(88%) saturate(6743%) hue-rotate(12deg) brightness(90%) contrast(108%);
   }
 }
+
 @media (prefers-color-scheme: light) {
   :root {
-    /* COPIADO EXACTO DE TU TEMA 'theme-fire' */
     --bg: #f2f0e9;
     --card: #e6e2d6;
     --text: #1a1a1a;
@@ -43,13 +40,13 @@
     --dim: #666666;
     --border: rgba(28, 68, 142, 0.15);
     --card-shadow: rgba(0, 0, 0, 0.2);
-
-    /* EXTRA: Invertir iconos negros para que se vean blancos en el fondo oscuro */
-    --icon-filter: grayscale(100%) invert(1) brightness(2);
+    --dim-filter: invert(42%) sepia(0%) saturate(0%) hue-rotate(135deg) brightness(91%) contrast(90%);
+    --icon-filter: grayscale(100%) opacity(0.8);
+    --accent-filter: invert(27%) sepia(91%) saturate(2351%) hue-rotate(346deg) brightness(90%) contrast(97%);
   }
 }
 
-/* ================== TEMAS ================== */
+/* ================== TEMAS DEFINIDOS ================== */
 :root[data-theme='theme-bauhaus'] {
   --bg: #f2f0e9;
   --card: #e6e2d6;
@@ -59,7 +56,11 @@
   --dim: #666666;
   --border: rgba(28, 68, 142, 0.15);
   --card-shadow: rgba(0, 0, 0, 0.2);
+  --icon-filter: grayscale(100%) opacity(0.8);
+  --dim-filter: invert(42%) sepia(0%) saturate(0%) hue-rotate(135deg) brightness(91%) contrast(90%);
+  --accent-filter: invert(27%) sepia(91%) saturate(2351%) hue-rotate(346deg) brightness(90%) contrast(97%);
 }
+
 :root[data-theme='theme-fire'] {
   --bg: #050202;
   --card: #0f0505;
@@ -69,7 +70,11 @@
   --dim: #775555;
   --border: rgba(255, 51, 0, 0.2);
   --card-shadow: rgba(255, 51, 0, 0.25);
+  --icon-filter: invert(1) brightness(2);
+  --dim-filter: invert(37%) sepia(16%) saturate(464%) hue-rotate(314deg) brightness(93%) contrast(89%);
+  --accent-filter: invert(18%) sepia(88%) saturate(6743%) hue-rotate(12deg) brightness(90%) contrast(107%);
 }
+
 :root[data-theme='theme-pop'] {
   --bg: #ffffff;
   --card: #f4f4f4;
@@ -79,7 +84,11 @@
   --dim: #333333;
   --border: #000000;
   --card-shadow: rgba(0, 0, 0, 0.3);
+  --icon-filter: grayscale(100%) opacity(0.8);
+  --dim-filter: invert(42%) sepia(0%) saturate(0%) hue-rotate(135deg) brightness(91%) contrast(90%);
+  --accent-filter: invert(12%) sepia(100%) saturate(7482%) hue-rotate(0deg) brightness(90%) contrast(114%);
 }
+
 :root[data-theme='theme-industrial'] {
   --bg: #1a1a1a;
   --card: #252525;
@@ -89,7 +98,10 @@
   --dim: #555555;
   --border: rgba(255, 153, 0, 0.2);
   --card-shadow: rgba(255, 153, 0, 0.2);
+  --icon-filter: invert(1) brightness(2);
+  --accent-filter: invert(62%) sepia(91%) saturate(2000%) hue-rotate(1deg) brightness(90%) contrast(105%);
 }
+
 :root[data-theme='theme-cyber'] {
   --bg: #010a12;
   --card: #02111f;
@@ -99,6 +111,9 @@
   --dim: #2b4f6b;
   --border: rgba(0, 242, 255, 0.2);
   --card-shadow: rgba(0, 242, 255, 0.2);
+  --icon-filter: invert(1) brightness(2);
+  --accent-filter: invert(85%) sepia(85%) saturate(3000%) hue-rotate(160deg) brightness(105%) contrast(105%);
+  --dim-filter: invert(29%) sepia(49%) saturate(497%) hue-rotate(167deg) brightness(91%) contrast(95%);
 }
 
 /* ================== RESET & BASE ================== */
@@ -1668,30 +1683,6 @@ body.no-scroll {
   color: var(--bg);
 }
 
-/* =========================================================
-   OPTIMIZACIÓN Y ACCESIBILIDAD
-   ========================================================= */
-
-/*
-/* 1. Respetar preferencia de usuario (Accesibilidad) */
-/*@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-*/
-
-/* Agrega esto al final de tu CSS */
-body.is-paused * {
-  animation-play-state: paused !important;
-  transition: none !important;
-}
-
 /* --- 2. FORZAR VISIBILIDAD DE LINKS (NO HOVER) --- */
 
 /* Ocultamos el badge flotante en galería móvil para limpiar */
@@ -2707,17 +2698,21 @@ body.is-paused * {
 }
 /* EFECTO HOVER PARA ICONOS ARTÍSTICOS */
 .icon-link {
-  color: var(--text); /* Color base del tema */
-  transition: color 0.2s ease-in-out; /* Transición corta */
   display: inline-flex;
   align-items: center;
 }
 
-.icon-link:hover {
-  color: var(--accent) !important; /* El rojo del tema al pasar el mouse */
+/* Apuntamos a img en lugar de i */
+.icon-link img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  /* USA EL FILTRO DE VISIBILIDAD DEL TEMA ACTIVO */
+  filter: var(--icon-filter);
+  transition: all 0.3s ease;
 }
 
-.icon-link i {
-  width: 20px;
-  height: 20px;
+.icon-link:hover img {
+  filter: var(--accent-filter) !important;
+  transform: translateY(-3px);
 }

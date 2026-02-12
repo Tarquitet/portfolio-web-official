@@ -554,54 +554,38 @@ export class Renderer {
   }
 
   // --- FOOTER ---
-  /* EN js/renderer.js */
-
   renderFooter() {
-    if (!window.cvData) return;
     const d = window.cvData;
-    const contactContainer = document.getElementById('contact-inject');
+    const iconsBase = d.config.iconsPath; // '../assets/icons/'
+    const container = document.getElementById('contact-inject');
 
-    // Texto del tema
-    const lblTheme = document.getElementById('lbl-theme');
-    if (lblTheme) lblTheme.textContent = 'SELECCIONA UN TEMA';
+    if (!container || !d.contact) return;
 
-    if (!contactContainer || !d.contact) return;
-
-    // 1. OBTENER DATOS
-    // Correo (Izquierda)
-    const emailVal = d.contact.find((c) => c.icon === 'mail')?.text || 'contact@tarquitet.com';
-
-    // Redes Profesionales (Derecha) - Filtramos LinkedIn y Github
+    const emailVal = d.contact.find((c) => c.icon === 'mail')?.text || '';
     const profLinks = d.contact.filter((c) => c.icon === 'linkedin' || c.icon === 'github');
-
-    // Redes Artísticas (Centro) - Filtramos por tipo 'ART' o por los iconos nuevos
     const artLinks = d.contact.filter((c) => c.type === 'ART');
 
-    // 2. RENDERIZAR (Mantenemos la estructura de 3 divs flotantes)
-    contactContainer.innerHTML = `
-    
+    container.innerHTML = `
     <div class="c-item">
       <span class="c-label">CORREO</span>
-      <div class="c-value copy-trigger" onclick="window.Utils.copyText('${emailVal}', this)">
-        ${emailVal} <i data-lucide="copy"></i>
+      <div class="c-value copy-trigger" data-copy="${emailVal}">
+        ${emailVal} <img src="${iconsBase}copy.svg" style="width:14px; opacity:0.5;">
       </div>
     </div>
 
     <div class="c-item">
       <span class="c-label">REDES ARTÍSTICAS</span>
-      <div style="display: flex; justify-content: center; gap: 25px; align-items: center; margin-top: 5px;">
-    
-    ${artLinks
-      .map(
-        (l) => `
-      <a href="${l.link}" target="_blank" class="icon-link" title="${l.text}" style="display: flex;">
-        <i data-lucide="${l.icon}" style="width: 24px; height: 24px;"></i>
-      </a>
-    `,
-      )
-      .join('')}
-
-  </div>
+      <div class="social-links">
+        ${artLinks
+          .map(
+            (l) => `
+          <a href="${l.link}" target="_blank" class="icon-link" title="${l.text}">
+            <img src="${iconsBase}${l.icon}.svg">
+          </a>
+        `,
+          )
+          .join('')}
+      </div>
     </div>
 
     <div class="c-item">
@@ -611,9 +595,6 @@ export class Renderer {
       </div>
     </div>
   `;
-
-    // Inicializar iconos
-    if (window.Utils && window.Utils.initIcons) window.Utils.initIcons();
   }
 
   initDatabaseEvents() {

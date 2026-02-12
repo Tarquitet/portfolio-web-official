@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. RUTAS INTELIGENTES (Usando Utils)
   const coverSrc = window.Utils.getSmartPath('cover_art', 'PORTFOLIO');
-  const backSrc = window.Utils.getSmartPath('back_art', 'PORTFOLIO');
+  const backSrc = window.Utils.getSmartPath('cover_art', 'PORTFOLIO');
 
   // 3. CONFIGURACIÓN DEL CONTENEDOR
   const container = document.getElementById('magazine-target');
@@ -143,19 +143,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // A. PORTADA
   const p1 = addPage(false);
+
+  // Datos dinámicos para la portada
+  const roleText = cv.basics.role ? cv.basics.role.toUpperCase() : 'MULTIMEDIA ENGINEER';
+
   p1.innerHTML = `
     <div class="cover-layout">
       <div class="cover-vertical">> TARQUITET</div>
+      
       <div class="cover-main">
         <div class="cover-img">
-            <img src="${coverSrc}" alt="Cover" onerror="window.Utils.handleImgError(this)">
+            <img src="${coverSrc}" alt="Cover" style="width:100%; height:100%; object-fit:cover;" onerror="window.Utils.handleImgError(this)">
+            
+            <div class="mag-overlay">
+                <div style="text-align:right; font-family:var(--f-code); color:#fff; font-size:9pt; opacity:0.8;">
+                    ISSUE NO. 01 // ${currentYear}
+                </div>
+
+                <div>
+                    <div class="mag-headline">THE<br>ARCHITECT</div>
+                    <div class="mag-sublines">> ${roleText}</div>
+                    
+                    <div class="barcode-strip">
+                        <div class="css-barcode"></div>
+                        <div style="text-align:right; color:#fff; font-family:var(--f-code); font-size:8pt;">
+                            $ PRICELESS<br>EDITION: GLOBAL
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div style="border-top:5px solid var(--text); padding-top:15px; display:flex; justify-content:space-between; align-items:flex-end;">
+
+        <div style="border-top:4px solid var(--text); padding-top:10px; display:flex; justify-content:space-between; align-items:flex-end;">
           <div>
-             <div style="font-weight:900; font-size:16pt;">${cv.basics.name.replace('<br>', ' ')}</div>
-             <div style="color:var(--accent); font-family:var(--f-code); font-size:10pt;">${cv.basics.role.toUpperCase()}</div>
+             <div style="font-weight:900; font-size:14pt; line-height:1.1;">${cv.basics.name.replace('<br>', ' ')}</div>
+             <div style="font-family:var(--f-code); font-size:9pt; margin-top:4px; opacity:0.7;">PORTFOLIO DOCUMENT</div>
           </div>
-          <div style="text-align:right; font-family:var(--f-code); font-size:8.5pt;">EDITION // ${currentYear}<br>BEST OF THE YEAR</div>
+          <div style="text-align:right;">
+             <div style="background:var(--text); color:var(--bg); padding:4px 8px; font-weight:bold; font-size:9pt;">
+                CONFIDENTIAL
+             </div>
+          </div>
         </div>
       </div>
     </div>`;
@@ -187,28 +215,85 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. Renderizar ARTE (usa title de sections[3])
   renderSection(gallery, getSectionTitle(3, '04 / VISUAL ARTS'), 'tags');
 
-  // C. CONTRAPORTADA
+  // C. CONTRAPORTADA (FINAL - SOLO PRO)
   const pLast = addPage(false);
-  const linksHtml = cv.contact
+
+  // 1. FILTRO: Definimos qué redes son "Profesionales"
+  // Solo permitimos: LinkedIn, GitHub y Correo (identificado por '@')
+  const allowedNetworks = ['linkedin', 'github', '@'];
+
+  const professionalContacts = cv.contact.filter((c) => {
+    const combined = (c.text + c.link).toLowerCase();
+    // Si cumple con alguna de las palabras permitidas, pasa el filtro
+    return allowedNetworks.some((keyword) => combined.includes(keyword));
+  });
+
+  // 2. GENERACIÓN DE LINKS (Usando la lista filtrada)
+  const linksHtml = professionalContacts
     .map((c) => {
-      const style =
-        'display:block; font-family:var(--f-code); font-size:8.5pt; color:rgba(242,240,233,0.7); text-decoration:none; margin-bottom:10px; border-bottom:1px solid rgba(242,240,233,0.1); padding-bottom:2px; transition:0.3s;';
-      if (c.link && c.link !== '-') {
-        return `<a href="${c.link}" target="_blank" style="${style} cursor:pointer;">${c.text.toUpperCase()} ↗</a>`;
-      }
-      return `<div onclick="window.Utils.copyText('${c.text}', this)" title="Copiar" style="${style} cursor:copy;">${c.text.toUpperCase()}</div>`;
+      // Icono simple
+      let icon = '>';
+      const txt = c.text.toLowerCase();
+      if (txt.includes('@')) icon = '@'; // Icono para email
+      if (c.link.includes('linkedin')) icon = 'IN'; // Texto corto para LinkedIn
+      if (c.link.includes('github')) icon = 'GIT'; // Texto corto para GitHub
+
+      const isLink = c.link && c.link !== '-';
+      const tag = isLink ? 'a' : 'div';
+      const href = isLink ? `href="${c.link}" target="_blank"` : `onclick="window.Utils.copyText('${c.text}', this)"`;
+      const cursor = isLink ? 'pointer' : 'copy';
+
+      // Estilo industrial para el link
+      return `
+        <${tag} ${href} style="display:flex; justify-content:space-between; align-items:center; font-family:var(--f-code); font-size:10pt; color:var(--bg); text-decoration:none; border-bottom:1px solid rgba(242,240,233,0.2); padding:12px 0; cursor:${cursor}; transition:0.2s;">
+            <span style="opacity:0.9; font-weight:bold;">${icon} // ${c.text.toUpperCase()}</span>
+            <span style="opacity:0.5;">↗</span>
+        </${tag}>`;
     })
     .join('');
 
+  // 3. HTML ESTRUCTURAL DE LA CONTRAPORTADA
   pLast.innerHTML = `
-    <div style="display:flex; flex-direction:column; height:100%;">
-        <div style="flex:1; border:2px solid var(--text); overflow:hidden; position:relative;">
-            <img src="${backSrc}" style="width:100%; height:100%; object-fit:cover; filter: grayscale(60%);" onerror="window.Utils.handleImgError(this)">
+    <div style="display:flex; flex-direction:column; height:100%; position:relative;">
+        
+        <div style="flex:1; border:2px solid var(--text); overflow:hidden; position:relative; background:#000;">
+            <img src="${backSrc}" style="width:100%; height:100%; object-fit:cover; filter: grayscale(100%) contrast(1.1);" onerror="window.Utils.handleImgError(this)">
+            
+            <div style="position:absolute; bottom:20px; left:20px; color:#fff; font-family:var(--f-code); font-size:8pt; opacity:0.8;">
+                /// SYSTEM SHUTDOWN<br>
+                /// EXECUTION COMPLETE
+            </div>
+            
+            <div style="position:absolute; bottom:20px; right:20px; background:var(--accent); color:#fff; padding:5px 10px; font-family:var(--f-code); font-size:8pt; font-weight:bold;">
+                ● AVAILABLE FOR HIRE
+            </div>
         </div>
-        <div class="back-thank-you">
-            <h1 class="back-title">THANK YOU</h1>
-            <div style="color:var(--bg); font-family:var(--f-code); margin:15px 0 25px 0; font-size:9pt;">TARQUITET.COM // ${currentYear}</div>
-            <div style="display:flex; flex-direction:column; gap:5px;">${linksHtml}</div>
+
+        <div class="back-thank-you" style="background:var(--box-dark); padding:40px 30px; margin-top:-20px; position:relative; z-index:10; border:none; border-left:4px solid var(--accent);">
+            
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:30px;">
+                <h1 class="back-title" style="font-size:45pt; margin:0; line-height:0.9;">LET'S<br>TALK.</h1>
+                <div style="text-align:right; font-family:var(--f-code); color:var(--bg); opacity:0.5; font-size:8pt;">
+                    David Josué Pinto Gómez<br>
+                    Ingeniero Multimedia
+                </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0px; margin-bottom:40px;">
+                ${linksHtml}
+            </div>
+
+            <div style="border-top:2px solid var(--accent); padding-top:15px; display:flex; justify-content:space-between; font-family:var(--f-code); font-size:7pt; color:var(--bg); opacity:0.6;">
+                <div>
+                    TARQUITET.COM // PORTFOLIO_V2<br>
+                    BOGOTÁ, COLOMBIA
+                </div>
+                <div style="text-align:right;">
+                    © ${currentYear} ALL RIGHTS RESERVED.<br>
+                    END OF FILE.
+                </div>
+            </div>
+
         </div>
     </div>`;
 

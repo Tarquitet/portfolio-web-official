@@ -1,20 +1,9 @@
-### 1. Web Principal: Impacto Visual, Diseño y UI/UX
-
-_(Orden: De cambios rápidos de texto/CSS → Diseño gráfico → Lógica compleja)_
-
-- [ ] Diseñar imagen portada portafolio
-- [ ] Diseñar imagen final portafolio ultima pagina
-- [ ] Agregar icons para redes artisticas footer, lucide no tiene todas
-- [ ] Actualizar deviantart perfil y fondo + agregar comisiones intentos
-- [ ] actualizar link imagen de convertidor imagenes python
-- [ ] problema web desplegada, toca eliminar las cookies para estar viendo sus ultimos cambios, al entrar, por mas que se hayan subido los cambios, se ven los anteriore
-- [ ] revisar porque aveces google o otros navegadores quitan las animaciones de la pagina web (forzar le uso aunque tenga la opcion de optimizacion o ahorro de bateria en el navegador)
-
 ### 2. Desarrollo Técnico y Optimización
 
 _(Orden: De ajustes simples → Optimización → Cambios de arquitectura)_
 
 - [ ] Agrgar soporte al compresor de imagenes svg
+- [ ] quitar redes artisticas cv artistico
 - [ ] mejorar optimizacion de compresor imagnes para png, no se nota mucha diferencia al bajar la calidad
 - [ ] Optimizar funciones js con funciones css
 - [ ] Contador automatico para evitar poner numeros en las secciones
@@ -70,7 +59,6 @@ _(Orden: De tareas rápidas/administrativas → Scripts/Mods → Desarrollo Web 
 - [ ] Optimizar aun mas la imagen de anuncio dorado
 - [ ] Filtrar trabajos deviantart +18
 - [ ] Subir trabajos a deviantart y usar tipo api/links para colocarlos
-- [ ] Morse en python, diseñar su script para Kelly.
 - [ ] OGG conversor de texture pack minecraft para subir tambien
 - [ ] Terminar conversor UUID Minecraft
 - [ ] **Web Instituto:** Agregar el diseño web del Instituto al portafolio.

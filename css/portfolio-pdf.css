@@ -247,3 +247,123 @@ body {
     print-color-adjust: exact !important;
   }
 }
+/* --- ESTILOS NUEVOS PARA LA PORTADA DE REVISTA --- */
+
+/* El contenedor de la imagen ahora es relativo para permitir superposiciones */
+.cover-img {
+  position: relative;
+  /* Mantenemos tus estilos existentes */
+  flex: 1;
+  background: var(--text);
+  border: 2px solid var(--text);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* La superposición (Overlay) */
+.mag-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    transparent 30%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Elementos internos de la revista */
+.mag-headline {
+  font-family: var(--f-body); /* Inter */
+  font-weight: 900;
+  font-size: 38pt;
+  line-height: 0.9;
+  color: #fff;
+  text-transform: uppercase;
+  margin-top: auto; /* Empuja hacia abajo */
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.mag-sublines {
+  font-family: var(--f-code);
+  color: #fff;
+  font-size: 10pt;
+  background: var(--accent);
+  display: inline-block;
+  padding: 4px 8px;
+  margin-bottom: 20px;
+  box-shadow: 3px 3px 0 var(--text);
+}
+
+.barcode-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  padding-top: 10px;
+}
+
+/* Código de barras CSS */
+.css-barcode {
+  width: 100px;
+  height: 30px;
+  background: #fff;
+  background-image: linear-gradient(
+    90deg,
+    #000 2%,
+    transparent 2%,
+    transparent 4%,
+    #000 4%,
+    #000 8%,
+    transparent 8%,
+    transparent 9%,
+    #000 9%,
+    #000 12%,
+    transparent 12%,
+    transparent 14%,
+    #000 14%,
+    #000 20%,
+    transparent 20%,
+    transparent 24%,
+    #000 24%,
+    #000 26%,
+    transparent 26%,
+    transparent 30%,
+    #000 30%,
+    #000 36%,
+    transparent 36%,
+    transparent 40%,
+    #000 40%,
+    #000 42%,
+    transparent 42%,
+    transparent 48%,
+    #000 48%,
+    #000 50%,
+    transparent 50%,
+    transparent 60%,
+    #000 60%,
+    #000 64%,
+    transparent 64%,
+    transparent 68%,
+    #000 68%,
+    #000 75%,
+    transparent 75%,
+    transparent 80%,
+    #000 80%,
+    #000 85%,
+    transparent 85%,
+    transparent 90%,
+    #000 90%,
+    #000 100%
+  );
+}

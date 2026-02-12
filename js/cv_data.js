@@ -54,18 +54,18 @@ window.cvData = {
   },
   // Contact details
   contact: [
-    { icon: 'mail', text: 'contact@tarquitet.com', link: '-' },
-    { icon: 'at-sign', text: '@tarquitet', link: '-' },
-    { icon: 'link', text: 'Portfolio Web', link: 'https://web.tarquitet.com' },
-    { icon: 'linkedin', text: 'Linkedin', link: 'https://linkedin.com/in/pinto-gomez-david' },
-    { icon: 'github', text: 'GitHub', link: 'https://github.com/tarquitet' },
-    // --- LAS NUEVAS PARA EL CENTRO ---
+    // --- COLUMNA IZQUIERDA (PROFESIONAL) ---
+    { icon: 'mail', text: 'contact@tarquitet.com', link: '-', type: 'PROFESSIONAL' },
+    { icon: 'linkedin', text: 'Linkedin', link: 'https://linkedin.com/in/pinto-gomez-david', type: 'PROFESSIONAL' },
+    { icon: 'github', text: 'GitHub', link: 'https://github.com/tarquitet', type: 'PROFESSIONAL' },
+
+    // --- COLUMNA CENTRAL (ARTÍSTICAS / CREADOR) ---
     { icon: 'youtube', text: 'YouTube', link: 'https://youtube.com/@tarquitet', type: 'ART' },
     { icon: 'palette', text: 'VGen', link: 'https://vgen.co/tarquitet', type: 'ART' },
-    { icon: 'message-circle', text: 'Discord', link: 'https://discord.gg/REMWQJRpnH', type: 'ART' },
-    { icon: 'twitter', text: 'Twitter', link: 'https://twitter.com/tarquitet', type: 'ART' },
-    { icon: 'image', text: 'ArtStation', link: 'https://artstation.com/tarquitet', type: 'ART' },
-    { icon: 'brush', text: 'DeviantArt', link: 'https://www.deviantart.com/tarquitet2002', type: 'ART' },
+    { icon: 'discord', text: 'Discord', link: 'https://discord.gg/REMWQJRpnH', type: 'ART' },
+    { icon: 'x', text: 'Twitter', link: 'https://twitter.com/tarquitet', type: 'ART' },
+    { icon: 'artstation', text: 'ArtStation', link: 'https://artstation.com/tarquitet', type: 'ART' },
+    { icon: 'deviant', text: 'DeviantArt', link: 'https://www.deviantart.com/tarquitet2002', type: 'ART' },
   ],
   // Languages data
   languages: [
@@ -148,20 +148,27 @@ window.cvData = {
   ],
   // Software and tools
   software: [
-    { name: 'Photoshop', iconClass: 'devicon-photoshop-plain colored' },
-    { name: 'Unity 3D', iconType: 'local', iconName: 'unity.svg' },
-    { name: 'Figma', iconClass: 'devicon-figma-plain colored' },
-    { name: 'VS Code', iconClass: 'devicon-vscode-plain colored' },
-    { name: 'GitHub', iconClass: 'devicon-github-original' },
-    { name: 'Web Dev', iconClass: 'devicon-html5-plain colored' },
-    { name: 'Davinci Resolve', iconType: 'local', iconName: 'davinci.svg' },
-    { name: 'OBS Studio', iconType: 'local', iconName: 'obs.svg' },
-    { name: 'Miro', iconType: 'local', iconName: 'miro.svg' },
-    { name: 'Chat GPT', iconType: 'local', iconName: 'chatgpt.svg' },
-    { name: 'Gemini', iconType: 'local', iconName: 'gemini.svg' },
+    { name: 'Photoshop', icon: 'photoshop' },
+    { name: 'Unity 3D', icon: 'unity' },
+    { name: 'Figma', icon: 'figma' },
+    { name: 'VS Code', icon: 'vscode' },
+    { name: 'GitHub', icon: 'github' },
+    { name: 'Web Dev', icon: 'code' },
+    { name: 'Davinci Resolve', icon: 'davinci' },
+    { name: 'OBS Studio', icon: 'obs' },
+    { name: 'Miro', icon: 'miro' },
+    { name: 'Chat GPT', icon: 'chatgpt' },
+    { name: 'Gemini', icon: 'gemini' },
   ],
   // Ticker after profile items
-  tickerItems: ['C#', 'C++', 'HTML / CSS', 'JavaScript', 'VIDEO EDITING'],
+  tickerItems: [
+    { name: 'C#', icon: 'csharp' },
+    { name: 'C++', icon: 'cpp' },
+    { name: 'HTML', icon: 'html' },
+    { name: 'CSS', icon: 'css' },
+    { name: 'JavaScript', icon: 'js' },
+    { name: 'VIDEO EDITING', icon: 'video' },
+  ],
   // Typerwriter / Identity data
   identityData: [
     'UBSRVJUFU JT DPPM',

@@ -46,17 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
     contactContainer.innerHTML = '';
     d.contact.forEach((item) => {
       const isCopy = item.link === '-';
+      // Usamos el path configurado en d.config.iconsPath
+      const iconPath = `${d.config.iconsPath}${item.icon}`;
 
-      // USAMOS window.Utils.copyText
       const contentHtml = isCopy
-        ? `<span class="contact-link copyable" onclick="window.Utils.copyText('${item.text}', this)" title="Click para copiar">${item.text}</span>`
+        ? `<span class="contact-link copyable" onclick="window.Utils.copyText('${item.text}', this)">${item.text}</span>`
         : `<a href="${item.link}" target="_blank" class="contact-link">${item.text}</a>`;
 
       contactContainer.innerHTML += `
-          <div class="contact-item">
-            <i data-lucide="${item.icon}" class="contact-icon"></i>
-            ${contentHtml}
-          </div>`;
+      <div class="contact-item">
+        <img src="${iconPath}" class="contact-icon" style="width:18px; height:18px;">
+        ${contentHtml}
+      </div>`;
     });
   }
 
