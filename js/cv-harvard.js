@@ -14,18 +14,24 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('cv-name').innerHTML = d.basics.name.replace('<br>', ' ');
   document.getElementById('cv-summary').innerHTML = d.basics.summary;
 
-  // 3. Contacto (Usando Utils para copiar)
+  // 3. Contacto (FILTRADO PROFESIONAL)
   const contactBar = document.getElementById('cv-contact-bar');
   if (contactBar && d.contact) {
-    d.contact.forEach((item, index) => {
+    contactBar.innerHTML = ''; // Limpiamos el contenedor
+
+    // Filtramos estrictamente por el tipo profesional definido en cv_data.js
+    const professionalContacts = d.contact.filter((item) => item.type === 'PROFESSIONAL');
+
+    professionalContacts.forEach((item, index) => {
       const isCopy = item.link === '-';
 
-      // AQUÍ EL CAMBIO: Usamos window.Utils.copyText
+      // Usamos window.Utils.copyText para los elementos sin link directo
       const content = isCopy
         ? `<span class="copyable" onclick="window.Utils.copyText('${item.text}', this)" title="Click para copiar">${item.text}</span>`
         : `<a href="${item.link}" target="_blank" class="contact-link">${item.text}</a>`;
 
-      contactBar.innerHTML += content + (index < d.contact.length - 1 ? ' | ' : '');
+      // Inyectamos el contenido con el separador '|'
+      contactBar.innerHTML += content + (index < professionalContacts.length - 1 ? ' | ' : '');
     });
   }
 

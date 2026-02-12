@@ -109,6 +109,7 @@ body {
   width: 14px;
   height: 14px;
   opacity: 0.8;
+  filter: brightness(0) invert(1);
 }
 .contact-link {
   font-family: var(--f-tech);
@@ -307,4 +308,21 @@ img.soft-icon.local-img {
 .soft-icon svg {
   width: 100%;
   height: 100%;
+}
+/* Asegura que los iconos locales sean visibles */
+.contact-icon.local-img {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+  /* Si tus SVGs son negros y el fondo es oscuro, puedes usar filter para hacerlos blancos */
+  /* filter: invert(1); */
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
 }

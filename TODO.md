@@ -3,14 +3,12 @@
 _(Orden: De ajustes simples → Optimización → Cambios de arquitectura)_
 
 - [ ] Agrgar soporte al compresor de imagenes svg
-- [ ] quitar redes artisticas cv artistico
+- [ ] tema oscuro logos oscuros y no contrastan (pendiente para dedespues)
 - [ ] mejorar optimizacion de compresor imagnes para png, no se nota mucha diferencia al bajar la calidad
 - [ ] Optimizar funciones js con funciones css
-- [ ] Contador automatico para evitar poner numeros en las secciones
-- [ ] Hacer menu de web principal, tener las secciones generadas automaticamente desde el cv_data
 - [ ] Corregir .avif .extension a imagenes que no existen, solo se forman en los links pero realmente no existen
-- [ ] Tratar de optimizar la web utilizando algun truco para que, la imagen ya descargada, sea la misma mostrada, no que se vuelva a descargar para mostrarla tanto en servicios de secciones como en historico (evitar hacer eso)
 - [ ] Cambiar el use client a server client (si se puede) - metodo de renderizado
+- [ ] agregar flechas abajo de perfil + pryectos hero
 
 ### 3. SEO, Enrutamiento y Gestión de Archivos
 
@@ -31,11 +29,7 @@ _(Orden: De configuración básica → Configuración de dominios → Automatiza
 
 _(Orden: De correcciones de texto → Actualización de perfiles → Traducción compleja)_
 
-- [ ] Actualizar foto linkedin por el actual de la pagina web
 - [ ] Actualizar pdfs
-- [ ] En seccion footer de contacto, cambiar de usuario por usuario en redes y dejar redes como linkedin profesional
-- [ ] Agregar servicios linkedin como ejemplo de [aquí](https://www.linkedin.com/services/page/a81b60328626a40977/)
-- [ ] Agregar acerca de en linkedin ejemplo de [Leidy](https://www.linkedin.com/in/leidy-stephanie-aponte-mu%C3%B1oz-6167282b1/)
 - [ ] Corregir Ingeniero en Multimedia en ingles (esta en español)
 - [ ] Corregir traduccion descripcion en formato harvard seccion educacion
 - [ ] Corregir traduccion en ingles de desc en español del formato harvard agregando degree

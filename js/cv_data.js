@@ -20,27 +20,69 @@ window.cvData = {
     footerContact: 'CONTACTO + REDES',
   },
   // Sections configuration (moved from modules/config.js)
+  /*
+  sections: [
+  // ... tus otras secciones
+  {
+    id: 'https://mi-otra-web.com', // La URL externa directamente
+    title: 'MI OTRA WEB',
+    inMenu: true,
+    menuTitle: 'OTRA WEB',
+    menuGroup: 'SERVICIOS', // Se inyecta en el dropdown de servicios
+    isOnlyLink: true        // CRUCIAL: No crea sección 01, 02, etc. en la web
+  },
+]
+  */
   sections: [
     {
-      id: 'work-section',
-      index: '01',
+      id: 'profile-section',
+      title: 'PERFIL',
+      subtitle: 'Sobre mí',
+      inMenu: true,
+      menuTitle: 'PERFIL',
+      isOnlyLink: true, // Esto hace que esté en el menú pero NO cree la sección 01
+    },
+    {
+      id: 'dev-section',
       title: 'DEVELOP<br/>CODER',
-      subtitle: 'Desarrollo + Web',
+      subtitle: 'WEB | SCRIPTS | AUTOMATIZACIÓN | BD',
       injectTarget: 'prof-inject',
+      inMenu: true,
+      menuTitle: 'DEVELOP',
+      menuGroup: 'SERVICIOS', // Se mete al dropdown automáticamente
     },
     {
       id: 'video-section',
-      index: '02',
       title: 'VIDEOS<br/>EDIT',
-      subtitle: 'Producción Audiovisual',
+      subtitle: 'YOUTUBE | SHORTS | REELS | TIK TOK',
       injectTarget: 'video-inject',
+      inMenu: true,
+      menuTitle: 'VIDEO',
+      menuGroup: 'SERVICIOS',
     },
     {
       id: 'ux-section',
-      index: '03',
       title: 'DISEÑO<br/>RENDERS',
-      subtitle: 'Figma / Photoshop',
+      subtitle: 'Miniaturas | 3D | Logos | Fondos',
       injectTarget: 'ux-inject',
+      inMenu: true,
+      menuTitle: 'DISEÑO',
+      menuGroup: 'SERVICIOS',
+    },
+    {
+      id: 'archive-section',
+      title: 'HISTÓRICO',
+      subtitle: 'Base de datos',
+      inMenu: true,
+      menuTitle: 'HISTÓRICO',
+      isOnlyLink: true,
+    },
+    {
+      id: 'contact', // ID del ancla del footer
+      title: 'CONTACTO',
+      inMenu: true,
+      menuTitle: 'CONTACTO',
+      isOnlyLink: true,
     },
   ],
   // Basic info about profile (me)
@@ -56,6 +98,7 @@ window.cvData = {
   contact: [
     // --- COLUMNA IZQUIERDA (PROFESIONAL) ---
     { icon: 'mail', text: 'contact@tarquitet.com', link: '-', type: 'PROFESSIONAL' },
+    { icon: 'globe', text: 'Portafolio Web', link: 'https://web.tarquitet.com', type: 'PROFESSIONAL' },
     { icon: 'linkedin', text: 'Linkedin', link: 'https://linkedin.com/in/pinto-gomez-david', type: 'PROFESSIONAL' },
     { icon: 'github', text: 'GitHub', link: 'https://github.com/tarquitet', type: 'PROFESSIONAL' },
 
@@ -110,6 +153,9 @@ window.cvData = {
     tech: [
       { name: 'Edición Video', percent: 60 },
       { name: 'Diseño Digital', percent: 40 },
+      { name: 'Diseño Web', percent: 60 },
+      { name: 'Ilustración Digital', percent: 40 },
+      { name: 'Videojuegos', percent: 60 },
     ],
     hard: ['Gestión de Proyectos', 'Lógica de Programación', 'Postproducción Audiovisual', 'Estrategia Digital'],
   },

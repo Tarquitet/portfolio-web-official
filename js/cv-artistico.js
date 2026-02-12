@@ -40,24 +40,29 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
   }
 
-  // 2. Contacto
+  // 2. Contacto (FILTRADO POR PROPIEDAD 'TYPE')
   const contactContainer = document.getElementById('cv-contact-list');
   if (contactContainer && d.contact) {
     contactContainer.innerHTML = '';
-    d.contact.forEach((item) => {
+
+    // Filtramos estrictamente por el tipo definido en cv_data.js
+    const professionalContacts = d.contact.filter((item) => item.type === 'PROFESSIONAL');
+
+    professionalContacts.forEach((item) => {
       const isCopy = item.link === '-';
-      // Usamos el path configurado en d.config.iconsPath
-      const iconPath = `${d.config.iconsPath}${item.icon}`;
+      const iconsBase = d.config.iconsPath || '../assets/icons/';
+      const iconName = item.icon.endsWith('.svg') ? item.icon : `${item.icon}.svg`;
+      const iconPath = `${iconsBase}${iconName}`;
 
       const contentHtml = isCopy
         ? `<span class="contact-link copyable" onclick="window.Utils.copyText('${item.text}', this)">${item.text}</span>`
         : `<a href="${item.link}" target="_blank" class="contact-link">${item.text}</a>`;
 
       contactContainer.innerHTML += `
-      <div class="contact-item">
-        <img src="${iconPath}" class="contact-icon" style="width:18px; height:18px;">
-        ${contentHtml}
-      </div>`;
+    <div class="contact-item">
+      <img src="${iconPath}" class="contact-icon" style="filter: brightness(0) invert(1); width:18px; height:18px;">
+      ${contentHtml}
+    </div>`;
     });
   }
 
@@ -126,39 +131,26 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`;
   });
 
-  // 7. Software
+  // 7. Software (SOLO SVG LOCALES)
   const softContainer = document.getElementById('cv-software-grid');
 
   if (softContainer && d.software) {
-    softContainer.innerHTML = ''; // Limpiar
-
-    // Obtener ruta base (asegurando fallback)
-    const iconsBase = d.config && d.config.iconsPath ? d.config.iconsPath : '../assets/icons/';
+    softContainer.innerHTML = '';
+    const iconsBase = d.config.iconsPath || '../assets/icons/';
 
     d.software.forEach((soft) => {
-      let iconHTML = '';
-
-      // CASO A: ICONO LOCAL (Imagen SVG/PNG)
-      if (soft.iconType === 'local') {
-        const fullPath = `${iconsBase}${soft.iconName}`;
-        // Agregamos clase 'local-img' para controlarlo con CSS
-        iconHTML = `<img src="${fullPath}" alt="${soft.name}" class="soft-icon local-img" loading="lazy" onerror="this.style.display='none'">`;
-      }
-      // CASO B: LUCIDE (SVG Dinámico)
-      else if (soft.iconType === 'lucide') {
-        const color = soft.color || '#111';
-        iconHTML = `<i data-lucide="${soft.iconName}" class="soft-icon" style="color:${color}"></i>`;
-      }
-      // CASO C: DEVICON (Clase CSS)
-      else {
-        iconHTML = `<i class="${soft.iconClass} soft-icon"></i>`;
-      }
+      // Generamos la ruta asumiendo que el nombre del icono en cv_data es el nombre del archivo
+      const fullPath = `${iconsBase}${soft.icon || soft.name.toLowerCase()}.svg`;
 
       softContainer.innerHTML += `
-        <div class="soft-box">
-          ${iconHTML}
-          <span class="soft-name">${soft.name}</span>
-        </div>`;
+      <div class="soft-box">
+        <img src="${fullPath}" 
+             alt="${soft.name}" 
+             class="soft-icon local-img" 
+             loading="lazy" 
+             onerror="this.style.display='none'">
+        <span class="soft-name">${soft.name}</span>
+      </div>`;
     });
 
     // Reinicializar iconos al final

@@ -11,10 +11,9 @@ export class Renderer {
   }
 
   renderAll() {
-    // 1. Generar la estructura base (Sticky Containers)
-    this.renderStructure();
-
     // 2. Renderizar contenido específico
+    this.renderStructure();
+    this.renderMenu();
     this.renderDev();
     this.renderVideo();
     this.renderDesign();
@@ -24,6 +23,17 @@ export class Renderer {
     this.renderFooter();
 
     if (window.Utils) window.Utils.initIcons();
+  }
+
+  _resolveImgPath(item, type) {
+    if (type === 'VIDEO') {
+      const videoId = item.id || this._extractYoutubeId(item.link);
+      return videoId
+        ? `https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`
+        : window.Utils.getSmartPath(item.fileName, 'VIDEO');
+    }
+    const cat = type === 'ART' ? 'ART' : type === 'DESIGN' ? 'DESIGN' : 'DEV';
+    return window.Utils.getSmartPath(item.fileName, cat);
   }
 
   // --- HELPER: Extraer ID de YouTube desde URL ---
@@ -36,33 +46,39 @@ export class Renderer {
   }
 
   // --- NUEVO: Generador de Estructura (Sticky Sections) ---
+  // --- 2. CONTADOR AUTOMÁTICO Y ESTRUCTURA ---
   renderStructure() {
     const root = document.getElementById(CONFIG.DOM.sectionsRoot);
-    const sections = window.cvData?.sections || null;
+    const sections = window.cvData?.sections;
     if (!root || !sections) return;
 
-    // Crea el HTML de las secciones leyendo cvData.sections
-    root.innerHTML = sections
-      .map(
-        (sect) => `
-      <div class="sticky-container" id="${sect.id}">
-        <div class="sticky-viewport">
-          <div class="h-card intro">
-            <span class="sect-idx">${sect.index}</span>
-            <h2>${sect.title}</h2>
-            <p>${sect.subtitle}</p>
-          </div>
-          <div class="horizontal-track">
-            <div id="${sect.injectTarget}" class="track-content"></div>
+    // Filtramos: Solo creamos bloques para lo que NO es "solo link"
+    const physicalSections = sections.filter((s) => !s.isOnlyLink);
+
+    root.innerHTML = physicalSections
+      .map((sect, index) => {
+        // Generación automática: 01, 02, 03...
+        const autoIndex = (index + 1).toString().padStart(2, '0');
+
+        return `
+        <div class="sticky-container" id="${sect.id}">
+          <div class="sticky-viewport">
+            <div class="h-card intro">
+              <span class="sect-idx">${autoIndex}</span>
+              <h2>${sect.title}</h2>
+              <p>${sect.subtitle}</p>
+            </div>
+            <div class="horizontal-track">
+              <div id="${sect.injectTarget}" class="track-content"></div>
+            </div>
           </div>
         </div>
-      </div>
-    `,
-      )
+      `;
+      })
       .join('');
   }
 
-  // --- HELPER: Crear Tarjeta desde Template ---
+  // --- 4. TARJETAS (Corrección de Fullscreen y Enlaces) ---
   _createCardNode(item, type) {
     if (!this.template) return null;
 
@@ -76,44 +92,32 @@ export class Renderer {
     const linkWrap = clone.querySelector('.card-link-wrapper');
     const badgeContainer = clone.querySelector('.card-badges-overlay');
 
-    let imgSrc = '';
+    // 1. UNIFICACIÓN: Usamos el método central para la imagen
+    let imgSrc = this._resolveImgPath(item, type);
     let mainLink = item.link;
     let ctaText = 'VER PROYECTO ->';
 
     let badgesToShow = [];
-    let dateText = '';
+    let dateText = item.date || '';
 
-    // --- LÓGICA DE CONTENIDO ---
+    // 2. LÓGICA DE CONTENIDO Y ENLACES
     if (type === 'VIDEO') {
-      // ... (Lógica de video se mantiene igual) ...
-      const videoId = item.id || this._extractYoutubeId(item.link);
-      imgSrc = videoId
-        ? `https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`
-        : window.Utils.getSmartPath(item.fileName, 'VIDEO');
-
       badgesToShow.push('YOUTUBE');
-      dateText = item.date || '';
       ctaText = 'VER EN YOUTUBE ->';
     } else if (type === 'ART') {
-      imgSrc = window.Utils.getSmartPath(item.fileName, 'ART');
-
-      // Lógica original de Arte
+      // Soporte para link '=' o vacío en Arte
       if (mainLink === '=' || !mainLink) mainLink = imgSrc;
 
       if (visualBox) visualBox.classList.add('is-art-mode');
       if (item.tags && item.tags.length > 0) {
         badgesToShow.push(item.tags[0].toUpperCase());
       }
-      dateText = item.date || '';
       ctaText = 'VER FULLSCREEN ->';
     } else {
-      // DEV & DESIGN
-      imgSrc = window.Utils.getSmartPath(item.fileName, type === 'DESIGN' ? 'DESIGN' : 'DEV');
-
-      // 🔥 LÓGICA AGREGADA AQUÍ: Soporte para '=' en Dev y Design
+      // DEV & DESIGN: Soporte para '='
       if (mainLink === '=') {
         mainLink = imgSrc;
-        ctaText = 'VER IMAGEN ->'; // Opcional: Cambiar texto si es imagen
+        ctaText = 'VER IMAGEN ->';
       }
 
       const tools = item.tools || [];
@@ -122,13 +126,10 @@ export class Renderer {
       else if (tools.some((t) => t.includes('Unity'))) badgesToShow.push('UNITY');
       else if (tools.length > 0) badgesToShow.push(tools[0]);
 
-      if (item.date) dateText = item.date;
-      // Mantiene el texto por defecto si no es imagen
       if (mainLink !== imgSrc) ctaText = type === 'DESIGN' ? 'VER DISEÑO ->' : 'VER PROYECTO ->';
     }
 
-    // --- RENDERIZADO (El resto sigue igual) ---
-
+    // 3. RENDERIZADO DE BADGES Y FECHA
     if (badgeContainer && badgesToShow.length > 0) {
       badgeContainer.innerHTML = badgesToShow
         .map((tag) => `<div class="overlay-badge" data-type="${tag}">${tag}</div>`)
@@ -137,6 +138,7 @@ export class Renderer {
 
     if (dateEl) dateEl.textContent = dateText;
 
+    // 4. RENDERIZADO DE IMAGEN (Con el unificador)
     if (img) {
       img.src = imgSrc;
       img.alt = item.title;
@@ -145,7 +147,8 @@ export class Renderer {
       };
     }
 
-    if (title) {
+    // 5. RENDERIZADO DE TÍTULO (Restaurado)
+    if (title && item.title) {
       const maxLen = 40;
       if (item.title.length > maxLen) {
         title.textContent = item.title.substring(0, maxLen) + '...';
@@ -156,13 +159,13 @@ export class Renderer {
       }
     }
 
-    // Links
+    // 6. ASIGNACIÓN DE ENLACES (CTA y Wrapper)
     if (cta) {
       cta.href = mainLink;
       cta.textContent = ctaText;
-      // Si es imagen, forzar target blank para que no cierre el portafolio
       if (mainLink === imgSrc) cta.target = '_blank';
     }
+
     if (linkWrap) {
       linkWrap.href = mainLink;
       linkWrap.style.display = 'block';
@@ -312,6 +315,42 @@ export class Renderer {
     }
 
     return card;
+  }
+
+  //RENDERIZADO MENU
+  // --- 3. MENÚ DINÁMICO (Dropdowns y Enlaces) ---
+  renderMenu() {
+    const nav = document.querySelector('.nav-minimal');
+    const sections = window.cvData?.sections;
+    if (!nav || !sections) return;
+
+    const menuItems = sections.filter((s) => s.inMenu);
+
+    // Separamos los que van en el grupo "SERVICIOS"
+    const topLevel = menuItems.filter((s) => !s.menuGroup);
+    const serviciosGroup = menuItems.filter((s) => s.menuGroup === 'SERVICIOS');
+
+    let menuHTML = '';
+
+    topLevel.forEach((item) => {
+      // Si el ID es una URL externa, la usamos; si no, ancla #
+      const link = item.id.startsWith('http') ? item.id : `#${item.id}`;
+      menuHTML += `<a href="${link}">${item.menuTitle || item.title}</a>`;
+
+      // Inyectar el dropdown de servicios justo después del Perfil (opcional)
+      if (item.id === 'profile-section' && serviciosGroup.length > 0) {
+        menuHTML += `
+          <div class="nav-group">
+            <span class="nav-trigger">SERVICIOS</span>
+            <div class="nav-dropdown">
+              ${serviciosGroup.map((s) => `<a href="#${s.id}">${s.menuTitle || s.title}</a>`).join('')}
+            </div>
+          </div>
+        `;
+      }
+    });
+
+    nav.innerHTML = menuHTML;
   }
 
   // --- SECCIONES INDIVIDUALES ---
@@ -466,29 +505,40 @@ export class Renderer {
         const groupItems = items.filter((p) => (p.category || 'OTHER') === cat);
         const rowsHTML = groupItems
           .map((p) => {
-            // Extracción automática de ID también para la lista
-            const videoId = p.id || this._extractYoutubeId(p.link);
-
-            let thumb = videoId
-              ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
-              : window.Utils.getSmartPath(p.fileName || p.image, cat);
+            // --- AQUÍ ESTÁ LA UNIFICACIÓN ---
+            // Llamamos al mismo método que usan las tarjetas de la parte superior
+            let thumb = this._resolveImgPath(p, cat);
 
             let linkHTML = p.link
               ? `<a href="${p.link === '=' ? thumb : p.link}" target="_blank" class="db-link">VER -></a>`
               : '';
 
             return `<div class="db-item">
-                  <div class="db-row-header"><div class="db-title"><i data-lucide="chevron-right" class="db-icon"></i> ${p.title}</div><span class="db-meta" style="opacity:0.5">${p.date || '--'}</span></div>
-                  <div class="db-content"><div class="db-inner">
-                      <img src="${thumb}" class="db-preview-img" loading="lazy" decoding="async" onerror="window.Utils.handleImgError(this)">
-                      <div class="db-text-wrap"><p class="db-desc">${p.desc || ''}</p><div class="db-action">${linkHTML}</div></div>
-                  </div></div>
-              </div>`;
+                <div class="db-row-header">
+                  <div class="db-title"><i data-lucide="chevron-right" class="db-icon"></i> ${p.title}</div>
+                  <span class="db-meta" style="opacity:0.5">${p.date || '--'}</span>
+                </div>
+                <div class="db-content">
+                  <div class="db-inner">
+                    <img src="${thumb}" class="db-preview-img" loading="lazy" decoding="async" onerror="window.Utils.handleImgError(this)">
+                    <div class="db-text-wrap">
+                      <p class="db-desc">${p.desc || ''}</p>
+                      <div class="db-action">${linkHTML}</div>
+                    </div>
+                  </div>
+                </div>
+            </div>`;
           })
           .join('');
         container.insertAdjacentHTML(
           'beforeend',
-          `<div class="db-group"><div class="db-group-header"><span>> ${catNames[cat] || cat}</span> <span>[ ${groupItems.length} ]</span></div><div class="db-group-content">${rowsHTML}</div></div>`,
+          `<div class="db-group">
+          <div class="db-group-header">
+            <span>> ${catNames[cat] || cat}</span> 
+            <span>[ ${groupItems.length} ]</span>
+          </div>
+          <div class="db-group-content">${rowsHTML}</div>
+        </div>`,
         );
       });
     });
