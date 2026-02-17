@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // 2. RUTAS INTELIGENTES (Usando Utils)
-  const coverSrc = window.Utils.getSmartPath('cover_art', 'PORTFOLIO');
-  const backSrc = window.Utils.getSmartPath('cover_art', 'PORTFOLIO');
+  const coverSrc = window.Utils.getSmartPath('cover_art.webp', 'PORTFOLIO');
+  const backSrc = coverSrc;
 
   // 3. CONFIGURACIÓN DEL CONTENEDOR
   const container = document.getElementById('magazine-target');
@@ -252,45 +252,42 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .join('');
 
+  // 2. Prepara las variables dinámicas ANTES de asignar el HTML
+  const letsTalk = cv.labels.letsTalk || "LET'S TALK.";
+  const rights = cv.labels.rights || 'ALL RIGHTS RESERVED.';
+  const hire = cv.labels.hire || 'AVAILABLE FOR HIRE';
+  const shutdown = cv.labels.shutdown || 'SYSTEM SHUTDOWN';
+
   // 3. HTML ESTRUCTURAL DE LA CONTRAPORTADA
   pLast.innerHTML = `
     <div style="display:flex; flex-direction:column; height:100%; position:relative;">
         
         <div style="flex:1; border:2px solid var(--text); overflow:hidden; position:relative; background:#000;">
-            <img src="${backSrc}" style="width:100%; height:100%; object-fit:cover; filter: grayscale(100%) contrast(1.1);" onerror="window.Utils.handleImgError(this)">
-            
             <div style="position:absolute; bottom:20px; left:20px; color:#fff; font-family:var(--f-code); font-size:8pt; opacity:0.8;">
-                /// SYSTEM SHUTDOWN<br>
-                /// EXECUTION COMPLETE
+                /// ${shutdown}<br> /// EXECUTION COMPLETE
             </div>
             
             <div style="position:absolute; bottom:20px; right:20px; background:var(--accent); color:#fff; padding:5px 10px; font-family:var(--f-code); font-size:8pt; font-weight:bold;">
-                ● AVAILABLE FOR HIRE
-            </div>
+                ● ${hire} </div>
         </div>
 
-        <div class="back-thank-you" style="background:var(--box-dark); padding:40px 30px; margin-top:-20px; position:relative; z-index:10; border:none; border-left:4px solid var(--accent);">
+        <div class="back-thank-you" style="...">
             
             <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:30px;">
-                <h1 class="back-title" style="font-size:45pt; margin:0; line-height:0.9;">LET'S<br>TALK.</h1>
+                <h1 class="back-title" style="font-size:45pt; margin:0; line-height:0.9;">${letsTalk.replace(' ', '<br>')}</h1>
+                
                 <div style="text-align:right; font-family:var(--f-code); color:var(--bg); opacity:0.5; font-size:8pt;">
-                    David Josué Pinto Gómez<br>
-                    Ingeniero Multimedia
-                </div>
+                    ${cv.basics.name}<br>
+                    ${roleText} </div>
             </div>
 
-            <div style="display:flex; flex-direction:column; gap:0px; margin-bottom:40px;">
-                ${linksHtml}
-            </div>
-
-            <div style="border-top:2px solid var(--accent); padding-top:15px; display:flex; justify-content:space-between; font-family:var(--f-code); font-size:7pt; color:var(--bg); opacity:0.6;">
+            <div style="...">
                 <div>
                     TARQUITET.COM // PORTFOLIO_V2<br>
                     BOGOTÁ, COLOMBIA
                 </div>
                 <div style="text-align:right;">
-                    © ${currentYear} ALL RIGHTS RESERVED.<br>
-                    END OF FILE.
+                    © ${currentYear} ${rights}<br> END OF FILE.
                 </div>
             </div>
 

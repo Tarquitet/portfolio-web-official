@@ -4,50 +4,40 @@
  */
 
 window.Utils = {
-  // 1. CONSTRUCCIÓN DE RUTA (Inicia con AVIF por defecto)
+  // 1. CONSTRUCCIÓN DE RUTA (SIMPLE Y DIRECTA)
   getSmartPath: (fileName, category = 'DEFAULT') => {
     if (!fileName) return '';
+    // Si ya es una URL completa (https://...) o data:image, la devolvemos tal cual
     if (fileName.includes('://') || fileName.startsWith('data:')) return fileName;
 
-    // Configuración de carpetas
     const projConfig = typeof PROJECT_CONFIG !== 'undefined' ? PROJECT_CONFIG.paths : {};
     const cvConfig = window.cvData && window.cvData.config ? window.cvData.config : {};
 
-    let basePath = '../assets/images/';
+    // Ruta base por defecto
+    let basePath = 'assets/images/';
 
+    // Selección de carpeta según categoría (Esto SÍ es útil mantenerlo)
     if (category === 'PORTFOLIO') basePath = cvConfig.portfolioPath || projConfig.DEFAULT || basePath;
     else if (category === 'PROFILE') basePath = cvConfig.profilePath || basePath;
+    else if (category === 'ART')
+      basePath = '../assets/images/ilustraciones/'; // Ajusta si tu ruta es diferente
+    else if (category === 'DESIGN') basePath = '../assets/images/design/';
+    else if (category === 'DEV') basePath = '../assets/images/dev/';
     else if (projConfig[category]) basePath = projConfig[category];
     else basePath = projConfig.DEFAULT || basePath;
 
-    // SI NO TIENE EXTENSIÓN, LE PONEMOS .avif PARA ARRANCAR LA CASCADA
-    const finalName = fileName.includes('.') ? fileName : `${fileName}.avif`;
-
-    return `${basePath}${finalName}`;
+    // AQUÍ ESTÁ EL CAMBIO: Ya no agregamos extensiones. Confiamos en tu JSON.
+    return `${basePath}${fileName}`;
   },
 
-  // 2. SISTEMA DE CASCADA (Detecta el formato correcto automáticamente)
+  // 2. MANEJO DE ERRORES (SIN CASCADA)
   handleImgError: function (img) {
-    // Si ya probamos todo y falló, paramos para evitar bucles
     if (img.dataset.dead === 'true') return;
 
-    const src = img.src;
-    console.warn('Probando siguiente formato para:', src);
-
-    // SECUENCIA: AVIF -> WEBP -> PNG -> JPG
-    if (src.includes('.avif')) {
-      img.src = src.replace('.avif', '.webp');
-    } else if (src.includes('.webp')) {
-      img.src = src.replace('.webp', '.png');
-    } else if (src.includes('.png')) {
-      img.src = src.replace('.png', '.jpg');
-    } else {
-      // Si llega aquí, no existe en ningún formato.
-      console.error('Imagen irrecuperable:', img.alt);
-      img.dataset.dead = 'true';
-      img.style.display = 'none'; // Se oculta
-      // Opcional: img.style.backgroundColor = '#222'; // Dejar cuadro gris
-    }
+    // Si la imagen falla, es porque no existe. Ya no probamos .png ni .jpg
+    console.warn('Imagen no encontrada:', img.src);
+    img.dataset.dead = 'true';
+    img.style.display = 'none'; // Ocultamos la imagen rota
   },
 
   /**

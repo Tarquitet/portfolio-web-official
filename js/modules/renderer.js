@@ -26,14 +26,24 @@ export class Renderer {
   }
 
   _resolveImgPath(item, type) {
+    // 1. Lógica de Video (YouTube)
     if (type === 'VIDEO') {
       const videoId = item.id || this._extractYoutubeId(item.link);
       return videoId
         ? `https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`
-        : window.Utils.getSmartPath(item.fileName, 'VIDEO');
+        : window.Utils.getSmartPath(file, 'VIDEO');
     }
+
+    // 2. Obtenemos el nombre. EJEMPLO: "mi-proyecto.webp"
+    const file = item.img || item.fileName || item.image;
+    if (!file) return '';
+
+    // 3. Mapeo de Categoría
     const cat = type === 'ART' ? 'ART' : type === 'DESIGN' ? 'DESIGN' : 'DEV';
-    return window.Utils.getSmartPath(item.fileName, cat);
+
+    // 4. Llamada a Utils.
+    // Como 'file' ya tiene la extensión, Utils solo le pegará la carpeta.
+    return window.Utils.getSmartPath(file, cat);
   }
 
   // --- HELPER: Extraer ID de YouTube desde URL ---
@@ -143,7 +153,7 @@ export class Renderer {
       img.src = imgSrc;
       img.alt = item.title;
       img.onerror = function () {
-        window.Utils.handleImgError(this);
+        this.onerror = null;
       };
     }
 

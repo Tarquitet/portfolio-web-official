@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('lbl-soft').textContent = d.labels.softSkills + ':';
   document.getElementById('lbl-tech').textContent = d.labels.techSkills + ':';
   document.getElementById('lbl-languages').textContent = d.labels.languages;
+  const skillsTitle = document.getElementById('lbl-skills-master');
+  if (skillsTitle) skillsTitle.textContent = d.labels.skillsTitle || 'Habilidades y Tecnologías';
+
+  const softCat = document.getElementById('lbl-software-cat');
+  if (softCat) softCat.textContent = (d.labels.software || 'Software') + ':';
 
   // 2. Básicos
   document.getElementById('cv-name').innerHTML = d.basics.name.replace('<br>', ' ');

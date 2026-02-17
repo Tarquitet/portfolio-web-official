@@ -18,46 +18,102 @@ window.cvData = {
     stack: 'Technological Stack',
     footerTheme: 'SELECT A TOPIC',
     footerContact: 'CONTACT + NETWORKS',
+    skillsTitle: 'Skills and Technologies',
+    software: 'Software',
+    letsTalk: "LET'S TALK.", // Para la contraportada del PDF
+    confidential: 'CONFIDENTIAL',
+    hire: 'AVAILABLE FOR HIRE',
+    shutdown: 'SYSTEM SHUTDOWN',
+    rights: 'ALL RIGHTS RESERVED.',
   },
   // Sections configuration (moved from modules/config.js)
+  /*
+  sections: [
+  // ... tus otras secciones
+  {
+    id: 'https://mi-otra-web.com', // La URL externa directamente
+    title: 'MY OTHER WEBSITE',
+    inMenu: true,
+    menuTitle: 'OTRA WEB',
+    menuGroup: 'SERVICIOS', // Se inyecta en el dropdown de servicios
+    isOnlyLink: true        // CRUCIAL: No crea sección 01, 02, etc. en la web
+  },
+]
+  */
   sections: [
     {
-      id: 'work-section',
-      index: '01',
+      id: 'profile-section',
+      title: 'PERFIL',
+      subtitle: 'Sobre mí',
+      inMenu: true,
+      menuTitle: 'PERFIL',
+      isOnlyLink: true, // Esto hace que esté en el menú pero NO cree la sección 01
+    },
+    {
+      id: 'dev-section',
       title: 'DEVELOP<br/>CODER',
-      subtitle: 'Desarrollo + Web',
+      subtitle: 'WEB | SCRIPTS | AUTOMATIZACIÓN | BD',
       injectTarget: 'prof-inject',
+      inMenu: true,
+      menuTitle: 'DEVELOP',
+      menuGroup: 'SERVICIOS', // Se mete al dropdown automáticamente
     },
     {
       id: 'video-section',
-      index: '02',
       title: 'VIDEOS<br/>EDIT',
-      subtitle: 'Producción Audiovisual',
+      subtitle: 'YOUTUBE | SHORTS | REELS | TIK TOK',
       injectTarget: 'video-inject',
+      inMenu: true,
+      menuTitle: 'VIDEO',
+      menuGroup: 'SERVICIOS',
     },
     {
       id: 'ux-section',
-      index: '03',
       title: 'DESIGN<br/>RENDERS',
-      subtitle: 'Figma / Photoshop',
+      subtitle: 'Miniaturas | 3D | Logos | Fondos',
       injectTarget: 'ux-inject',
+      inMenu: true,
+      menuTitle: 'DISEÑO',
+      menuGroup: 'SERVICIOS',
+    },
+    {
+      id: 'archive-section',
+      title: 'HISTÓRICO',
+      subtitle: 'Base de datos',
+      inMenu: true,
+      menuTitle: 'HISTÓRICO',
+      isOnlyLink: true,
+    },
+    {
+      id: 'contact', // ID del ancla del footer
+      title: 'CONTACTO',
+      inMenu: true,
+      menuTitle: 'CONTACTO',
+      isOnlyLink: true,
     },
   ],
   // Basic info about profile (me)
   basics: {
     name: 'David Josué Pinto Gómez',
     role: 'Multimedia Engineer',
-    imageName: 'profile',
-    secretImageName: 'profile-secret',
+    imageName: 'profile.webp',
     summary: 'Multimedia Engineer with solid academic training and experience in digital production. Noted for his skill in project management and strategic creativity for innovative solutions. <br><br>Mastery of tools focused on editing and post-production, allowing the creation of high-quality visual content. Always attentive to continuous learning to achieve the proposed objectives.',
   },
   // Contact details
   contact: [
-    { icon: 'mail', text: 'contact@tarquitet.com', link: '-' },
-    { icon: 'at-sign', text: '@tarquitet', link: '-' },
-    { icon: 'link', text: 'Web Portfolio', link: 'https://web.tarquitet.com' },
-    { icon: 'linkedin', text: 'Linkedin', link: 'https://linkedin.com/in/pinto-gomez-david' },
-    { icon: 'github', text: 'GitHub', link: 'https://github.com/tarquitet' },
+    // --- COLUMNA IZQUIERDA (PROFESIONAL) ---
+    { icon: 'mail', text: 'contact@tarquitet.com', link: '-', type: 'PROFESSIONAL' },
+    { icon: 'globe', text: 'Web Portfolio', link: 'https://web.tarquitet.com', type: 'PROFESSIONAL' },
+    { icon: 'linkedin', text: 'Linkedin', link: 'https://linkedin.com/in/pinto-gomez-david', type: 'PROFESSIONAL' },
+    { icon: 'github', text: 'GitHub', link: 'https://github.com/tarquitet', type: 'PROFESSIONAL' },
+
+    // --- COLUMNA CENTRAL (ARTÍSTICAS / CREADOR) ---
+    { icon: 'youtube', text: 'YouTube', link: 'https://youtube.com/@tarquitet', type: 'ART' },
+    { icon: 'palette', text: 'VGen', link: 'https://vgen.co/tarquitet', type: 'ART' },
+    { icon: 'discord', text: 'Discord', link: 'https://discord.gg/REMWQJRpnH', type: 'ART' },
+    { icon: 'x', text: 'Twitter', link: 'https://twitter.com/tarquitet', type: 'ART' },
+    { icon: 'artstation', text: 'ArtStation', link: 'https://artstation.com/tarquitet', type: 'ART' },
+    { icon: 'deviant', text: 'DeviantArt', link: 'https://www.deviantart.com/tarquitet2002', type: 'ART' },
   ],
   // Languages data
   languages: [
@@ -102,6 +158,9 @@ window.cvData = {
     tech: [
       { name: 'Video Editing', percent: 60 },
       { name: 'Digital Design', percent: 40 },
+      { name: 'Web Design', percent: 60 },
+      { name: 'Digital Illustration', percent: 40 },
+      { name: 'Video games', percent: 60 },
     ],
     hard: ['Gestión de Proyectos', 'Lógica de Programación', 'Postproducción Audiovisual', 'Estrategia Digital'],
   },
@@ -140,20 +199,27 @@ window.cvData = {
   ],
   // Software and tools
   software: [
-    { name: 'photoshop', iconClass: 'devicon-photoshop-plain colored' },
-    { name: 'Unity 3D', iconType: 'local', iconName: 'unity.svg' },
-    { name: 'Figma', iconClass: 'devicon-figma-plain colored' },
-    { name: 'VSCode', iconClass: 'devicon-vscode-plain colored' },
-    { name: 'GitHub', iconClass: 'devicon-github-original' },
-    { name: 'web dev', iconClass: 'devicon-html5-plain colored' },
-    { name: 'Davinci Resolve', iconType: 'local', iconName: 'davinci.svg' },
-    { name: 'OBS Studio', iconType: 'local', iconName: 'obs.svg' },
-    { name: 'Miro', iconType: 'local', iconName: 'miro.svg' },
-    { name: 'GPT Chat', iconType: 'local', iconName: 'chatgpt.svg' },
-    { name: 'Gemini', iconType: 'local', iconName: 'gemini.svg' },
+    { name: 'photoshop', icon: 'photoshop' },
+    { name: 'Unity 3D', icon: 'unity' },
+    { name: 'Figma', icon: 'figma' },
+    { name: 'VSCode', icon: 'vscode' },
+    { name: 'GitHub', icon: 'github' },
+    { name: 'web dev', icon: 'code' },
+    { name: 'Davinci Resolve', icon: 'davinci' },
+    { name: 'OBS Studio', icon: 'obs' },
+    { name: 'Miro', icon: 'miro' },
+    { name: 'Chat GPT', icon: 'chatgpt' },
+    { name: 'Gemini', icon: 'gemini' },
   ],
   // Ticker after profile items
-  tickerItems: ['C#', 'C++', 'HTML / CSS', 'JavaScript', 'VIDEO EDITING'],
+  tickerItems: [
+    { name: 'C#', icon: 'csharp' },
+    { name: 'C++', icon: 'cpp' },
+    { name: 'HTML', icon: 'html' },
+    { name: 'CSS', icon: 'css' },
+    { name: 'JavaScript', icon: 'js' },
+    { name: 'VIDEO EDITING', icon: 'video' },
+  ],
   // Typerwriter / Identity data
   identityData: [
     'UBSRVJUFU JT DPPM',

@@ -2520,7 +2520,7 @@ body.no-scroll {
 /* A. LOCAL (Imágenes negras -> Gris) */
 .ticker-icon-img {
   object-fit: contain;
-  filter: grayscale(100%);
+  filter: grayscale(100%) var(--dim-filter);
   opacity: 0.6; /* Bajamos opacidad para igualar el gris del texto */
 }
 
@@ -2715,4 +2715,16 @@ body.no-scroll {
 .icon-link:hover img {
   filter: var(--accent-filter) !important;
   transform: translateY(-3px);
+}
+.hero-icon {
+  width: 20px; /* Tamaño similar al texto */
+  height: 20px;
+  vertical-align: middle; /* Para que quede alineado con el texto */
+  display: inline-block;
+
+  /* TRUCO: Si tus iconos son negros y el fondo es oscuro, inviértelos a blanco */
+  filter: var(--icon-filter);
+
+  /* Opcional: un poco de margen si están muy pegados */
+  margin: 0 8px;
 }

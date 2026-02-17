@@ -18,6 +18,13 @@ window.cvData = {
     stack: 'Stack Tecnológico',
     footerTheme: 'SELECCIONA UN TEMA',
     footerContact: 'CONTACTO + REDES',
+    skillsTitle: 'Habilidades y Tecnologías',
+    software: 'Software',
+    letsTalk: "LET'S TALK.", // Para la contraportada del PDF
+    confidential: 'CONFIDENTIAL',
+    hire: 'AVAILABLE FOR HIRE',
+    shutdown: 'SYSTEM SHUTDOWN',
+    rights: 'ALL RIGHTS RESERVED.',
   },
   // Sections configuration (moved from modules/config.js)
   /*
@@ -89,8 +96,7 @@ window.cvData = {
   basics: {
     name: 'David Josué<br>Pinto Gómez',
     role: 'Ingeniero en Multimedia',
-    imageName: 'profile',
-    secretImageName: 'profile-secret',
+    imageName: 'profile.webp',
     summary:
       'Ingeniero en Multimedia con sólida formación académica y experiencia en producción digital. Destacado por su habilidad en gestión de proyectos y creatividad estratégica para soluciones innovadoras.<br><br>Dominio de herramientas enfocadas en la edición y postproducción, permitiendo la creación de contenidos visuales de alta calidad. Siempre atento al aprendizaje continuo para alcanzar los objetivos propuestos.',
   },
