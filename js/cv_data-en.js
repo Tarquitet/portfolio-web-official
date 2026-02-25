@@ -119,7 +119,7 @@ window.cvData = {
   languages: [
     {
       name: 'Spanish',
-      level: 'Nativo',
+      level: 'Native',
       code: 'ES',
       percent: 100,
     },

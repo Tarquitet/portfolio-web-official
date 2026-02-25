@@ -6,7 +6,8 @@ _(Orden: De ajustes simples → Optimización → Cambios de arquitectura)_
 - [ ] mejorar optimizacion de compresor imagnes para png, no se nota mucha diferencia al bajar la calidad
 - [ ] Optimizar funciones js con funciones css
 - [ ] agrgar iconos al portafolio largo pdf como el texto hirzontal preo sin animar
-- [ ] redefinir las secciones del portafolio porque se cambio para la web principal
+- [ ] redefinir las secciones del portafolio porque se cambio para la web principal, se hicieron cambios a como se lee la cantidad de secciones desde cv_data y eso rompio las secciones del portafolio de arte largo
+- [ ] Agregar a las secciones de proyectos y arte una variable para determinar si se muestra en el portafolio mas no en la web principal
 - [ ] Idea de mostrar badges acorde a la cantidad de proyectos por seccion en la web
 - [ ] alternar un tipo de badge de proyecto con otro tipo "zig zag", un badge de web despues otro python, web python... asi hasta llegar a 10 proyectos, o bien, si hay mas categorias para badges, tambien
 - [ ] Intentar agregar proyectos de githuh meidante una api, asi nos ahorramos, y que busque la primera imagen del readme si tiene, si no, que sea una imagen manual o capturada mediante otro recurso o libreria automatica si es posible
@@ -25,9 +26,7 @@ _(Orden: De configuración básica → Configuración de dominios → Automatiza
 
 _(Orden: De correcciones de texto → Actualización de perfiles → Traducción compleja)_
 
-- [ ] Readme de proyectos github en ingles
 - [ ] Agrear readmes faltantes para imagenes alta calidad para links que no lleven = para portafolio en pagina web tarquitet
-- [ ] Mejorar nombres y descripciones de proyectos pagin tarquitet
 - [ ] Retomar idea de lang para descargar version web en español o ingles con la idea ?lang y usando javascript tomo "diccionario" aveces al traducir a otro idioma, desaparece el texto horizontal del hero u otras cosas
 - [ ] Bot linkedin idea discord mok
 
@@ -35,18 +34,13 @@ _(Orden: De correcciones de texto → Actualización de perfiles → Traducción
 
 _(Orden: De tareas rápidas/administrativas → Scripts/Mods → Desarrollo Web completo)_
 
-- [ ] Subir anuncio dorado iglesia a portafolio
 - [ ] Cobrar por anuncio dorado papa
-- [ ] Optimizar aun mas la imagen de anuncio dorado
 - [ ] Filtrar trabajos deviantart +18
 - [ ] Subir trabajos a deviantart y usar tipo api/links para colocarlos
 - [ ] OGG conversor de texture pack minecraft para subir tambien
-- [ ] Terminar conversor UUID Minecraft
-- [ ] **Web Instituto:** Agregar el diseño web del Instituto al portafolio.
-- [ ] **Mejora Builtechraft:** Actualizar y mejorar la web existente de Builtechraft.
 - [ ] **Web Juego Diplomado:** Diseñar e integrar la página del proyecto de juego del diplomado.
 - [ ] Agregar menu de ilustraciones por comisiones en pagina por separada relacionada mas a fursona y vision mas personal no tan profesional
 - [ ] **Sección Comisiones/Tienda:** Diseñar web para comisiones de arte.
 - [ ] **Sección Comisiones/Tienda:** Agregar sección de "Tienda", menú y página específica para comisiones y otros servicios.
-- [ ] Rediseñar y optimizar pagin web papa
 - [ ] Agregar SEO pagian papa
+- [ ] Cambiar dominio de la pagina instituto biblico horeb por el dominio oficial si es que tienen, si no, se deja asi sin mas

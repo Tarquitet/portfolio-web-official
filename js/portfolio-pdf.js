@@ -261,34 +261,46 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. HTML ESTRUCTURAL DE LA CONTRAPORTADA
   pLast.innerHTML = `
     <div style="display:flex; flex-direction:column; height:100%; position:relative;">
-        
+
         <div style="flex:1; border:2px solid var(--text); overflow:hidden; position:relative; background:#000;">
-            <div style="position:absolute; bottom:20px; left:20px; color:#fff; font-family:var(--f-code); font-size:8pt; opacity:0.8;">
+            <img src="${backSrc}" alt="Back Cover" style="width:100%; height:100%; object-fit:cover; opacity:0.5;" onerror="window.Utils.handleImgError(this)">
+
+            <div style="position:absolute; bottom:55px; left:20px; color:#fff; font-family:var(--f-code); font-size:8pt; opacity:0.8;">
                 /// ${shutdown}<br> /// EXECUTION COMPLETE
             </div>
             
-            <div style="position:absolute; bottom:20px; right:20px; background:var(--accent); color:#fff; padding:5px 10px; font-family:var(--f-code); font-size:8pt; font-weight:bold;">
+            <div style="position:absolute; bottom:55px; right:20px; background:var(--accent); color:#fff; padding:5px 10px; font-family:var(--f-code); font-size:8pt; font-weight:bold;">
                 ● ${hire} </div>
         </div>
 
-        <div class="back-thank-you" style="...">
-            
+        <div class="back-thank-you" style="padding-top:30px;">
+
             <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:30px;">
                 <h1 class="back-title" style="font-size:45pt; margin:0; line-height:0.9;">${letsTalk.replace(' ', '<br>')}</h1>
-                
+
                 <div style="text-align:right; font-family:var(--f-code); color:var(--bg); opacity:0.5; font-size:8pt;">
                     ${cv.basics.name}<br>
                     ${roleText} </div>
             </div>
 
-            <div style="...">
-                <div>
-                    TARQUITET.COM // PORTFOLIO_V2<br>
-                    BOGOTÁ, COLOMBIA
+            <div style="margin-bottom:30px;">
+                ${linksHtml}
+            </div>
+
+            <div style="border-top: 1px solid rgba(242,240,233,0.3); padding-top: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; font-family: var(--f-code); font-size: 10pt; color: var(--bg); text-align: left; opacity: 1;">
+                
+                <div style="line-height: 1.5;">
+                    <a href="https://web.tarquitet.com" target="_blank" style="color: #ffffff; text-decoration: none; font-weight: 900; font-size: 13pt; border-bottom: 2px solid var(--accent); padding-bottom: 2px; display: inline-block; margin-bottom: 4px;">
+                        WEB.TARQUITET.COM
+                    </a><br>
+                    <span style="opacity: 0.9;">PORTFOLIO_V2 // BOGOTÁ, COLOMBIA</span>
                 </div>
-                <div style="text-align:right;">
-                    © ${currentYear} ${rights}<br> END OF FILE.
+
+                <div style="text-align: right; line-height: 1.5; opacity: 0.9;">
+                    © ${currentYear} ${rights}<br>
+                    <span style="font-weight: bold; color: var(--accent);">END OF FILE.</span>
                 </div>
+
             </div>
 
         </div>
