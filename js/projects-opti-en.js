@@ -535,8 +535,7 @@ window.mainPortfolio = [
   {
     title: 'In-Mortal Transmedia',
     desc: 'Transmedia narrative exploration of the evolution of ideas; project site and narrative assets.',
-    fileName:
-      'https://static.wixstatic.com/media/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg/v1/fill/w_2146,h_1229,al_c,q_90,enc_avif,quality_auto/5d4a70_7d7ad22b0b4f4defbc347b359909bcb1~mv2.jpg',
+    fileName: 'in-mortal.avif',
     link: 'https://pintodavid2002.wixsite.com/in-mortal',
     tools: ['Storytelling', 'Wix', 'Concept Art', 'Narrative', 'Transmedia', 'Web Design', T.WEB, T.UX],
     category: CAT.DEV,
