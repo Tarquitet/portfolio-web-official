@@ -2,32 +2,19 @@
 
 _(Orden: De ajustes simples → Optimización → Cambios de arquitectura)_
 
-- [ ] Agrgar soporte al compresor de imagenes svg
-- [ ] mejorar optimizacion de compresor imagnes para png, no se nota mucha diferencia al bajar la calidad
 - [ ] Optimizar funciones js con funciones css
-- [ ] agrgar iconos al portafolio largo pdf como el texto hirzontal preo sin animar
-- [ ] redefinir las secciones del portafolio porque se cambio para la web principal, se hicieron cambios a como se lee la cantidad de secciones desde cv_data y eso rompio las secciones del portafolio de arte largo
-- [ ] Agregar a las secciones de proyectos y arte una variable para determinar si se muestra en el portafolio mas no en la web principal
-- [ ] Idea de mostrar badges acorde a la cantidad de proyectos por seccion en la web
-- [ ] alternar un tipo de badge de proyecto con otro tipo "zig zag", un badge de web despues otro python, web python... asi hasta llegar a 10 proyectos, o bien, si hay mas categorias para badges, tambien
-- [ ] Intentar agregar proyectos de githuh meidante una api, asi nos ahorramos, y que busque la primera imagen del readme si tiene, si no, que sea una imagen manual o capturada mediante otro recurso o libreria automatica si es posible
 
 ### 3. SEO, Enrutamiento y Gestión de Archivos
 
 _(Orden: De configuración básica → Configuración de dominios → Automatización)_
 
-- [ ] Agregar palabras de busqueda para google en mi pagina web tarquitet
-- [ ] Agregar SEO para busquedas de mi pagina tarquitet.com
-- [ ] Agregar enrutamiento de www.tarquitet.com a web.tarquitet.com
-- [ ] Agregar dominios para pdfs actualizados tipo cv para cada uno (mini pagina web para descargar cada uno tipo boton flotante)
+- [ ] Agregar dominios para pdfs actualizados tipo cv para cada uno (mini pagina web para descargar cada uno tipo boton flotante), realmente es para su version web, no pdf para que nadie pueda descargarlo, solo yo puedo crear el pdf original desde la web usando un script en python. Aunque si quiero que ese link este "oculto", no facil a simple vista,pero tampoco complicado de acceder, puede estar en no se... la palabra tarquiet del footer o en otra parte o como una expansion de la tabla de habilidades, pero... eso se dar mucha informacion y simplemente se quitaria proque ya puedo tener los pdfs originales sin exponerlos al publico, cierto?
 - [ ] Arreglar actualizacion al documento portfolio o cv_data con las variables constantes de memoria a disco (archivo, no se estan guardadno) esto es del python portfolio updater
 
 ### 4. Contenido, Traducciones y Perfil Profesional
 
 _(Orden: De correcciones de texto → Actualización de perfiles → Traducción compleja)_
 
-- [ ] Agrear readmes faltantes para imagenes alta calidad para links que no lleven = para portafolio en pagina web tarquitet
-- [ ] Retomar idea de lang para descargar version web en español o ingles con la idea ?lang y usando javascript tomo "diccionario" aveces al traducir a otro idioma, desaparece el texto horizontal del hero u otras cosas
 - [ ] Bot linkedin idea discord mok
 
 ### 5. Otros Proyectos y Tareas Externas
@@ -40,7 +27,13 @@ _(Orden: De tareas rápidas/administrativas → Scripts/Mods → Desarrollo Web 
 - [ ] OGG conversor de texture pack minecraft para subir tambien
 - [ ] **Web Juego Diplomado:** Diseñar e integrar la página del proyecto de juego del diplomado.
 - [ ] Agregar menu de ilustraciones por comisiones en pagina por separada relacionada mas a fursona y vision mas personal no tan profesional
-- [ ] **Sección Comisiones/Tienda:** Diseñar web para comisiones de arte.
-- [ ] **Sección Comisiones/Tienda:** Agregar sección de "Tienda", menú y página específica para comisiones y otros servicios.
+- [ ] **Sección Comisiones/Tienda:** Diseñar web para comisiones de arte. Agregarlo al submenu de proyectos en web principal
 - [ ] Agregar SEO pagian papa
+- [ ] agrgar seo pagina instituto
+- [ ] si la web del instituto tiene dominio propio, hacer su enrutamiento, si no, intentarlo con el dominio de pages o un dominio gratuito si es posible
 - [ ] Cambiar dominio de la pagina instituto biblico horeb por el dominio oficial si es que tienen, si no, se deja asi sin mas
+- [ ] Agregar juego desarrollado del diplomado
+- [ ] builtechraft web, error en indefined de ipsection cuando servidor esta off
+- [ ] agregar enrutamiento builtechraft web
+- [ ] agregar enrutamiento pagina papa verdadyfe.org
+- [ ] seo para builtechraft web

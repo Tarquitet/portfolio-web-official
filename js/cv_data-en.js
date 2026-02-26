@@ -109,7 +109,7 @@ window.cvData = {
 
     // --- COLUMNA CENTRAL (ARTÍSTICAS / CREADOR) ---
     { icon: 'youtube', text: 'YouTube', link: 'https://youtube.com/@tarquitet', type: 'ART' },
-    { icon: 'palette', text: 'VGen', link: 'https://vgen.co/tarquitet', type: 'ART' },
+    { icon: 'vgen', text: 'VGen', link: 'https://vgen.co/tarquitet', type: 'ART' },
     { icon: 'discord', text: 'Discord', link: 'https://discord.gg/REMWQJRpnH', type: 'ART' },
     { icon: 'x', text: 'Twitter', link: 'https://twitter.com/tarquitet', type: 'ART' },
     { icon: 'artstation', text: 'ArtStation', link: 'https://artstation.com/tarquitet', type: 'ART' },
@@ -210,6 +210,7 @@ window.cvData = {
     { name: 'Miro', icon: 'miro' },
     { name: 'Chat GPT', icon: 'chatgpt' },
     { name: 'Gemini', icon: 'gemini' },
+    { name: 'Autodesk Maya', icon: 'maya' },
   ],
   // Ticker after profile items
   tickerItems: [

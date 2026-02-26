@@ -64,6 +64,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
+    pdfOnly: false,
   },
   {
     title: 'Orquestador de construcción y gestión',
@@ -73,24 +74,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-  },
-  {
-    title: 'Auto-traductor JSON (i18n)',
-    category: CAT.DEV,
-    context: CTX.PERS,
-    fileName: 'translator-py.avif',
-    link: 'https://github.com/Tarquitet/web-translator',
-    desc: 'Automatiza la localización de archivos JSON de texto plano con procesamiento por lotes y backends de traducción configurables.',
-    tools: [T.PY, T.SCR, T.SOFT, T.COM],
-  },
-  {
-    title: 'Optimizador de activos (minificador CSS/JS)',
-    category: CAT.DEV,
-    context: CTX.PERS,
-    fileName: 'minify-py.avif',
-    link: 'https://github.com/Tarquitet/minify-asset-optimizer',
-    desc: 'Minifica y normaliza CSS/JS para reducir el tamaño de los paquetes y corregir problemas comunes de minificación.',
-    tools: [T.PY, T.SCR, T.SOFT, T.COM],
+    pdfOnly: false,
   },
   {
     title: 'Convertidor y compresor OGG',
@@ -100,6 +84,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
+    pdfOnly: false,
   },
   {
     title: 'Convertidor HTML a PDF',
@@ -109,6 +94,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
+    pdfOnly: false,
   },
   {
     title: 'Compresor de imágenes offline',
@@ -118,6 +104,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
+    pdfOnly: false,
   },
   {
     title: 'Conversor de UUIDs de Minecraft',
@@ -128,6 +115,27 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
+    pdfOnly: false,
+  },
+  {
+    title: 'Auto-traductor JSON (i18n)',
+    category: CAT.DEV,
+    context: CTX.PERS,
+    fileName: 'https://raw.githubusercontent.com/Tarquitet/web-translator/main/images/README/1769442012384.png',
+    link: 'https://github.com/Tarquitet/web-translator',
+    desc: 'Automatiza la localización de archivos JSON de texto plano con procesamiento por lotes y backends de traducción configurables.',
+    tools: [T.PY, T.SCR, T.SOFT, T.COM],
+    pdfOnly: false,
+  },
+  {
+    title: 'Optimizador de activos (minificador CSS/JS)',
+    category: CAT.DEV,
+    context: CTX.PERS,
+    fileName: 'minify-py.avif',
+    link: 'https://github.com/Tarquitet/minify-asset-optimizer',
+    desc: 'Minifica y normaliza CSS/JS para reducir el tamaño de los paquetes y corregir problemas comunes de minificación.',
+    tools: [T.PY, T.SCR, T.SOFT, T.COM],
+    pdfOnly: false,
   },
   {
     title: 'Invitación de boda (encargo)',
@@ -137,6 +145,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Encargo de cliente: diseño de invitación de boda con ajustes personalizados; entregables listos para impresión.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Miniatura: video nostálgico Minecraft',
@@ -146,6 +155,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO, T.THUMB, T.VID, T.YT],
     category: CAT.DES,
     context: CTX.PERS,
+    pdfOnly: false,
   },
   {
     title: 'Mini edición: invitación Semana Santa',
@@ -154,6 +164,7 @@ window.mainPortfolio = [
     tools: [T.DAVINCI, T.EDIT, T.VID, T.YT],
     category: CAT.VID,
     context: CTX.PERS,
+    pdfOnly: false,
   },
   {
     title: 'Demo RA: modelado 3D',
@@ -162,6 +173,7 @@ window.mainPortfolio = [
     tools: [T.MAYA, T.UNITY, T.VID, T.YT],
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Overlay de cierre para streaming',
@@ -171,6 +183,7 @@ window.mainPortfolio = [
     link: 'https://www.twitch.tv/tarquitet',
     desc: 'Diseño de overlay para transmisiones en directo (Twitch/YouTube); entregables en PNG y PSD.',
     tools: [T.PHOTO, T.TW, T.VID, T.YT],
+    pdfOnly: false,
   },
   {
     title: 'Logo G.O.U.G',
@@ -180,6 +193,7 @@ window.mainPortfolio = [
     link: 'https://www.curseforge.com/minecraft/modpacks/goug-optimized',
     desc: 'Diseño de logotipo para el modpack G.O.U.G; incluye versiones vectoriales y rasterizadas.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Anuncio frontal para Iglesia',
@@ -189,6 +203,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Diseño de anuncio frontal para impresión y exposición en la fachada de una iglesia local.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Rediseño: Instituto Bíblico Horeb',
@@ -198,6 +213,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Rediseño de identidad visual para Instituto Bíblico Horeb, orientado a legibilidad y aplicaciones impresas.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Anuncio frontal (Iglesia)',
@@ -207,6 +223,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Diseño de anuncio frontal para impresión y exposición en la fachada de una iglesia local.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Miniatura: instalación de modpack',
@@ -216,6 +233,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Miniatura diseñada para un tutorial sobre cómo instalar un modpack en Minecraft.',
     tools: [T.PHOTO, T.THUMB, T.VID, T.YT],
+    pdfOnly: false,
   },
   {
     title: 'Maquetación: oferta laboral (ATOM Solutions)',
@@ -225,6 +243,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Maquetación del anuncio de empleo para ATOM Solutions; entregables listos para web e impresión.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Edición de fotograma — Cities in Dust',
@@ -234,15 +253,17 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Edición rápida (≤1 h) de un fotograma del videoclip musical para un proyecto académico.',
     tools: [T.PHOTO, T.VID],
+    pdfOnly: false,
   },
   {
     title: 'Render final — cómic (universidad)',
     category: CAT.DES,
     context: CTX.PERS,
     fileName: 'preview-comic-render.webp',
-    link: '=',
+    link: '/assets/pdf/university/DavidPinto_ComicFinal_Unido_compressed.pdf',
     desc: 'Render final de un cómic realizado de forma individual para la asignatura de Render.',
     tools: [T.MAYA, T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Propuesta mockup — Día Multimedia',
@@ -252,6 +273,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Propuesta de logo y mockup para el Día del Ingeniero Multimedia; incluye presentaciones y mockups de aplicación.',
     tools: [T.ILUS, T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Retro CGI Art #02',
@@ -261,6 +283,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Obra CGI inspirada en estética retro previa a los años 2000.',
     tools: [T.MAYA, T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Retro CGI Art #01',
@@ -270,6 +293,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Obra CGI inspirada en estética retro previa a los años 2000.',
     tools: [T.MAYA, T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Logo Fancy Land',
@@ -279,6 +303,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Diseño de logotipo para una serie de Minecraft; incluye archivos escalables.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Los sueños hechos realidad',
@@ -288,6 +313,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Diseño conceptual sobre la expresión de un mundo onírico en formato visual.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Diseño de niveles (Unreal Engine)',
@@ -297,6 +323,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Diseño de iluminación y niveles para un proyecto académico en Unreal Engine.',
     tools: [T.CS, T.UNREAL],
+    pdfOnly: false,
   },
   {
     title: 'Rediseño logo — Verdad & Fe',
@@ -306,6 +333,7 @@ window.mainPortfolio = [
     link: 'https://www.verdadyfe.org/',
     desc: 'Rediseño de identidad visual para el ministerio Verdad & Fe; preparado para web e impresión.',
     tools: [T.PHOTO],
+    pdfOnly: false,
   },
   {
     title: 'Miniatura: Parkour Minecraft',
@@ -315,6 +343,7 @@ window.mainPortfolio = [
     link: '=',
     desc: 'Diseño de miniatura para un vídeo de parkour en Minecraft.',
     tools: [T.PHOTO, T.THUMB, T.VID, T.YT],
+    pdfOnly: false,
   },
   {
     title: 'Sitio web ministerial — Verdad & Fe',
@@ -324,6 +353,7 @@ window.mainPortfolio = [
     link: 'https://www.verdadyfe.org/',
     desc: 'Landing page oficial desarrollada con HTML/CSS/JS para el ministerio Verdad & Fe.',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'SEO'],
+    pdfOnly: false,
   },
   {
     title: 'Sitio oficial — Tarquitet',
@@ -333,6 +363,7 @@ window.mainPortfolio = [
     link: '#',
     desc: 'Sitio personal de portafolio con diseño responsive y visualización de proyectos.',
     tools: [T.HTML, T.CSS, T.JS, 'Portfolio', T.FRONT, 'Web Design', 'Backend'],
+    pdfOnly: false,
   },
   {
     title: 'Tarquitet (versión anterior)',
@@ -342,6 +373,7 @@ window.mainPortfolio = [
     link: '/ver1/index.html',
     desc: 'Versión previa del sitio de portafolio (archivada).',
     tools: [T.HTML, T.CSS, T.JS, 'Portfolio', T.FRONT, 'Web Design', 'Backend'],
+    pdfOnly: false,
   },
   {
     title: 'Builtechraft Web (1st ver)',
@@ -351,6 +383,7 @@ window.mainPortfolio = [
     link: 'https://tarquitet.github.io/Builtechraft-Web/',
     desc: 'Sitio web para proyecto de servidor multijugador; incluye presentación del proyecto y detalles del servidor.',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Minecraft', T.WEB],
+    pdfOnly: false,
   },
   {
     title: 'Builtechraft Web',
@@ -360,6 +393,7 @@ window.mainPortfolio = [
     link: 'https://builtechraft.tarquitet.com/',
     desc: 'Sitio web para proyecto de servidor multijugador; incluye presentación del proyecto y detalles del servidor.',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Minecraft', T.WEB],
+    pdfOnly: false,
   },
   {
     title: 'Instituto Bíblico Horeb Web',
@@ -368,7 +402,8 @@ window.mainPortfolio = [
     fileName: 'instituto-web.avif',
     link: 'https://pagina-instituto.pages.dev/',
     desc: 'Sitio web para el instituto bíblico; incluye presentación del instituto, programas académicos y contacto.',
-    tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Academic', T.WEB],
+    tools: ['Academic', T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', T.WEB],
+    pdfOnly: false,
   },
   {
     title: 'App Gimnasio 3D Virtual',
@@ -379,6 +414,7 @@ window.mainPortfolio = [
     tools: [T.UNITY, T.CS, 'UI Mobile'],
     category: CAT.DEV,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Solver inteligente de Sudoku',
@@ -389,6 +425,7 @@ window.mainPortfolio = [
     tools: [T.CS, 'Backtracking', 'IA'],
     category: CAT.DEV,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'C.I.P.S Puzzle Solver',
@@ -399,6 +436,7 @@ window.mainPortfolio = [
     tools: [T.CS, 'Heurística', 'IA'],
     category: CAT.DEV,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Agente Wumpus World',
@@ -409,6 +447,7 @@ window.mainPortfolio = [
     tools: [T.JS, 'Lógica', 'IA Clásica'],
     category: CAT.DEV,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Algoritmo A* (pathfinding)',
@@ -419,6 +458,7 @@ window.mainPortfolio = [
     tools: [T.JS, 'Pathfinding', 'Algoritmos'],
     category: CAT.DEV,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Asistente CarVoice',
@@ -429,6 +469,7 @@ window.mainPortfolio = [
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Voiceflow', 'Chatbot', T.WEB],
     category: CAT.DEV,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Algebrain App',
@@ -439,6 +480,7 @@ window.mainPortfolio = [
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'eLearning', 'Web App', 'Mobile', T.WEB],
     category: CAT.DEV,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Experiencia VR 360°',
@@ -448,6 +490,7 @@ window.mainPortfolio = [
     link: 'https://www.youtube.com/watch?v=Z8sgOhYMAl4',
     desc: 'Experiencia inmersiva de terror en VR creada en Unity con audio 3D e elementos interactivos.',
     tools: [T.UNITY, 'VR', 'Audio 3D', T.CS, 'Immersiva', '360°', 'Video', 'Audio', 'XR'],
+    pdfOnly: false,
   },
   {
     title: 'Simulación 3D OpenGL',
@@ -457,6 +500,7 @@ window.mainPortfolio = [
     link: 'https://relaxed-valkyrie-75101a.netlify.app/',
     desc: 'Minijuego de recolección con físicas básicas, implementado para despliegue WebGL.',
     tools: [T.UNITY, 'Simulación', '3D', 'Físicas', 'WebGL', T.WEB, T.CS],
+    pdfOnly: false,
   },
   {
     title: 'Sonórus — Rediseño UI',
@@ -466,6 +510,7 @@ window.mainPortfolio = [
     link: 'https://www.figma.com/design/lClUfMJDAuqfEhvXN6IN2B/Untitled?node-id=0-1&t=UD8TxB4UupRydWWD-1',
     desc: 'Rediseño de interfaz para aplicación musical; prototipos en Figma y kit de UI.',
     tools: [T.FIGMA, 'UI Design', 'Prototyping', 'Redesign', T.UI, T.UX, 'Mobile Design'],
+    pdfOnly: false,
   },
   {
     title: '4 Better Pets — App móvil',
@@ -475,6 +520,7 @@ window.mainPortfolio = [
     link: 'https://www.figma.com/design/8LDG3cejNOO7Re9Z6MMrfU/4-BETTER-PETS?node-id=0-1&t=fkQtYiNLOuIEM5Uo-1',
     desc: 'Prototipo móvil para facilitar la adopción de mascotas; incluye investigación UX y prototipos.',
     tools: [T.FIGMA, 'UX Research', 'Mobile Design', 'Prototyping', T.UI, T.UX, 'App Design'],
+    pdfOnly: false,
   },
   {
     title: 'Rediseño UI — Rappi',
@@ -484,6 +530,7 @@ window.mainPortfolio = [
     link: 'https://www.figma.com/design/W8tY2RtS3hM7B9BQjJgpiB/David-Pinto---Redise%C3%B1o-Rappi?node-id=0-1&t=UmSvMcQEsiyU7y4s-1',
     desc: 'Propuesta de rediseño centrada en mejorar la experiencia de usuario y la consistencia visual.',
     tools: [T.FIGMA, 'UI Kit', 'Redesign', T.UI, T.UX, 'App Design'],
+    pdfOnly: false,
   },
   {
     title: 'In-Mortal Transmedia',
@@ -494,6 +541,7 @@ window.mainPortfolio = [
     tools: ['Storytelling', 'Wix', 'Concept Art', 'Narrative', 'Transmedia', 'Web Design', T.WEB, T.UX],
     category: CAT.DEV,
     context: CTX.PERS,
+    pdfOnly: false,
   },
   {
     title: 'Planty — Video instruccional',
@@ -503,6 +551,7 @@ window.mainPortfolio = [
     desc: 'Video instruccional para Planty (cliente); incluye guía paso a paso.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Planty — Detrás de cámaras',
@@ -512,6 +561,7 @@ window.mainPortfolio = [
     desc: 'Material detrás de cámaras de la producción de Planty.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Iglesia Misionera Antioquia — Evento',
@@ -521,6 +571,7 @@ window.mainPortfolio = [
     desc: 'Registro y edición de evento para Iglesia Misionera Antioquia (cliente).',
     category: CAT.VID,
     context: CTX.PERS,
+    pdfOnly: false,
   },
   {
     title: 'Trailer — Algebrain',
@@ -530,6 +581,7 @@ window.mainPortfolio = [
     desc: 'Tráiler promocional de la aplicación Algebrain mostrando funcionalidades y UI.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Comercial parodia — GymApp',
@@ -539,6 +591,7 @@ window.mainPortfolio = [
     desc: 'Comercial parodia creado como pieza promocional para GymApp.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Radionovela — Suspenso',
@@ -548,6 +601,7 @@ window.mainPortfolio = [
     desc: 'Producción de radionovela en género de suspenso (archivo).',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Minidocumental — Arte electrónico',
@@ -557,6 +611,7 @@ window.mainPortfolio = [
     desc: 'Minidocumental sobre prácticas de arte electrónico.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Brainstorming — Proyecto Brock',
@@ -566,6 +621,7 @@ window.mainPortfolio = [
     desc: 'Sesión de brainstorming y material de prototipo (archivo).',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Stop motion — Pixelation',
@@ -575,6 +631,7 @@ window.mainPortfolio = [
     desc: 'Proyecto de animación stop-motion usando técnicas de pixelation.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Narrativa visual — Ética',
@@ -584,6 +641,7 @@ window.mainPortfolio = [
     desc: 'Proyecto académico sobre narrativa visual y temas éticos.',
     context: CTX.UNIV,
     category: CAT.VID,
+    pdfOnly: false,
   },
   {
     title: 'Render sincronizado 3D',
@@ -593,6 +651,7 @@ window.mainPortfolio = [
     desc: 'Render 3D sincronizado con animación (archivo).',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Saco animado 3D',
@@ -602,6 +661,7 @@ window.mainPortfolio = [
     desc: 'Cortometraje/animación 3D protagonizado por un personaje tipo saco (archivo).',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Playblast — Electro Swing',
@@ -611,6 +671,7 @@ window.mainPortfolio = [
     desc: 'Playblast de animación para proyecto musical (archivo).',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Playblast & edit — Cops',
@@ -620,6 +681,7 @@ window.mainPortfolio = [
     desc: 'Compilación de playblasts y edición para proyecto Cops (archivo).',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Timelapse — Desarrollo GymApp',
@@ -629,6 +691,7 @@ window.mainPortfolio = [
     desc: 'Timelapse del proceso de desarrollo del prototipo GymApp.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Dibujo digital — Mis inicios',
@@ -638,6 +701,7 @@ window.mainPortfolio = [
     desc: 'Serie de dibujos digitales tempranos que muestran la evolución personal.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
   {
     title: 'Tutorial — POO en Java',
@@ -647,6 +711,7 @@ window.mainPortfolio = [
     desc: 'Tutorial sobre programación orientada a objetos en Java.',
     category: CAT.VID,
     context: CTX.UNIV,
+    pdfOnly: false,
   },
 ];
 

@@ -10,10 +10,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentYear = new Date().getFullYear();
 
   // Helper: get sanitized section title from cvData.sections (strip html like <br/>)
-  const getSectionTitle = (idx, fallback) => {
+  const getSectionTitle = (id, fallback) => {
     const sections = cv.sections || [];
-    const s = sections[idx] || null;
+
+    // Filtramos solo las secciones que son de servicios/proyectos (las que tienen injectTarget)
+    const projectSections = sections.filter((s) => s.injectTarget);
+
+    // Buscamos la sección por su ID
+    const index = projectSections.findIndex((s) => s.id === id);
+    const s = projectSections[index];
+
+    // Si no existe (ej. la de artes visuales que no está en cv_data), usamos el fallback
     if (!s) return fallback || '';
+
+    // Generamos el número automáticamente basado en su posición en el cv_data (01, 02...)
+    const numPrefix = (index + 1).toString().padStart(2, '0');
+
+    // Limpiamos el texto HTML
     const raw = s.title || '';
     const cleaned = window.Utils.stripHtmlToText
       ? window.Utils.stripHtmlToText(raw)
@@ -22,7 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
           .replace(/<[^>]+>/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
-    return `${s.index} / ${cleaned.toUpperCase()}`;
+
+    return `${numPrefix} / ${cleaned.toUpperCase()}`;
   };
 
   // 2. RUTAS INTELIGENTES (Usando Utils)
@@ -59,19 +73,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- FUNCIÓN PARA OBTENER ICONOS ---
   const getIcon = (type, key) => {
     const t = (key || '').toLowerCase();
+    const iconPath = cv.config && cv.config.iconsPath ? cv.config.iconsPath : '../assets/icons/';
 
-    // Iconos de Arte
-    if (type === 'art') {
-      if (t.includes('sketch')) return '<i data-lucide="pencil"></i>';
-      if (t.includes('ilustracion')) return '<i data-lucide="palette"></i>';
-      return '<i data-lucide="image"></i>';
+    const toolsList = [...(cv.software || []), ...(cv.tickerItems || [])];
+    const soft = toolsList.find((s) => t.includes(s.name.toLowerCase()) || s.name.toLowerCase().includes(t));
+
+    // Función auxiliar que crea la máscara SVG con el color del texto (currentColor)
+    const buildIcon = (iconName) => {
+      const url = `${iconPath}${iconName}.svg`;
+      return `<span style="-webkit-mask: url(${url}) no-repeat center; -webkit-mask-size: contain; mask: url(${url}) no-repeat center; mask-size: contain; background-color: currentColor; width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px; transform: translateY(-1px);"></span>`;
+    };
+
+    // 1. Si encuentra la herramienta exacta
+    if (soft && soft.icon) return buildIcon(soft.icon);
+
+    // 2. Fallbacks
+    if (type === 'art') return buildIcon('palette');
+
+    if (t.includes('web') || t.includes('front') || t.includes('python') || t.includes('script')) {
+      return buildIcon('code');
     }
 
-    // Iconos de Software
-    const soft = cv.software.find((s) => s.name.toLowerCase().includes(t.split('/')[0]));
-    if (!soft) return '<i data-lucide="code-2"></i>';
-
-    return soft.iconType === 'lucide' ? `<i data-lucide="${soft.iconName}"></i>` : `<i class="${soft.iconClass}"></i>`;
+    // 3. Si no encuentra nada, un símbolo básico que también hereda el color
+    return `<span style="font-weight:900; margin-right:4px; color:currentColor; font-family:var(--f-code);">></span>`;
   };
 
   // --- FUNCIÓN MAESTRA DE RENDERIZADO ---
@@ -198,22 +222,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Renderizar DEV (usa title de sections[0])
   renderSection(
     port.filter((p) => p.category === 'DEV'),
-    getSectionTitle(0, '01 / DEVELOPMENT'),
+    getSectionTitle('dev-section'),
     'tools',
   );
 
-  // 3. Renderizar DESIGN (usa title de sections[2] - UX / UI)
-  // Append "& UI" only if necessary; prefer the sanitized section title
   renderSection(
     port.filter((p) => p.category === 'DESIGN'),
-    getSectionTitle(2, '02 / DESIGN & UI'),
+    getSectionTitle('ux-section'),
     'tools',
   );
 
   // 4. VIDEO: excluido del PDF (no renderizamos sección de video)
 
   // 5. Renderizar ARTE (usa title de sections[3])
-  renderSection(gallery, getSectionTitle(3, '04 / VISUAL ARTS'), 'tags');
+  renderSection(gallery, getSectionTitle('visual-arts-section', '03 / VISUAL ARTS'), 'tags');
 
   // C. CONTRAPORTADA (FINAL - SOLO PRO)
   const pLast = addPage(false);

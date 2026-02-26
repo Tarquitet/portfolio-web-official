@@ -55,19 +55,100 @@ export class Renderer {
     return match && match[2].length === 11 ? match[2] : null;
   }
 
+  _zigZagSort(projects, limit, isArt = false) {
+    const groups = {};
+    projects.forEach((p) => {
+      // Para DEV/DESIGN usa 'tools', para ART usa 'tags'. Si no tiene, va a 'Otros'
+      const arr = isArt ? p.tags : p.tools;
+      const key = arr && arr.length > 0 ? arr[0] : 'Otros';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(p);
+    });
+
+    const result = [];
+    const keys = Object.keys(groups);
+    let index = 0;
+    let keepAdding = true;
+
+    // Entrelaza 1 de cada grupo hasta llegar al límite
+    while (result.length < limit && keepAdding) {
+      keepAdding = false;
+      for (const key of keys) {
+        if (result.length >= limit) break;
+        if (groups[key][index]) {
+          result.push(groups[key][index]);
+          keepAdding = true;
+        }
+      }
+      index++;
+    }
+    return result;
+  }
+
+  async _fetchGithubRepos(username = 'tarquitet') {
+    try {
+      // 1. Traemos los repositorios públicos ordenados por los actualizados más recientemente
+      const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
+      const repos = await res.json();
+
+      // 2. Mapeamos cada repositorio para intentar sacarle la imagen de su README
+      const githubProjects = await Promise.all(
+        repos.map(async (repo) => {
+          let firstImage = null;
+
+          try {
+            // Buscamos el README.md en la rama 'main' (o 'master')
+            const readmeRes = await fetch(`https://raw.githubusercontent.com/${username}/${repo.name}/main/README.md`);
+            if (readmeRes.ok) {
+              const readmeText = await readmeRes.text();
+
+              // Regex mágico: Busca ![alt](url_imagen) o <img src="url_imagen">
+              const regex = /!\[.*?\]\((.*?)\)|<img.*?src=["'](.*?)["']/;
+              const match = readmeText.match(regex);
+
+              // Si encuentra un match, guardamos la URL de la imagen
+              if (match) firstImage = match[1] || match[2];
+            }
+          } catch (e) {
+            // Silencioso, si falla es porque no hay README o no hay rama main
+          }
+
+          // 3. Formateamos el objeto para que tu sistema de grillas (SmartGrid) lo entienda
+          return {
+            title: repo.name.replace(/-/g, ' ').toUpperCase(),
+            category: 'DEV',
+            context: 'PERSONAL',
+            link: repo.html_url,
+            // Si no encuentra imagen, le podemos poner un placeholder por defecto de tu assets
+            img: firstImage || 'github_placeholder.webp',
+            desc: repo.description || 'Repositorio público en GitHub',
+            // El Zig-Zag lo agrupará bajo el lenguaje principal del repo
+            tools: ['GITHUB', repo.language || 'CODE'],
+            date: repo.updated_at.split('T')[0],
+            isGithub: true,
+          };
+        }),
+      );
+
+      // Filtramos por si acaso quieres omitir los que definitivamente no tienen imagen
+      return githubProjects;
+    } catch (e) {
+      console.warn('⚠️ Error cargando feed de GitHub.', e);
+      return [];
+    }
+  }
+
   // --- NUEVO: Generador de Estructura (Sticky Sections) ---
-  // --- 2. CONTADOR AUTOMÁTICO Y ESTRUCTURA ---
+  // --- 2. CONTADOR AUTOMÁTICO Y ESTRUCTURA POR ZIG ZAG + SI ESTA SOLO EN PDF O NO---
   renderStructure() {
     const root = document.getElementById(CONFIG.DOM.sectionsRoot);
     const sections = window.cvData?.sections;
     if (!root || !sections) return;
 
-    // Filtramos: Solo creamos bloques para lo que NO es "solo link"
     const physicalSections = sections.filter((s) => !s.isOnlyLink);
 
     root.innerHTML = physicalSections
       .map((sect, index) => {
-        // Generación automática: 01, 02, 03...
         const autoIndex = (index + 1).toString().padStart(2, '0');
 
         return `
@@ -123,18 +204,26 @@ export class Renderer {
         badgesToShow.push(item.tags[0].toUpperCase());
       }
       ctaText = 'VER FULLSCREEN ->';
+      // Dentro de _createCardNode, reemplaza el bloque 'else' final con este:
     } else {
-      // DEV & DESIGN: Soporte para '='
       if (mainLink === '=') {
         mainLink = imgSrc;
         ctaText = 'VER IMAGEN ->';
       }
-
       const tools = item.tools || [];
-      if (tools.some((t) => t.includes('HTML') || t.includes('Web'))) badgesToShow.push('WEB');
-      else if (tools.some((t) => t.includes('Figma'))) badgesToShow.push('FIGMA');
-      else if (tools.some((t) => t.includes('Unity'))) badgesToShow.push('UNITY');
-      else if (tools.length > 0) badgesToShow.push(tools[0]);
+
+      // Recorremos las herramientas (limitamos a 3 para no saturar visualmente)
+      tools.slice(0, 3).forEach((tool) => {
+        let badgeText = tool.toUpperCase();
+
+        // Normalizamos nombres para que "web" o "html" muestren "WEB"
+        if (tool.includes('HTML') || tool.toLowerCase().includes('web')) badgeText = 'WEB';
+
+        // Evitamos poner el mismo badge dos veces en la misma tarjeta
+        if (!badgesToShow.includes(badgeText)) {
+          badgesToShow.push(badgeText);
+        }
+      });
 
       if (mainLink !== imgSrc) ctaText = type === 'DESIGN' ? 'VER DISEÑO ->' : 'VER PROYECTO ->';
     }
@@ -364,28 +453,84 @@ export class Renderer {
   }
 
   // --- SECCIONES INDIVIDUALES ---
-  renderDev() {
-    // 1. Filtrar todos los posibles
-    const allItems = this.data.filter((p) => 'DEV' === p.category && p.context !== 'UNIVERSITY');
+  async renderDev() {
+    const localDev = this.data.filter((p) => !p.pdfOnly && p.category === 'DEV' && p.context !== 'UNIVERSITY');
+    const localLinks = this.data.map((p) => p.link).filter((link) => link);
 
-    // 2. Detectar si hay más de 10
+    let githubProjects = [];
+
+    try {
+      const res = await fetch(`https://api.github.com/users/tarquitet/repos?sort=updated&per_page=15`);
+      const repos = await res.json();
+      const newRepos = repos.filter((repo) => !localLinks.includes(repo.html_url));
+
+      githubProjects = await Promise.all(
+        newRepos.map(async (repo) => {
+          let firstImage = null;
+          try {
+            const readmeRes = await fetch(`https://raw.githubusercontent.com/tarquitet/${repo.name}/main/README.md`);
+            if (readmeRes.ok) {
+              const readmeText = await readmeRes.text();
+
+              // Búsqueda global de todas las imágenes en el Markdown o HTML
+              const regex = /!\[.*?\]\((.*?)\)|<img.*?src=["'](.*?)["']/g;
+              let match;
+
+              // Recorremos las imágenes hasta encontrar una válida
+              while ((match = regex.exec(readmeText)) !== null) {
+                const url = match[1] || match[2];
+
+                // Ignoramos escudos (badges) típicos de GitHub
+                if (url && !url.includes('shields.io') && !url.includes('badge') && !url.endsWith('.svg')) {
+                  // Si la imagen es una ruta local del repo (ej. "images/foto.png"), reconstruimos la URL cruda
+                  if (!url.startsWith('http')) {
+                    // Limpiamos el "./" por si acaso y armamos la ruta hacia raw.githubusercontent
+                    firstImage = `https://raw.githubusercontent.com/tarquitet/${repo.name}/main/${url.replace(/^\.\//, '')}`;
+                  } else {
+                    firstImage = url;
+                  }
+
+                  break; // Encontramos la imagen buena, detenemos la búsqueda
+                }
+              }
+            }
+          } catch (e) {
+            /* Falla silenciosa */
+          }
+
+          return {
+            title: repo.name.replace(/-/g, ' ').toUpperCase(),
+            category: 'DEV',
+            context: 'PERSONAL',
+            link: repo.html_url,
+            img: firstImage || 'github_placeholder.webp', // Asegúrate de tener esta imagen en tus assets por si acaso
+            desc: repo.description || 'Repositorio público en GitHub',
+            tools: ['GITHUB', (repo.language || 'CODE').toUpperCase()],
+            date: repo.updated_at.split('T')[0],
+            isGithub: true,
+          };
+        }),
+      );
+    } catch (e) {
+      console.warn('⚠️ Error cargando repos de GitHub:', e);
+    }
+
+    const allItems = [...localDev, ...githubProjects];
     const limit = 10;
     const hasMore = allItems.length > limit;
 
-    // 3. Cortar solo los 10 primeros para mostrar
-    const dataToShow = allItems.slice(0, limit);
+    const dataToShow = this._zigZagSort(allItems, limit, false);
 
-    // 4. Renderizar pasando el flag 'hasMore'
     this._renderSmartGrid(dataToShow, CONFIG.DOM.injects.prof, 'DEV', hasMore);
   }
 
   renderDesign() {
-    const allItems = this.data.filter((e) => 'DESIGN' === e.category && e.context !== 'UNIVERSITY');
-
+    // Agregamos el filtro !p.pdfOnly
+    const allItems = this.data.filter((e) => !e.pdfOnly && 'DESIGN' === e.category && e.context !== 'UNIVERSITY');
     const limit = 10;
     const hasMore = allItems.length > limit;
-    const dataToShow = allItems.slice(0, limit);
-
+    // Usamos Zig-Zag
+    const dataToShow = this._zigZagSort(allItems, limit, false);
     this._renderSmartGrid(dataToShow, CONFIG.DOM.injects.ux, 'DESIGN', hasMore);
   }
 
@@ -399,24 +544,21 @@ export class Renderer {
   }
 
   async renderVideo() {
-    // 1. OBTENER VIDEOS MANUALES (Desde projects-opti.js)
-    // Filtramos categoría VIDEO y excluimos UNIVERSITY (para que salgan los PERSONAL y PROFESSIONAL)
+    // 1. Filtramos los manuales ignorando los pdfOnly (por si acaso)
     const manualVideos = this.data
-      .filter((p) => p.category === 'VIDEO' && p.context !== 'UNIVERSITY')
+      .filter((p) => !p.pdfOnly && p.category === 'VIDEO' && p.context !== 'UNIVERSITY')
       .map((p) => ({
         ...p,
-        id: this._extractYoutubeId(p.link), // Ahora detectará el ID del Short
-        date: p.date || '2023-01-01', // Fecha fallback
+        id: this._extractYoutubeId(p.link),
+        date: p.date || '2023-01-01',
         isManual: true,
       }));
 
-    // 2. OBTENER VIDEOS AUTOMÁTICOS (RSS YouTube)
     if (!this.cachedVideos) {
       let youtubeVideos = [];
       try {
         const res = await fetch(CONFIG.API.rssBase + CONFIG.API.youtubeChannel);
         const data = await res.json();
-
         if (data.status === 'ok') {
           youtubeVideos = data.items.map((item) => ({
             title: item.title,
@@ -425,7 +567,7 @@ export class Renderer {
             category: 'VIDEO',
             id: this._extractYoutubeId(item.link),
             desc: 'Video reciente de YouTube',
-            tools: ['YouTube'],
+            tools: ['YouTube'], // Etiqueta clave para el Zig-Zag
             isManual: false,
           }));
         }
@@ -434,45 +576,37 @@ export class Renderer {
         youtubeVideos = [];
       }
 
-      // 3. FUSIÓN (Merge) - Manuales tienen prioridad sobre RSS
       const videoMap = new Map();
-
-      // A. Primero los de YouTube
       youtubeVideos.forEach((v) => {
         if (v.id) videoMap.set(v.id, v);
       });
-
-      // B. Sobrescribimos con los Manuales (así conservas tus descripciones personalizadas)
       manualVideos.forEach((v) => {
         if (v.id) videoMap.set(v.id, v);
       });
 
-      // 4. Convertir a Array y Ordenar
       this.cachedVideos = Array.from(videoMap.values()).sort((a, b) => {
         return new Date(b.date) - new Date(a.date);
       });
-
-      // Actualizar también la lista de base de datos completa si es necesario
       this.renderDatabase();
     }
 
-    // 5. RENDERIZADO FINAL
     const allItems = this.cachedVideos || [];
-
     const limit = 10;
     const hasMore = allItems.length > limit;
-    const dataToShow = allItems.slice(0, limit);
+
+    // 2. Aplicamos el Zig-Zag a los videos (intercala 'YouTube' con tus otras herramientas)
+    const dataToShow = this._zigZagSort(allItems, limit, false);
 
     this._renderSmartGrid(dataToShow, CONFIG.DOM.injects.video, 'VIDEO', hasMore);
   }
 
   renderGallery() {
-    const allItems = [...this.gallery].sort((a, b) => new Date(b.date) - new Date(a.date));
-
+    // Agregamos el filtro !p.pdfOnly
+    const allItems = [...this.gallery].filter((p) => !p.pdfOnly).sort((a, b) => new Date(b.date) - new Date(a.date));
     const limit = 10;
     const hasMore = allItems.length > limit;
-    const dataToShow = allItems.slice(0, limit);
-
+    // Usamos Zig-Zag (isArt = true para que lea "tags" en vez de "tools")
+    const dataToShow = this._zigZagSort(allItems, limit, true);
     this._renderSmartGrid(dataToShow, CONFIG.DOM.injects.media, 'ART', hasMore);
   }
 
@@ -493,7 +627,7 @@ export class Renderer {
       const container = mapContext[contextKey];
       if (!container) return;
 
-      let items = this.data.filter((p) => p.context === contextKey);
+      let items = this.data.filter((p) => !p.pdfOnly && p.context === contextKey);
 
       // Combinar datos externos (Videos y Galería) en la sección PERSONAL
       if (contextKey === 'PERSONAL') {

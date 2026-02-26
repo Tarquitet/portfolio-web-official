@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://web.tarquitet.com/sitemap.xml

@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       contactContainer.innerHTML += `
     <div class="contact-item">
-      <img src="${iconPath}" class="contact-icon" style="filter: brightness(0) invert(1); width:18px; height:18px;">
+      <span class="contact-icon" style="-webkit-mask: url('${iconPath}') no-repeat center; -webkit-mask-size: contain; mask: url('${iconPath}') no-repeat center; mask-size: contain; background-color: currentColor; width: 18px; height: 18px; display: inline-block; vertical-align: middle;"></span>
       ${contentHtml}
     </div>`;
     });
@@ -152,13 +152,5 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="soft-name">${soft.name}</span>
       </div>`;
     });
-
-    // Reinicializar iconos al final
-    if (window.Utils && window.Utils.initIcons) {
-      window.Utils.initIcons();
-    }
   }
-
-  // USAMOS window.Utils.initIcons
-  window.Utils.initIcons();
 });
