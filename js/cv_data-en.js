@@ -97,7 +97,7 @@ window.cvData = {
     name: 'David Josué Pinto Gómez',
     role: 'Multimedia Engineer',
     imageName: 'profile.webp',
-    summary: 'Multimedia Engineer with solid academic training and experience in digital production. Noted for his skill in project management and strategic creativity for innovative solutions. <br><br>Mastery of tools focused on editing and post-production, allowing the creation of high-quality visual content. Always attentive to continuous learning to achieve the proposed objectives.',
+    summary: 'Multimedia engineer with solid academic training and experience in digital production. Noted for his skill in project management and strategic creativity for innovative solutions. <br><br>Mastery of tools focused on editing and post-production, allowing the creation of high-quality visual content. Always attentive to continuous learning to achieve the proposed objectives.',
   },
   // Contact details
   contact: [

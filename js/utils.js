@@ -33,11 +33,15 @@ window.Utils = {
   // 2. MANEJO DE ERRORES (SIN CASCADA)
   handleImgError: function (img) {
     if (img.dataset.dead === 'true') return;
-
-    // Si la imagen falla, es porque no existe. Ya no probamos .png ni .jpg
-    console.warn('Imagen no encontrada:', img.src);
+    console.warn('Imagen no encontrada o bloqueada por la API:', img.src);
     img.dataset.dead = 'true';
-    img.style.display = 'none'; // Ocultamos la imagen rota
+
+    // 1. Reemplazamos el src por un SVG vacío para que desaparezca el icono de "imagen rota" del navegador
+    img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
+
+    // 2. Le aplicamos el color gris.
+    // Puedes usar un gris neutro como '#555555' o usar la variable de tus tarjetas para que cambie según el tema:
+    img.style.backgroundColor = 'var(--card)';
   },
 
   /**
