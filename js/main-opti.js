@@ -11,7 +11,25 @@ class PortfolioApp {
 
     // Iniciar
     setRandomSystemTheme();
+    this.handlePreloader();
     this.init();
+  }
+
+  handlePreloader() {
+    const preloader = document.getElementById('preloader');
+
+    // Comprobamos si ya visitó la página en esta pestaña/sesión
+    if (sessionStorage.getItem('tarquitet_welcomed')) {
+      // Si ya la visitó: Matamos el preloader instantáneamente sin animaciones
+      if (preloader) {
+        preloader.style.transition = 'none'; // Evitamos que el CSS intente animarlo
+        preloader.style.display = 'none'; // Lo quitamos del camino por completo
+      }
+      document.body.classList.remove('loading'); // Devolvemos el scroll al usuario
+    } else {
+      // Si es su primera vez: Guardamos el registro y dejamos que tu UI haga la animación normal
+      sessionStorage.setItem('tarquitet_welcomed', 'true');
+    }
   }
 
   init() {
