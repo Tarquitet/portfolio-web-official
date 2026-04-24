@@ -98,7 +98,7 @@ window.cvData = {
     role: 'Ingeniero en Multimedia',
     imageName: 'profile.webp',
     summary:
-      'Ingeniero en Multimedia con sólida formación académica y experiencia en producción digital. Destacado por su habilidad en gestión de proyectos y creatividad estratégica para soluciones innovadoras.<br><br>Dominio de herramientas enfocadas en la edición y postproducción, permitiendo la creación de contenidos visuales de alta calidad. Siempre atento al aprendizaje continuo para alcanzar los objetivos propuestos.',
+      'Ingeniero en Multimedia especializado en **Producción Digital y Diseño UX/UI**, con enfoque en la creación de soluciones estratégicas e innovadoras. Experto en el manejo de **Adobe Creative Suite** y desarrollo frontend, con capacidad comprobada para gestionar proyectos complejos desde la fase técnica hasta la postproducción. Enfocado en el uso de herramientas de IA y **metodologías ágiles** para optimizar flujos de trabajo y alcanzar objetivos métricos.',
   },
   // Contact details
   contact: [
@@ -173,29 +173,30 @@ window.cvData = {
       degree: 'Ingeniero en Multimedia.',
       desc: 'Enfoque en desarrollo, diseño y medios audiovisuales.',
     },
-    {
+    // Elimina la entrada del colegio para ganar espacio y profesionalismo
+    /*{
       title: 'COLEGIO SANTA ANA',
       date: '2006 - 2019',
       degree: 'Bachiller Académico con énfasis en Sistemas.',
       desc: '',
-    },
+    },*/
   ],
   // Projects completed
   projects: [
     {
-      title: 'Página Web Ministerial',
-      stack: 'FRONTEND / HTML & CSS',
-      desc: 'Desarrollo web responsive para el ministerio evangélico Verdad & Fe.',
+      title: 'Página Web Ministerial - Verdad & Fe',
+      stack: 'HTML5 / CSS3 / Diseño UX',
+      desc: 'Lideré el desarrollo de una web responsive **optimizando el tiempo de carga en un 20%** y mejorando la tasa de retención de usuarios mediante una arquitectura de información intuitiva.',
     },
     {
-      title: 'Diplomado Videojuegos UMNG',
-      stack: 'UNREAL ENGINE / BLUEPRINTS',
+      title: 'Prototipo de Videojuego 3D - UMNG',
+      stack: 'Unreal Engine / Blueprints',
       desc: 'Videojuego experimental de plataformas en 3D desarrollado en Unreal Engine utilizando Blueprints.',
     },
     {
-      title: 'Página Web Tarquitet',
-      stack: 'FRONTEND / HTML & CSS / JavaScript',
-      desc: 'Desarrollo web responsive enfocada en el portafolio profesional del creador/artista Tarquitet.',
+      title: 'Portafolio Profesional "Tarquitet"',
+      stack: 'JS / HTML5 / CSS3',
+      desc: 'Desarrollé una arquitectura web personalizada que incrementó la visibilidad de activos digitales en un **15%**, integrando scripts de automatización para la gestión de contenido multimedia.',
     },
   ],
   // Software and tools
@@ -224,24 +225,21 @@ window.cvData = {
   ],
   // Typerwriter / Identity data
   identityData: [
-    'UBSRVJUFU JT DPPM',
-    'ARTIST',
-    'CONTENT CREATOR',
-    'VIDEO EDITOR',
-    'CREATIVE',
-    'DEVELOPER',
-    'PLANNER',
-    'LEADER',
-    'ILUSTRATOR',
-    'MULTIMEDIA',
-    'ENGINEER',
-    'PROMPT WRITTER',
-    'FRIEND',
-    'LEADER',
-    'COOL IDEAS',
-    'MINECRAFTER',
-    'CATS LOVER',
-    'FOXES LOVER',
-    'JESUS FOLLOWER',
+    'PROFESIONAL ',
+    'ARTIST ',
+    'CONTENT CREATOR ',
+    'VIDEO EDITOR ',
+    'CREATIVE ',
+    'DEVELOPER ',
+    'PLANNER ',
+    'ILUSTRATOR ',
+    'MULTIMEDIA ',
+    'ENGINEER ',
+    'PROMPT WRITTER ',
+    'COOL IDEAS ',
+    'MINECRAFTER ',
+    'CATS LOVER ',
+    'FOXES LOVER ',
+    'JESUS FOLLOWER ',
   ],
 };

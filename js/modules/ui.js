@@ -7,7 +7,7 @@ export class UI {
 
   initAll() {
     this.initLoader();
-    this.initCursor();
+    this.initOptimizedCursor();
     this.initTicker();
     this.initTechTicker();
     this.initTypewriter();
@@ -19,13 +19,11 @@ export class UI {
     this.initGlobalSmoothScroll();
 
     this.initDuolingoModal();
-    this.initReadMore();
     this.initSmoothNavigation();
     this.checkColombiaEasterEgg();
     this.initProfileWipeEffect();
     this.initVisibilityControl();
     this.initHeroInteraction();
-    this.initTabs();
   }
 
   // --- 1. MOTOR DE SCROLL (LENIS) ---
@@ -96,13 +94,14 @@ export class UI {
 
   initTechTicker() {
     const track = document.querySelector('.tech-track');
+    const section = document.querySelector('.tech-ticker-section'); // El contenedor padre
     const d = window.cvData;
-    if (!track || !d) return;
+    if (!track || !section || !d) return;
 
     const iconsBase = d.config.iconsPath;
     const allItems = [...(d.software || []), ...(d.tickerItems || [])];
 
-    // Mantenemos tu lógica de SVGs locales
+    // 1. Renderizado eficiente (Las 2 copias)
     const tickerHTML = allItems
       .map(
         (item) => `
@@ -115,7 +114,29 @@ export class UI {
       )
       .join(' ');
 
-    track.innerHTML = Array(4).fill(tickerHTML).join(' ');
+    track.innerHTML = tickerHTML + tickerHTML;
+
+    // 2. OPTIMIZACIÓN REAL: Intersection Observer
+    // Le dice al navegador que vigile si la sección es visible en la pantalla
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Si la sección entra en la pantalla, corre la animación
+            track.style.animationPlayState = 'running';
+          } else {
+            // Si el usuario hace scroll y la sección desaparece, ponle PAUSA.
+            // Esto libera la Tarjeta Gráfica y ahorra batería.
+            track.style.animationPlayState = 'paused';
+          }
+        });
+      },
+      {
+        rootMargin: '50px', // Empieza a calcular 50px antes de que aparezca
+      },
+    );
+
+    observer.observe(section);
   }
 
   // --- 4. UTILIDADES ---
@@ -158,6 +179,7 @@ export class UI {
     const num = document.getElementById('load-num');
     const bar = document.getElementById('bar-fill');
     const textEl = document.getElementById('random-text');
+    const root = document.documentElement;
 
     if (!l) return;
 
@@ -172,69 +194,62 @@ export class UI {
       'CONECTANDO...',
       'VERIFICANDO...',
     ];
-    if (textEl) textEl.textContent = phrases[0];
 
+    // 1. ROTACIÓN DE FRASES (JS puro cambiando el DOM)
     let textInterval = setInterval(() => {
       if (textEl) textEl.textContent = phrases[Math.floor(Math.random() * phrases.length)];
     }, 120);
 
     let visualProgress = 0;
-    let realLoadedPercent = 0;
-    const imgs = Array.from(document.images);
-    const total = imgs.length;
-    let loadedCount = 0;
 
-    const updateRealLoad = () => {
-      loadedCount++;
-      realLoadedPercent = total === 0 ? 100 : Math.floor((loadedCount / total) * 100);
-    };
-
-    if (total === 0) realLoadedPercent = 100;
-    else {
-      imgs.forEach((img) => {
-        if (img.complete) updateRealLoad();
-        else {
-          img.addEventListener('load', updateRealLoad);
-          img.addEventListener('error', updateRealLoad);
-        }
-      });
-    }
-
+    // 2. SIMULACIÓN ORGÁNICA (Llega al 90% mientras carga)
     const animInterval = setInterval(() => {
-      if (visualProgress < 85) {
-        if (Math.random() > 0.5) visualProgress += 1;
-      }
-      if (realLoadedPercent > visualProgress) {
-        visualProgress += (realLoadedPercent - visualProgress) * 0.2;
-      }
-      if (realLoadedPercent >= 100) visualProgress += 4;
-      if (visualProgress > 100) visualProgress = 100;
+      if (visualProgress < 90) {
+        // Incremento aleatorio para que no parezca una máquina lineal
+        visualProgress += Math.random() * 2;
+        if (visualProgress > 90) visualProgress = 90;
 
-      if (num) {
         const val = Math.floor(visualProgress);
-        num.textContent = val;
-        num.style.setProperty('--progress', val + '%');
+        if (num) num.textContent = val;
+        if (bar) bar.style.width = val + '%';
+        // Actualizamos la variable para el efecto "Líquido" del CSS
+        root.style.setProperty('--progress', val + '%');
       }
-      if (bar) bar.style.width = visualProgress + '%';
+    }, 50);
 
-      if (visualProgress >= 100) {
-        clearInterval(animInterval);
-        clearInterval(textInterval);
-        if (textEl) {
-          textEl.textContent = 'ACCESO CONCEDIDO';
-          textEl.style.color = '#2ecc71';
-          textEl.style.fontWeight = 'bold';
+    // 3. FINALIZACIÓN REAL (Cuando window.load confirma que todo bajó)
+    window.addEventListener('load', () => {
+      clearInterval(animInterval);
+
+      // Tramo final rápido del 90 al 100%
+      let finalStep = visualProgress;
+      const finish = setInterval(() => {
+        finalStep += 2;
+        const val = Math.min(Math.floor(finalStep), 100);
+
+        if (num) num.textContent = val;
+        if (bar) bar.style.width = val + '%';
+        root.style.setProperty('--progress', val + '%');
+
+        if (val >= 100) {
+          clearInterval(finish);
+          clearInterval(textInterval);
+
+          if (textEl) {
+            textEl.textContent = 'ACCESO CONCEDIDO';
+            textEl.style.color = '#2ecc71';
+            textEl.style.fontWeight = 'bold';
+          }
+
+          // Animación de salida "Portal Zoom"
+          setTimeout(() => {
+            l.classList.add('zoom-out');
+            document.body.classList.remove('loading');
+            setTimeout(() => (l.style.display = 'none'), 1000);
+          }, 500);
         }
-        setTimeout(() => {
-          l.classList.add('zoom-out');
-          document.body.classList.remove('loading');
-          setTimeout(() => (l.style.display = 'none'), 1000);
-        }, 500);
-      }
-    }, 30);
-    setTimeout(() => {
-      realLoadedPercent = 100;
-    }, 5000);
+      }, 20);
+    });
   }
 
   getCombinedTickerData() {
@@ -248,59 +263,73 @@ export class UI {
     const items = this.getCombinedTickerData();
     const t1 = document.getElementById(CONFIG.DOM.tickers.t1);
     const t2 = document.getElementById(CONFIG.DOM.tickers.t2);
+
     if (t1 && t2 && items.length > 0) {
-      const createStream = () => {
-        const offset = Math.floor(Math.random() * items.length);
-        const list = [...items.slice(offset), ...items.slice(0, offset)];
-        return Array(20)
-          .fill(list.join(' /// ') + ' /// ')
-          .join('');
-      };
-      t1.textContent = createStream();
-      t2.textContent = createStream();
+      // 1. Unimos las palabras una sola vez
+      const singleText = items.join(' /// ') + ' /// ';
+
+      // 2. Lo duplicamos exactamente 1 vez para que encaje con tu CSS de translateY(-50%)
+      const loopText = singleText + singleText;
+
+      t1.textContent = loopText;
+      t2.textContent = loopText;
+
+      // 3. El truco estático: Desfasamos el tiempo de tu animación de 60s
+      t1.style.animationDelay = `-${Math.random() * 60}s`;
+      t2.style.animationDelay = `-${Math.random() * 60}s`;
     }
   }
 
   initTypewriter() {
     const el = document.querySelector('.typing-text');
-    const words = window.cvData?.identityData;
-    if (el && words) {
-      let wIdx = 0,
-        cIdx = 0,
-        isDel = false;
-      const type = () => {
-        const word = words[wIdx];
-        el.textContent = word.substring(0, isDel ? cIdx - 1 : cIdx + 1);
-        cIdx = isDel ? cIdx - 1 : cIdx + 1;
-        let speed = isDel ? 50 : 150;
-        if (!isDel && cIdx === word.length) {
-          speed = 2000;
-          isDel = true;
-        } else if (isDel && cIdx === 0) {
-          isDel = false;
-          wIdx = (wIdx + 1) % words.length;
-          speed = 500;
-        }
-        setTimeout(type, speed);
-      };
-      type();
-    }
+    const words = window.cvData?.identityData; // Usamos tus datos de cv_data.min.js
+
+    if (!el || !words) return;
+
+    let index = 0;
+
+    const runCycle = () => {
+      const word = words[index];
+      el.textContent = word;
+      el.style.setProperty('--n-chars', word.length);
+
+      // 1. INICIAR ESCRITURA
+      el.classList.remove('is-erasing');
+      el.classList.add('is-typing');
+
+      // 2. PAUSA AL TERMINAR DE ESCRIBIR (3 segundos: 2.5s de animación + 0.5s de lectura)
+      setTimeout(() => {
+        // 3. INICIAR BORRADO
+        el.classList.remove('is-typing');
+        el.classList.add('is-erasing');
+
+        // 4. PASAR A LA SIGUIENTE PALABRA AL TERMINAR DE BORRAR (1.5 segundos)
+        setTimeout(() => {
+          index = (index + 1) % words.length;
+          runCycle();
+        }, 1500);
+      }, 3500);
+    };
+
+    runCycle();
   }
 
-  initCursor() {
-    if (!window.matchMedia('(hover:hover)').matches) return;
-    const d = document.getElementById('cursor-dot');
-    const c = document.getElementById('cursor-circle');
-    document.addEventListener('mousemove', (e) => {
-      if (d) {
-        d.style.left = e.clientX + 'px';
-        d.style.top = e.clientY + 'px';
-      }
-      if (c)
-        setTimeout(() => {
-          c.style.left = e.clientX + 'px';
-          c.style.top = e.clientY + 'px';
-        }, 50);
+  initOptimizedCursor() {
+    const dot = document.getElementById('cursor-dot');
+    const circle = document.getElementById('cursor-circle');
+
+    if (!dot || !circle) return;
+
+    window.addEventListener('mousemove', (e) => {
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      // Usamos transform directamente como en tu ejemplo,
+      // pero con translate3d para que sea ultra suave.
+      requestAnimationFrame(() => {
+        dot.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
+        circle.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
+      });
     });
   }
 
@@ -357,35 +386,5 @@ export class UI {
         h.classList.add('brand-contrast-active');
         setTimeout(() => h.classList.remove('brand-contrast-active'), 2000);
       });
-  }
-
-  initTabs() {
-    document.querySelectorAll('.db-btn').forEach((b) =>
-      b.addEventListener('click', () => {
-        document.querySelectorAll('.db-btn, .db-list').forEach((x) => x.classList.remove('active'));
-        b.classList.add('active');
-        document.getElementById(`list-${b.dataset.cat}`)?.classList.add('active');
-      }),
-    );
-  }
-
-  initReadMore() {
-    const bio = document.querySelector('.p-bio');
-    if (!bio || !window.matchMedia('(max-width: 1024px)').matches) return;
-    bio.classList.add('bio-collapsed');
-    const btn = document.createElement('button');
-    btn.id = 'read-more-btn';
-    btn.textContent = '< LEER MÁS >';
-    bio.parentNode.insertBefore(btn, bio.nextSibling);
-    btn.addEventListener('click', () => {
-      if (bio.classList.contains('bio-collapsed')) {
-        bio.classList.remove('bio-collapsed');
-        btn.textContent = '> LEER MENOS <';
-      } else {
-        bio.classList.add('bio-collapsed');
-        btn.textContent = '< LEER MÁS >';
-        document.getElementById('profile-section')?.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
   }
 }

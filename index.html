@@ -136,6 +136,7 @@
 
           <div class="p-content">
             <h2 class="p-title">MI PERFIL</h2>
+            <input type="checkbox" id="bio-toggle" hidden />
             <div class="p-bio">
               <p>
                 <strong>¡Hola, soy David Josué Pinto Gómez! 👋</strong><br /><br />
@@ -157,6 +158,10 @@
                 Busco retos que exijan innovación, estrategia y <strong>calidad visual</strong>.
               </p>
             </div>
+            <label for="bio-toggle" id="read-more-btn" class="bio-btn-css">
+              <span class="text-more">&lt; LEER MÁS &gt;</span>
+              <span class="text-less">&gt; LEER MENOS &lt;</span>
+            </label>
 
             <div class="p-stats">
               <div class="stat">
@@ -212,7 +217,9 @@
           <p class="hd-sub">> ENTREGADOS / FINALIZADOS</p>
         </div>
       </section>
+
       <div id="dynamic-sections-root"></div>
+
       <section class="database-section" id="archive-section">
         <div class="db-header">
           <h2>HISTÓRICO</h2>
@@ -220,16 +227,20 @@
         </div>
 
         <div class="db-interface">
+          <input type="radio" name="hist-tab" id="radio-prof" checked style="display: none" />
+          <input type="radio" name="hist-tab" id="radio-personal" style="display: none" />
+          <input type="radio" name="hist-tab" id="radio-univ" style="display: none" />
+
           <div class="db-menu">
-            <button class="db-btn active" data-cat="prof">PROFESIONAL</button>
-            <button class="db-btn" data-cat="personal">PERSONAL</button>
-            <button class="db-btn" data-cat="univ">UNIVERSITARIO</button>
+            <label for="radio-prof" class="db-btn">PROFESIONAL</label>
+            <label for="radio-personal" class="db-btn">PERSONAL</label>
+            <label for="radio-univ" class="db-btn">UNIVERSITARIO</label>
           </div>
 
           <div class="db-viewer">
-            <div class="db-list active" id="list-prof"></div>
-            <div class="db-list" id="list-personal"></div>
-            <div class="db-list" id="list-univ"></div>
+            <div class="db-list" id="list-prof" data-lenis-prevent></div>
+            <div class="db-list" id="list-personal" data-lenis-prevent></div>
+            <div class="db-list" id="list-univ" data-lenis-prevent></div>
           </div>
         </div>
       </section>

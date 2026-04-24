@@ -11,6 +11,13 @@
 
   /* --- ALTURA MAESTRA DE TARJETAS (SCROLL) --- */
   --card-height: 55vh;
+
+  /* Inicializamos las variables en el centro o fuera de vista */
+  --cursor-x: -100px;
+  --cursor-y: -100px;
+
+  /* PRELOADER */
+  --progress: 0%;
 }
 
 /* ================== PUENTE AUTOMÁTICO ================== */
@@ -162,11 +169,23 @@ body {
 
 /* 2. EXCEPCIÓN: MOSTRAR CURSOR SOLO DENTRO DEL DIÁLOGO ABIERTO */
 dialog[open],
-dialog[open],
-html,
-body,
-* {
+dialog[open] * {
   cursor: default !important; /* Aquí sí permitimos el cursor normal */
+}
+
+/* ELIMINA LA NECESIDAD DE JS PARA EL HOVER */
+/* Si el body contiene un enlace o botón que esté en hover, agranda el círculo */
+body:has(a:hover, button:hover, .interactive:hover, .db-btn:hover) .cursor-circle {
+  width: 65px;
+  height: 65px;
+  background: var(--border); /* Un relleno sutil */
+  border-color: transparent;
+  opacity: 0.3;
+}
+
+/* Efecto opcional para el punto central cuando haces click */
+body:active .cursor-dot {
+  transform: translate3d(calc(var(--cursor-x) - 50%), calc(var(--cursor-y) - 50%), 0) scale(0.5);
 }
 
 /* ================== UI COMPONENTS ================== */
@@ -183,35 +202,37 @@ img {
   height: 100%;
   object-fit: cover;
 }
-.cursor-dot {
+.cursor-dot,
+.cursor-circle {
   position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate3d(calc(var(--cursor-x) - 50%), calc(var(--cursor-y) - 50%), 0);
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  display: block !important; /* Aseguramos que se vea */
+}
+
+.cursor-dot {
   width: 8px;
   height: 8px;
   background: var(--accent);
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
 }
+
 .cursor-circle {
-  position: fixed;
   width: 40px;
   height: 40px;
   border: 1px solid var(--accent-sec);
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.1s,
-    height 0.1s;
   opacity: 0.6;
-}
-body.hovered .cursor-circle {
-  width: 60px;
-  height: 60px;
-  background: var(--border);
-  border-color: transparent;
+  transition:
+    width 0.2s,
+    height 0.2s,
+    background 0.3s,
+    opacity 0.3s,
+    transform 0.15s ease;
 }
 
 /* ================== PRELOADER MEJORADO ================== */
@@ -278,16 +299,6 @@ body.hovered .cursor-circle {
   position: relative;
   overflow: hidden;
   border-radius: 4px; /* Un poco redondeada si quieres */
-}
-
-.bar-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: var(--progress, 0%); /* Controlado por JS ahora */
-  background: var(--accent);
-  transition: width 0.2s ease-out; /* Transición fluida */
 }
 
 /* 3. TEXTO ALEATORIO */
@@ -1057,6 +1068,11 @@ body.hovered .cursor-circle {
   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 1px solid var(--border);
   overscroll-behavior: contain;
+
+  /* FIX PARA MÓVIL: */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .db-group-content::-webkit-scrollbar {
@@ -1175,6 +1191,11 @@ body.hovered .cursor-circle {
   line-height: 1.6;
   margin-bottom: 1rem;
   color: var(--text);
+  max-height: none !important;
+  overflow: visible !important;
+}
+.bio-btn-css {
+  display: none;
 }
 
 /* ESTADÍSTICAS / IDIOMAS (RESTAURADO) */
@@ -1272,6 +1293,7 @@ body.hovered .cursor-circle {
   gap: 2rem;
   width: max-content;
   animation: scroll-tech 90s linear infinite;
+  will-change: transform;
 }
 .tech-item {
   font-family: var(--font-display);
@@ -1712,6 +1734,57 @@ body.no-scroll {
 }
 
 @media (max-width: 1024px) {
+  /*BIOGRAFIA*/
+  /* 1. Estado colapsado por defecto */
+  .p-bio {
+    max-height: 120px; /* Ajusta cuánto texto quieres que se vea inicialmente */
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.4s cubic-bezier(0.1, 0.5, 0.1, 1);
+  }
+
+  /* Sombra inferior para indicar que hay más texto */
+  .p-bio::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, var(--bg)); /* Cambia --bg por tu variable de fondo */
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  /* 2. Estado expandido cuando el checkbox está activo */
+  #bio-toggle:checked + .p-bio {
+    max-height: 1500px; /* Un valor lo suficientemente grande para que quepa todo tu texto */
+  }
+
+  #bio-toggle:checked + .p-bio::after {
+    opacity: 0; /* Ocultamos la sombra al abrir */
+  }
+
+  /* 3. Lógica del Botón */
+  .bio-btn-css {
+    display: inline-block;
+    cursor: pointer;
+    color: var(--accent); /* Usa tu color de acento */
+    font-weight: bold;
+    margin-top: 15px;
+  }
+
+  /* Alternar los textos del botón según el estado del checkbox */
+  .bio-btn-css .text-less {
+    display: none;
+  }
+  #bio-toggle:checked ~ .bio-btn-css .text-more {
+    display: none;
+  }
+  #bio-toggle:checked ~ .bio-btn-css .text-less {
+    display: inline;
+  }
+
   /*FOOTER*/
   #contact-inject {
     flex-direction: column;
@@ -2234,28 +2307,26 @@ body.no-scroll {
     color: var(--bg);
   }
 }
-/* style.css */
 
 /* EFECTO DE LÍQUIDO EN EL TEXTO */
 #load-num {
-  font-family: var(--font-display), monospace; /* Tu fuente monoespaciada */
-  font-size: 8rem; /* Grande */
+  font-family: var(--font-display);
+  font-size: 8rem;
   font-weight: 900;
-  position: relative;
-  color: rgba(255, 255, 255, 0.1); /* Color "vacío" (gris claro o transparente) */
-
-  /* LA MAGIA: Usamos la variable --progress que envía el JS */
-  background: linear-gradient(to top, var(--accent) var(--progress), transparent var(--progress));
-
-  /* Cortar el fondo con la forma del texto */
-  -webkit-background-clip: text;
+  /* El color de fondo "sube" según la variable --progress */
+  background: linear-gradient(to top, var(--accent) var(--progress, 0%), transparent var(--progress, 0%));
   background-clip: text;
-
-  /* Para que el color de relleno se vea sobre el color base */
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* Transición suave para que el líquido no salte */
+  transition: --progress 0.2s ease-out;
+}
 
-  /* Transición suave para que no salte de golpe */
-  transition: --progress 0.1s linear;
+.bar-fill {
+  background: var(--accent);
+  height: 100%;
+  /* La barra también sigue la variable */
+  transition: width 0.3s ease-out;
 }
 
 /* El texto cambiante */
@@ -2266,7 +2337,6 @@ body.no-scroll {
   opacity: 0.7;
   min-height: 1.2em; /* Evita saltos si el texto cambia de tamaño */
 }
-/* styles_v2.css */
 
 /* --- 1. ASEGURAR EL CONTENEDOR PADRE --- */
 .card-visual {
@@ -2739,4 +2809,84 @@ body.no-scroll {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+/* ========== EFECTO TYPE WRITTER ========== */
+/* OPTIMIZACIÓN TYPEWRITER: ANIMACIÓN POR PASOS */
+.typing-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0; /* Estado inicial */
+  vertical-align: bottom;
+}
+
+/* Estado: Escribiendo */
+.typing-text.is-typing {
+  animation:
+    type-anim 2.5s steps(var(--n-chars)) forwards,
+    blink-caret 0.75s step-end infinite;
+}
+
+/* Estado: Borrando */
+.typing-text.is-erasing {
+  animation:
+    erase-anim 1.5s steps(var(--n-chars)) forwards,
+    blink-caret 0.75s step-end infinite;
+}
+
+@keyframes type-anim {
+  from {
+    width: 0;
+  }
+  to {
+    width: calc(var(--n-chars) * 1ch);
+  }
+}
+
+@keyframes erase-anim {
+  from {
+    width: calc(var(--n-chars) * 1ch);
+  }
+  to {
+    width: 0;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--accent);
+  }
+}
+/*FIX PARA SCROLL EN MOVILES - FOTO PERFIL (EN TEORIA DEBE FUNCIONAR)*/
+#profile-trigger,
+.p-img-front {
+  touch-action: pan-y !important;
+  pointer-events: none; /* Esto evita que el div "secuestre" el touch */
+}
+/* --- FIX TABS HISTÓRICO --- */
+
+/* Ocultar todas por defecto con !important para evitar conflictos con clases viejas */
+.db-viewer .db-list {
+  display: none !important;
+  opacity: 0;
+}
+
+/* Mostrar la lista correcta según el Radio seleccionado */
+#radio-prof:checked ~ .db-viewer #list-prof,
+#radio-personal:checked ~ .db-viewer #list-personal,
+#radio-univ:checked ~ .db-viewer #list-univ {
+  display: block !important;
+  opacity: 1;
+  animation: tabFadeIn 0.3s ease forwards;
+}
+
+/* Estilo del botón activo (el label) */
+#radio-prof:checked ~ .db-menu label[for='radio-prof'],
+#radio-personal:checked ~ .db-menu label[for='radio-personal'],
+#radio-univ:checked ~ .db-menu label[for='radio-univ'] {
+  color: var(--accent) !important;
 }
