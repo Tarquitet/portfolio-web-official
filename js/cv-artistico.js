@@ -66,44 +66,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Idiomas
+  /// 3. Idiomas (Corregido: Nivel al lado del nombre)
   const langContainer = document.getElementById('cv-languages-list');
-  d.languages.forEach((lang) => {
-    let percent = lang.percent;
-    let label = lang.level;
+  if (langContainer && d.languages) {
+    langContainer.innerHTML = '';
+    d.languages.forEach((lang) => {
+      // Obtenemos el nivel directamente del dato o lo calculamos si es necesario
+      const label = lang.level || (lang.score >= 130 ? 'B1 Level' : '');
 
-    if (!percent && lang.score && lang.maxScore) {
-      percent = (lang.score / lang.maxScore) * 100;
-      if (lang.levelRanges) {
-        const found = lang.levelRanges.find((r) => lang.score <= r.limit);
-        if (found) label = `${found.code} ${found.label}`;
-      }
-    }
+      langContainer.innerHTML += `
+          <div class="skill-row" style="margin-bottom: 8px;">
+            <div class="skill-txt" style="justify-content: flex-start; gap: 8px;">
+              <span style="font-weight:bold;">${lang.name}</span> 
+              <span style="opacity:0.7;">— ${label}</span>
+            </div>
+          </div>`;
+    });
+  }
 
-    langContainer.innerHTML += `
-      <div class="skill-row">
-        <div class="skill-txt"><span>${lang.name}</span> <span>${label || ''}</span></div>
-        <div class="progress-track">
-           <div class="progress-fill" style="width: ${percent}%"></div>
-           ${percent < 100 ? `<div class="progress-marker" style="left: ${percent}%"></div>` : ''}
-        </div>
-      </div>`;
-  });
-
-  // 4. Skills
-  const renderBars = (items, containerId) => {
+  // 4. Skills (Corregido: Evita [OBJECT OBJECT] y quita niveles subjetivos)
+  const renderAsText = (items, containerId) => {
     const container = document.getElementById(containerId);
     if (!items || !container) return;
+    container.innerHTML = '';
+
     items.forEach((skill) => {
+      // Extraemos el nombre si es un objeto, o usamos el valor si es un string
+      const skillName = typeof skill === 'object' ? skill.name : skill;
+
       container.innerHTML += `
-        <div class="skill-row">
-          <div class="skill-txt"><span>${skill.name}</span></div>
-          <div class="progress-track"><div class="progress-fill" style="width: ${skill.percent}%"></div></div>
-        </div>`;
+      <div class="skill-row" style="margin-bottom: 5px;">
+        <div class="skill-txt" style="justify-content: flex-start;">
+          <span>• ${skillName}</span>
+        </div>
+      </div>`;
     });
   };
-  renderBars(d.skills.soft, 'cv-soft-skills');
-  renderBars(d.skills.tech, 'cv-tech-skills');
+
+  renderAsText(d.skills.soft, 'cv-soft-skills');
+  renderAsText(d.skills.hard, 'cv-hard-skills');
+  renderAsText(d.skills.tech, 'cv-tech-skills');
 
   // 5. Educación
   const eduContainer = document.getElementById('cv-education-list');

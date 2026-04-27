@@ -98,7 +98,7 @@ window.cvData = {
     role: 'Ingeniero en Multimedia',
     imageName: 'profile.webp',
     summary:
-      'Ingeniero en Multimedia especializado en **Producción Digital y Diseño UX/UI**, con enfoque en la creación de soluciones estratégicas e innovadoras. Experto en el manejo de **Adobe Creative Suite** y desarrollo frontend, con capacidad comprobada para gestionar proyectos complejos desde la fase técnica hasta la postproducción. Enfocado en el uso de herramientas de IA y **metodologías ágiles** para optimizar flujos de trabajo y alcanzar objetivos métricos.',
+      'Ingeniero en Multimedia especializado en Producción Digital y Diseño UX/UI, con enfoque en la creación de soluciones estratégicas e innovadoras. Experto en el manejo de Adobe Creative Suite y desarrollo frontend, con capacidad comprobada para gestionar proyectos complejos desde la fase técnica hasta la postproducción. Enfocado en el uso de herramientas de IA y metodologías ágiles para optimizar flujos de trabajo y alcanzar objetivos métricos.',
   },
   // Contact details
   contact: [
@@ -130,17 +130,17 @@ window.cvData = {
       maxScore: 300,
 
       levelRanges: [
-        { limit: 50, code: 'A1', label: 'Level' },
-        { limit: 100, code: 'A1', label: 'Level' },
-        { limit: 110, code: 'A2', label: 'Level' },
-        { limit: 120, code: 'A2', label: 'Level' },
-        { limit: 130, code: 'B1', label: 'Level' },
-        { limit: 140, code: 'B1', label: 'Level' },
-        { limit: 160, code: 'B2', label: 'Level' },
-        { limit: 180, code: 'B2', label: 'Level' },
-        { limit: 210, code: 'C1', label: 'Level' },
-        { limit: 240, code: 'C1', label: 'Level' },
-        { limit: 300, code: 'C2', label: 'Level' },
+        { limit: 50, code: 'A1', label: 'Básico' },
+        { limit: 100, code: 'A1', label: 'Básico' },
+        { limit: 110, code: 'A2', label: 'Básico' },
+        { limit: 120, code: 'A2', label: 'Básico' },
+        { limit: 130, code: 'B1', label: 'Medio' },
+        { limit: 140, code: 'B1', label: 'Medio' },
+        { limit: 160, code: 'B2', label: 'Medio' },
+        { limit: 180, code: 'B2', label: 'Medio' },
+        { limit: 210, code: 'C1', label: 'Avanzado' },
+        { limit: 240, code: 'C1', label: 'Avanzado' },
+        { limit: 300, code: 'C2', label: 'Avanzado' },
       ],
 
       modalTitle: 'SOBRE EL NIVEL',
@@ -150,26 +150,15 @@ window.cvData = {
   ],
   // Skills data - soft, tech, hard
   skills: {
-    soft: [
-      { name: 'Creatividad e Innovación', percent: 75 },
-      { name: 'Trabajo en Equipo', percent: 80 },
-      { name: 'Resolución de Problemas', percent: 75 },
-      { name: 'Gestión del Tiempo', percent: 85 },
-    ],
-    tech: [
-      { name: 'Edición Video', percent: 60 },
-      { name: 'Diseño Digital', percent: 40 },
-      { name: 'Diseño Web', percent: 60 },
-      { name: 'Ilustración Digital', percent: 40 },
-      { name: 'Videojuegos', percent: 60 },
-    ],
+    soft: ['Creatividad e Innovación', 'Pensamiento Analítico', 'Trabajo en Equipo', 'Comunicación Estratégica'],
     hard: ['Gestión de Proyectos', 'Lógica de Programación', 'Postproducción Audiovisual', 'Estrategia Digital'],
+    tech: ['Postproducción Audiovisual', 'Diseño Web (UX/UI)', 'Desarrollo de Videojuegos', 'Ilustración Digital'],
   },
   // Education history
   education: [
     {
       title: 'UNIVERSIDAD MILITAR NUEVA GRANADA',
-      date: '2020 - 2025',
+      date: '2020 - 2026',
       degree: 'Ingeniero en Multimedia.',
       desc: 'Enfoque en desarrollo, diseño y medios audiovisuales.',
     },
@@ -184,19 +173,19 @@ window.cvData = {
   // Projects completed
   projects: [
     {
-      title: 'Página Web Ministerial - Verdad & Fe',
+      title: 'Página Web - Verdad & Fe',
       stack: 'HTML5 / CSS3 / Diseño UX',
-      desc: 'Lideré el desarrollo de una web responsive **optimizando el tiempo de carga en un 20%** y mejorando la tasa de retención de usuarios mediante una arquitectura de información intuitiva.',
+      desc: 'Desarrollo de plataforma web responsive para contenido ministerial, priorizando la legibilidad y la navegación intuitiva para diversos grupos demográficos.',
     },
     {
       title: 'Prototipo de Videojuego 3D - UMNG',
       stack: 'Unreal Engine / Blueprints',
-      desc: 'Videojuego experimental de plataformas en 3D desarrollado en Unreal Engine utilizando Blueprints.',
+      desc: 'Videojuego experimental de plataformas en 3D desarrollado en Unreal Engine utilizando Blueprints para el Diplomado en Desarrollo de VideoJuegos.',
     },
     {
-      title: 'Portafolio Profesional "Tarquitet"',
+      title: 'Portafolio Profesional - Tarquitet',
       stack: 'JS / HTML5 / CSS3',
-      desc: 'Desarrollé una arquitectura web personalizada que incrementó la visibilidad de activos digitales en un **15%**, integrando scripts de automatización para la gestión de contenido multimedia.',
+      desc: 'Desarrollo de portafolio personal en Vanilla JavaScript, logrando una reducción del 95% en el peso de carga de activos multimedia mediante técnicas avanzadas de compresión sin depender de librerías externas.',
     },
   ],
   // Software and tools

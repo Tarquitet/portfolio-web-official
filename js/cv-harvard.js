@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   renderList('cv-soft-skills', d.skills.soft);
+  renderList('cv-hard-skills', d.skills.hard);
   renderList('cv-tech-skills', d.skills.tech);
   renderList('cv-software-list', d.software);
 

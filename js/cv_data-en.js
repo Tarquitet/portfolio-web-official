@@ -97,7 +97,7 @@ window.cvData = {
     name: 'David Josué Pinto Gómez',
     role: 'Multimedia Engineer',
     imageName: 'profile.webp',
-    summary: 'Multimedia engineer with solid academic training and experience in digital production. Noted for his skill in project management and strategic creativity for innovative solutions. <br><br>Mastery of tools focused on editing and post-production, allowing the creation of high-quality visual content. Always attentive to continuous learning to achieve the proposed objectives.',
+    summary: 'Multimedia Engineer specialized in Digital Production and UX/UI Design, with a focus on the creation of strategic and innovative solutions. Expert in the use of Adobe Creative Suite and frontend development, with proven ability to manage complex projects from the technical phase to post-production. Focused on the use of AI tools and agile methodologies to optimize workflows and achieve metric objectives.',
   },
   // Contact details
   contact: [
@@ -129,17 +129,17 @@ window.cvData = {
       maxScore: 300,
 
       levelRanges: [
-        { limit: 50, code: 'A1', label: 'Level' },
-        { limit: 100, code: 'A1', label: 'Level' },
-        { limit: 110, code: 'A2', label: 'Level' },
-        { limit: 120, code: 'A2', label: 'Level' },
-        { limit: 130, code: 'B1', label: 'Level' },
-        { limit: 140, code: 'B1', label: 'Level' },
-        { limit: 160, code: 'B2', label: 'Level' },
-        { limit: 180, code: 'B2', label: 'Level' },
-        { limit: 210, code: 'C1', label: 'Level' },
-        { limit: 240, code: 'C1', label: 'Level' },
-        { limit: 300, code: 'C2', label: 'Level' },
+        { limit: 50, code: 'A1', label: 'Básico' },
+        { limit: 100, code: 'A1', label: 'Básico' },
+        { limit: 110, code: 'A2', label: 'Básico' },
+        { limit: 120, code: 'A2', label: 'Básico' },
+        { limit: 130, code: 'B1', label: 'Medio' },
+        { limit: 140, code: 'B1', label: 'Medio' },
+        { limit: 160, code: 'B2', label: 'Medio' },
+        { limit: 180, code: 'B2', label: 'Medio' },
+        { limit: 210, code: 'C1', label: 'Avanzado' },
+        { limit: 240, code: 'C1', label: 'Avanzado' },
+        { limit: 300, code: 'C2', label: 'Avanzado' },
       ],
 
       modalTitle: 'SOBRE EL NIVEL',
@@ -149,52 +149,42 @@ window.cvData = {
   ],
   // Skills data - soft, tech, hard
   skills: {
-    soft: [
-      { name: 'Creativity and Innovation', percent: 75 },
-      { name: 'Teamwork', percent: 80 },
-      { name: 'Troubleshooting', percent: 75 },
-      { name: 'Time Management', percent: 85 },
-    ],
-    tech: [
-      { name: 'Video Editing', percent: 60 },
-      { name: 'Digital Design', percent: 40 },
-      { name: 'Web Design', percent: 60 },
-      { name: 'Digital Illustration', percent: 40 },
-      { name: 'Video games', percent: 60 },
-    ],
+    soft: ['Creatividad e Innovación', 'Pensamiento Analítico', 'Trabajo en Equipo', 'Comunicación Estratégica'],
     hard: ['Gestión de Proyectos', 'Lógica de Programación', 'Postproducción Audiovisual', 'Estrategia Digital'],
+    tech: ['Postproducción Audiovisual', 'Diseño Web (UX/UI)', 'Desarrollo de Videojuegos', 'Ilustración Digital'],
   },
   // Education history
   education: [
     {
       title: 'NEW GRANADA MILITARY UNIVERSITY',
-      date: '2020 - 2025',
+      date: '2020 - 2026',
       degree: 'Multimedia Engineer.',
       desc: 'Focus on development, design and audiovisual media.',
     },
-    {
+    // Elimina la entrada del colegio para ganar espacio y profesionalismo
+    /*{
       title: 'SANTA ANA SCHOOL',
       date: '2006 - 2019',
       degree: 'Academic Bachelor with emphasis in Systems.',
       desc: '',
-    },
+    },*/
   ],
   // Projects completed
   projects: [
     {
-      title: 'Ministerial Website',
-      stack: 'FRONTEND / HTML & CSS',
-      desc: 'Responsive web development for the evangelical ministry Verdad & Fe.',
+      title: 'Website - Truth & Faith',
+      stack: 'HTML5 / CSS3 / UX Design',
+      desc: 'Development of a responsive web platform for ministerial content, prioritizing readability and intuitive navigation for various demographic groups.',
     },
     {
-      title: 'UMNG Video Games Diploma',
-      stack: 'UNREAL ENGINE / BLUEPRINTS',
-      desc: 'Experimental 3D platform video game developed in Unreal Engine using Blueprints.',
+      title: '3D Video Game Prototype - UMNG',
+      stack: 'Unreal Engine / Blueprints',
+      desc: 'Experimental 3D platform video game developed in Unreal Engine using Blueprints for the Diploma in Video Game Development.',
     },
     {
-      title: 'Tarquitet Website',
-      stack: 'FRONTEND / HTML & CSS / JavaScript',
-      desc: 'Responsive web development focused on the professional portfolio of the creator/artist Tarquitet.',
+      title: 'Professional Portfolio - Tarquitet',
+      stack: 'JS/HTML5/CSS3',
+      desc: 'Personal portfolio development in Vanilla JavaScript, achieving a 95% reduction in the loading weight of multimedia assets through advanced compression techniques without depending on external libraries.',
     },
   ],
   // Software and tools
@@ -223,24 +213,21 @@ window.cvData = {
   ],
   // Typerwriter / Identity data
   identityData: [
-    'UBSRVJUFU JT DPPM',
-    'ARTIST',
-    'CONTENT CREATOR',
-    'VIDEO EDITOR',
-    'CREATIVE',
-    'DEVELOPER',
-    'PLANNER',
-    'LEADER',
-    'ILUSTRATOR',
-    'MULTIMEDIA',
-    'ENGINEER',
-    'PROMPT WRITTER',
-    'FRIEND',
-    'LEADER',
-    'COOL IDEAS',
-    'MINECRAFTER',
-    'CATS LOVER',
-    'FOXES LOVER',
-    'JESUS FOLLOWER',
+    'PROFESIONAL ',
+    'ARTIST ',
+    'CONTENT CREATOR ',
+    'VIDEO EDITOR ',
+    'CREATIVE ',
+    'DEVELOPER ',
+    'PLANNER ',
+    'ILUSTRATOR ',
+    'MULTIMEDIA ',
+    'ENGINEER ',
+    'PROMPT WRITTER ',
+    'COOL IDEAS ',
+    'MINECRAFTER ',
+    'CATS LOVER ',
+    'FOXES LOVER ',
+    'JESUS FOLLOWER ',
   ],
 };
