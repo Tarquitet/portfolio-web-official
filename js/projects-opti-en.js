@@ -64,7 +64,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Construction and management orchestrator',
@@ -74,7 +74,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'OGG converter and compressor',
@@ -84,7 +84,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'HTML to PDF Converter',
@@ -94,7 +94,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Offline image compressor',
@@ -104,17 +104,18 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Minecraft UUID Converter',
-    fileName: 'https://raw.githubusercontent.com/Tarquitet/minecraft_uuid_converter/refs/heads/main/images/README/1769448117738.png',
+    fileName:
+      'https://raw.githubusercontent.com/Tarquitet/minecraft_uuid_converter/refs/heads/main/images/README/1769448117738.png',
     link: 'https://github.com/Tarquitet/minecraft_uuid_converter.git',
     desc: 'Utility in Python to resolve and manage player UUIDs in different authentication systems.',
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'JSON auto-translator (i18n)',
@@ -124,7 +125,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Asset optimizer (CSS/JS minifier)',
@@ -134,7 +135,7 @@ window.mainPortfolio = [
     tools: [T.PY, T.SCR, T.SOFT, T.COM],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Wedding invitation (custom)',
@@ -144,7 +145,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Thumbnail: Nostalgic Minecraft Video',
@@ -154,7 +155,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO, T.THUMB, T.VID, T.YT],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Mini edition: Easter invitation',
@@ -163,7 +164,7 @@ window.mainPortfolio = [
     tools: [T.DAVINCI, T.EDIT, T.VID, T.YT],
     category: CAT.VID,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'AR Demo: 3D modeling',
@@ -172,7 +173,7 @@ window.mainPortfolio = [
     tools: [T.MAYA, T.UNITY, T.VID, T.YT],
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Closing overlay for streaming',
@@ -182,7 +183,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO, T.TW, T.VID, T.YT],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'G.O.U.G Logo',
@@ -192,7 +193,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Front advertisement for Church',
@@ -202,7 +203,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO],
     category: CAT.DES,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Redesign: Horeb Bible Institute',
@@ -212,7 +213,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO],
     category: CAT.DES,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Front advertisement (Church)',
@@ -222,7 +223,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO],
     category: CAT.DES,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Thumbnail: modpack installation',
@@ -232,7 +233,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO, T.THUMB, T.VID, T.YT],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Layout: job offer (ATOM Solutions)',
@@ -242,7 +243,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO],
     category: CAT.DES,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Frame Edit — Cities in Dust',
@@ -252,7 +253,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO, T.VID],
     category: CAT.DES,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Final render — comic (university)',
@@ -262,17 +263,17 @@ window.mainPortfolio = [
     tools: [T.MAYA, T.PHOTO],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Mockup proposal — Multimedia Day',
     fileName: 'smartmockups_l7w4oeot.avif',
     link: '=',
-    desc: 'Logo and mockup proposal for the Multimedia Engineer\'s Day; includes presentations and application mockups.',
+    desc: "Logo and mockup proposal for the Multimedia Engineer's Day; includes presentations and application mockups.",
     tools: [T.ILUS, T.PHOTO],
     category: CAT.DES,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Retro CGI Art #02',
@@ -282,7 +283,7 @@ window.mainPortfolio = [
     tools: [T.MAYA, T.PHOTO],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Retro CGI Art #01',
@@ -292,7 +293,7 @@ window.mainPortfolio = [
     tools: [T.MAYA, T.PHOTO],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Fancy Land Logo',
@@ -301,7 +302,7 @@ window.mainPortfolio = [
     fileName: 'Texto-Fancy-Land.avif',
     link: '=',
     desc: 'Logo design for a Minecraft series; includes scalable files.',
-    pdfOnly: 'false',
+    pdfOnly: false,
     tools: [T.MINE, T.PHOTO],
   },
   {
@@ -312,7 +313,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO],
     category: CAT.DES,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Level design (Unreal Engine)',
@@ -322,7 +323,7 @@ window.mainPortfolio = [
     tools: [T.CS, T.UNREAL],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Logo redesign — Verdad & Fe',
@@ -332,7 +333,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO],
     category: CAT.DES,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Thumbnail: Parkour Minecraft',
@@ -342,7 +343,7 @@ window.mainPortfolio = [
     tools: [T.PHOTO, T.THUMB, T.VID, T.YT],
     category: CAT.DES,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Ministerial website — Truth & Faith',
@@ -352,7 +353,7 @@ window.mainPortfolio = [
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'SEO'],
     category: CAT.DEV,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Official site — Tarquitet',
@@ -362,7 +363,7 @@ window.mainPortfolio = [
     tools: [T.HTML, T.CSS, T.JS, 'Portfolio', T.FRONT, 'Web Design', 'Backend'],
     category: CAT.DEV,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Tarquitet (previous version)',
@@ -372,7 +373,7 @@ window.mainPortfolio = [
     tools: [T.HTML, T.CSS, T.JS, 'Portfolio', T.FRONT, 'Web Design', 'Backend'],
     category: CAT.DEV,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Builtechraft Web (1st ver)',
@@ -382,7 +383,7 @@ window.mainPortfolio = [
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Minecraft', T.WEB],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Builtechraft Web',
@@ -392,7 +393,7 @@ window.mainPortfolio = [
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Minecraft', T.WEB],
     category: CAT.DEV,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Horeb Web Bible Institute',
@@ -402,77 +403,84 @@ window.mainPortfolio = [
     tools: ['Academic', T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', T.WEB],
     category: CAT.DEV,
     context: CTX.PROF,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: '3D Virtual Gym App',
     desc: 'Mobile application with 360° demos and biomechanical explanations; UI prototype included.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/GymApp_1_2024/refs/heads/main/Assets/prototipo-demo.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/GymApp_1_2024/refs/heads/main/Assets/prototipo-demo.png',
     link: 'https://github.com/pintomultimedia2002/GymApp_1_2024',
     tools: [T.UNITY, T.CS, 'UI Mobile'],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Smart Sudoku Solver',
     desc: 'Sudoku generator and solver using optimized backtracking; research prototype.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking/refs/heads/master/sudokugenerado.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking/refs/heads/master/sudokugenerado.png',
     link: 'https://github.com/pintomultimedia2002/Sudoku_Intelligent_Backtracking',
     tools: [T.CS, 'Backtracking', 'IA'],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'C.I.P.S Puzzle Solver',
     desc: 'Experimental AI mini-game that solves numerical puzzles using heuristics.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver/refs/heads/master/puzzle-solved.jpg',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver/refs/heads/master/puzzle-solved.jpg',
     link: 'https://github.com/pintomultimedia2002/CIPS_Intelligent_Puzzle_Solver',
     tools: [T.CS, 'Heurística', 'IA'],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Agent Wumpus World',
     desc: 'Simulation of a rational agent based on propositional logic for decision making.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/wumpus-world-javascript/refs/heads/main/src/resources/wampus.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/wumpus-world-javascript/refs/heads/main/src/resources/wampus.png',
     link: 'https://github.com/pintomultimedia2002/wumpus-world-javascript',
     tools: [T.JS, 'Lógica', 'IA Clásica'],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'A* algorithm (pathfinding)',
     desc: 'Implementation of the A* algorithm to search for optimal paths; includes visual demo.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/A_star_algorithm_Javascript/refs/heads/main/wampus-ia.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/A_star_algorithm_Javascript/refs/heads/main/wampus-ia.png',
     link: 'https://github.com/pintomultimedia2002/A_star_algorithm_Javascript',
     tools: [T.JS, 'Pathfinding', 'Algoritmos'],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'CarVoice Assistant',
     desc: 'Voice assistant for vehicular environments with prototype web interface and integrations.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/carvoice-assist/refs/heads/main/assets/asistant-2.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/carvoice-assist/refs/heads/main/assets/asistant-2.png',
     link: 'https://github.com/pintomultimedia2002/carvoice-assist',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'Voiceflow', 'Chatbot', T.WEB],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Algebrain App',
     desc: 'UX-focused educational algebra app; Interactive exercises and progress tracking.',
-    fileName: 'https://raw.githubusercontent.com/pintomultimedia2002/Algebrain-App/refs/heads/main/resources/images/algebrain-demo-4.png',
+    fileName:
+      'https://raw.githubusercontent.com/pintomultimedia2002/Algebrain-App/refs/heads/main/resources/images/algebrain-demo-4.png',
     link: 'https://github.com/pintomultimedia2002/Algebrain-App',
     tools: [T.HTML, T.CSS, T.JS, T.FRONT, 'Web Design', 'eLearning', 'Web App', 'Mobile', T.WEB],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: '360° VR experience',
@@ -482,7 +490,7 @@ window.mainPortfolio = [
     tools: [T.UNITY, 'VR', 'Audio 3D', T.CS, 'Immersiva', '360°', 'Video', 'Audio', 'XR'],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'OpenGL 3D simulation',
@@ -492,7 +500,7 @@ window.mainPortfolio = [
     tools: [T.UNITY, 'Simulación', '3D', 'Físicas', 'WebGL', T.WEB, T.CS],
     category: CAT.DEV,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Sonórus — UI Redesign',
@@ -502,7 +510,7 @@ window.mainPortfolio = [
     tools: [T.FIGMA, 'UI Design', 'Prototyping', 'Redesign', T.UI, T.UX, 'Mobile Design'],
     category: CAT.DES,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: '4 Better Pets — Mobile App',
@@ -512,7 +520,7 @@ window.mainPortfolio = [
     tools: [T.FIGMA, 'UX Research', 'Mobile Design', 'Prototyping', T.UI, T.UX, 'App Design'],
     category: CAT.DES,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'UI Redesign — Rappi',
@@ -522,7 +530,7 @@ window.mainPortfolio = [
     tools: [T.FIGMA, 'UI Kit', 'Redesign', T.UI, T.UX, 'App Design'],
     category: CAT.DES,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'In-Mortal Transmedia',
@@ -532,7 +540,7 @@ window.mainPortfolio = [
     tools: ['Storytelling', 'Wix', 'Concept Art', 'Narrative', 'Transmedia', 'Web Design', T.WEB, T.UX],
     category: CAT.DEV,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Planty — Instructional Video',
@@ -542,17 +550,17 @@ window.mainPortfolio = [
     desc: 'Instructional video for Planty (client); includes step-by-step guide.',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Planty — Behind the scenes',
     date: '2023-05-25',
     channel: 'CLIENTE',
     link: 'https://www.youtube.com/watch?v=scgv4lL-4vk',
-    desc: 'Behind-the-scenes footage of Planty\'s production.',
+    desc: "Behind-the-scenes footage of Planty's production.",
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Antioquia Missionary Church — Event',
@@ -562,7 +570,7 @@ window.mainPortfolio = [
     desc: 'Registration and editing of event for Iglesia Misionera Antioquia (client).',
     category: CAT.VID,
     context: CTX.PERS,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Trailer — Algebrain',
@@ -572,7 +580,7 @@ window.mainPortfolio = [
     desc: 'Promotional trailer of the Algebrain application showing functionalities and UI.',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Parody commercial — GymApp',
@@ -582,7 +590,7 @@ window.mainPortfolio = [
     desc: 'Parody commercial created as a promotional piece for GymApp.',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Radio soap opera — Suspense',
@@ -592,7 +600,7 @@ window.mainPortfolio = [
     desc: 'Production of radio soap opera in suspense genre (archive).',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Minidocumentary — Electronic art',
@@ -602,7 +610,7 @@ window.mainPortfolio = [
     desc: 'Minidocumentary on electronic art practices.',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Brainstorming — Brock Project',
@@ -612,7 +620,7 @@ window.mainPortfolio = [
     desc: 'Brainstorming session and prototype material (file).',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Stop motion — Pixelation',
@@ -622,7 +630,7 @@ window.mainPortfolio = [
     desc: 'Stop-motion animation project using pixelation techniques.',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Visual narrative — Ethics',
@@ -632,7 +640,7 @@ window.mainPortfolio = [
     desc: 'Academic project on visual narrative and ethical issues.',
     context: CTX.UNIV,
     category: CAT.VID,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Synchronized 3D Render',
@@ -642,7 +650,7 @@ window.mainPortfolio = [
     desc: '3D rendering synchronized with animation (file).',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: '3D animated sack',
@@ -652,7 +660,7 @@ window.mainPortfolio = [
     desc: 'Short film/3D animation starring a sack character (file).',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Playblast — Electro Swing',
@@ -662,7 +670,7 @@ window.mainPortfolio = [
     desc: 'Animation playblast for musical project (file).',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Playblast & edit — Cops',
@@ -672,7 +680,7 @@ window.mainPortfolio = [
     desc: 'Compilation of playblasts and editing for Cops project (archive).',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Timelapse — GymApp Development',
@@ -682,7 +690,7 @@ window.mainPortfolio = [
     desc: 'Timelapse of the GymApp prototype development process.',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Digital drawing — My beginnings',
@@ -692,7 +700,7 @@ window.mainPortfolio = [
     desc: 'Series of early digital drawings showing personal evolution.',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
+    pdfOnly: false,
   },
   {
     title: 'Tutorial — OOP in Java',
@@ -702,8 +710,9 @@ window.mainPortfolio = [
     desc: 'Tutorial on object-oriented programming in Java.',
     category: CAT.VID,
     context: CTX.UNIV,
-    pdfOnly: 'false',
-  },];
+    pdfOnly: false,
+  },
+];
 
 /* ========================================================================
    2. GALERÍA VISUAL (ARTE)
