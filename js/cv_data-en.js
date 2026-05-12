@@ -77,6 +77,14 @@ window.cvData = {
       menuGroup: 'SERVICIOS',
     },
     {
+      id: 'https://art.tarquitet.com',
+      title: 'COMISIONES',
+      inMenu: true,
+      menuTitle: 'ARTE',
+      menuGroup: 'SERVICIOS',
+      isOnlyLink: true,
+    },
+    {
       id: 'archive-section',
       title: 'HISTÓRICO',
       subtitle: 'Base de datos',
@@ -97,7 +105,8 @@ window.cvData = {
     name: 'David Josué Pinto Gómez',
     role: 'Multimedia Engineer',
     imageName: 'profile.webp',
-    summary: 'Multimedia Engineer specialized in Digital Production and UX/UI Design, with a focus on the creation of strategic and innovative solutions. Expert in the use of Adobe Creative Suite and frontend development, with proven ability to manage complex projects from the technical phase to post-production. Focused on the use of AI tools and agile methodologies to optimize workflows and achieve metric objectives.',
+    summary:
+      'Multimedia Engineer specialized in Digital Production and UX/UI Design, with a focus on the creation of strategic and innovative solutions. Expert in the use of Adobe Creative Suite and frontend development, with proven ability to manage complex projects from the technical phase to post-production. Focused on the use of AI tools and agile methodologies to optimize workflows and achieve metric objectives.',
   },
   // Contact details
   contact: [

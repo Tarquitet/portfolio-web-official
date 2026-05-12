@@ -52,7 +52,7 @@ window.cvData = {
     {
       id: 'dev-section',
       title: 'DEVELOP<br/>CODER',
-      subtitle: 'WEB | SCRIPTS | AUTOMATIZACIÓN | BD',
+      subtitle: 'WEB | SCRIPTS | AUTOMATIZACIÓN',
       injectTarget: 'prof-inject',
       inMenu: true,
       menuTitle: 'DEVELOP',
@@ -61,7 +61,7 @@ window.cvData = {
     {
       id: 'video-section',
       title: 'VIDEOS<br/>EDIT',
-      subtitle: 'YOUTUBE | SHORTS | REELS | TIK TOK',
+      subtitle: 'YOUTUBE | SHORTS',
       injectTarget: 'video-inject',
       inMenu: true,
       menuTitle: 'VIDEO',
@@ -75,6 +75,14 @@ window.cvData = {
       inMenu: true,
       menuTitle: 'DISEÑO',
       menuGroup: 'SERVICIOS',
+    },
+    {
+      id: 'https://art.tarquitet.com', // La URL externa directamente
+      title: 'COMISIONES',
+      inMenu: true,
+      menuTitle: 'ARTE',
+      menuGroup: 'SERVICIOS', // Se inyecta en el dropdown de servicios
+      isOnlyLink: true, // CRUCIAL: No crea sección 01, 02, etc. en la web
     },
     {
       id: 'archive-section',
@@ -226,9 +234,5 @@ window.cvData = {
     'ENGINEER ',
     'PROMPT WRITTER ',
     'COOL IDEAS ',
-    'MINECRAFTER ',
-    'CATS LOVER ',
-    'FOXES LOVER ',
-    'JESUS FOLLOWER ',
   ],
 };
