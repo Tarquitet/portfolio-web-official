@@ -7,11 +7,6 @@ https://www.tarquitet.com/_ https://web.tarquitet.com/:splat 301
 
 http://web.tarquitet.com/* https://web.tarquitet.com/:splat 301
 
-# Redirigir la versión vieja
+# Reescritura silenciosa: Todo lo que entre a la raíz carga 'ver2_opti' internamente
 
-#/ver1/\* https://web.tarquitet.com/ 301
-
-# Regla SPA
-
-#/_ /index.html 200
-/_ /ver2/:splat 200
+/\* /ver2_opti/:splat 200
