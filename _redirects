@@ -9,4 +9,4 @@ http://web.tarquitet.com/* https://web.tarquitet.com/:splat 301
 
 # Reescritura silenciosa: Todo lo que entre a la raíz carga 'ver2' internamente
 
-/* /ver2/:splat 200
+#/* /ver2/:splat 200
