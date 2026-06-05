@@ -1,16 +1,38 @@
-<!DOCTYPE html>
-<html lang="es" data-theme="theme-bauhaus">
+<!doctype html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Web Portfolio of Tarquitet" />
     <meta
       name="keywords"
-      content="HTML, CSS, JavaScript, Multimedia, Video, Editor, Video Editor, Code, Developer, Minecraft, Youtube, Python, AI, Figma, Photoshop, Davinci Resolve, OBS Studio, Web Development, UI, UX, Design, Graphic Design, Illustrator, Tarquitet"
+      content="Developer, HTML, CSS, JavaScript, Multimedia, Video, Editor, Video Editor, Code, Developer, Minecraft, Youtube, Python, AI, Figma, Photoshop, Davinci Resolve, OBS Studio, Web Development, UI, UX, Design, Graphic Design, Illustrator, Tarquitet, Comissions, Comision, Wolfox, Furry"
     />
     <meta name="author" content="Tarquitet - David Josue Pinto Gómez" />
-    <title>TARQUITET=TRUE</title>
+    <title>David Pinto - Diseñador, Programador - Ingeniero en Multimedia | Tarquitet - Creador Contenido</title>
+    <meta
+      name="description"
+      content="Portafolio de David Josué Pinto Gómez (Tarquitet). Ingeniero en Multimedia especializado en desarrollo web, diseño UI/UX y soluciones tecnológicas pragmáticas."
+    />
 
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://web.tarquitet.com/" />
+    <meta property="og:title" content="Tarquitet | Portafolio Profesional" />
+    <meta property="og:description" content="Explora mis proyectos de desarrollo, programación y diseño digital." />
+    <meta property="og:image" content="https://web.tarquitet.com/assets/images/cover_art.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tarquitet | Portafolio Profesional" />
+    <meta name="twitter:description" content="Explora mis proyectos de desarrollo, programación y diseño digital." />
+    <meta name="twitter:image" content="https://web.tarquitet.com/assets/images/cover_art.webp" />
+
+    <link rel="canonical" href="https://web.tarquitet.com/" />
+
+    <link rel="icon" type="image/png" href="/assets/ico/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/ico/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/ico/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/ico/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Tarquitet" />
+    <link rel="manifest" href="/assets/ico/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,9 +40,30 @@
       rel="stylesheet"
     />
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../common/css/styles_v2.css" />
 
-    <link rel="stylesheet" href="../css/styles_v2.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "David Josué Pinto Gómez",
+        "alternateName": "Tarquitet",
+        "jobTitle": "Ingeniero en Multimedia",
+        "url": "https://web.tarquitet.com/",
+        "knowsAbout": ["Desarrollo Web", "Diseño UI/UX", "Edición de Video", "Python", "JavaScript", "Modelado 3D"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "CO",
+          "addressLocality": "Bogotá"
+        },
+        "sameAs": [
+          "https://linkedin.com/in/pinto-gomez-david",
+          "https://github.com/tarquitet",
+          "https://youtube.com/@tarquitet",
+          "https://twitter.com/tarquitet"
+        ]
+      }
+    </script>
   </head>
 
   <body class="loading">
@@ -41,20 +84,11 @@
 
     <div class="ui-frame">
       <a href="#" class="brand">TARQUITET<span class="blink">_</span></a>
+
       <nav class="nav-minimal">
-        <a href="#profile-section">PERFIL</a>
-        <div class="nav-group">
-          <span class="nav-trigger">TRABAJOS</span>
-          <div class="nav-dropdown">
-            <a href="#work-section">DESARROLLO</a>
-            <a href="#video-section">VIDEO</a>
-            <a href="#ux-section">DISEÑO</a>
-            <a href="#media-section">DIBUJOS</a>
-          </div>
-        </div>
-        <a href="#archive-section">HISTÓRICO</a>
-        <a href="#contact">CONTACTO</a>
+        <span class="sys-text">INICIALIZANDO MENÚ...</span>
       </nav>
+
       <div class="status-indicator"><span class="status-dot"></span> EN LÍNEA</div>
     </div>
 
@@ -67,15 +101,25 @@
 
         <div class="hero-center">
           <h1 class="title-main">
-            <span class="row interactive-brand" id="hero-trigger">TARQUITET</span>
-            <span class="row">IS = TO</span>
-            <span class="row accent-row">> <span class="typing-text"></span><span class="cursor">|</span> </span>
+            <span class="sr-only"
+              >David Josué Pinto Gómez - Ingeniero en Multimedia, Desarrollador Web y Diseñador</span
+            >
+
+            <span class="row interactive-brand" id="hero-trigger" aria-hidden="true">TARQUITET</span>
+            <span class="row" aria-hidden="true">IS = TO</span>
+            <span class="row accent-row" aria-hidden="true"
+              >> <span class="typing-text"></span><span class="cursor">|</span>
+            </span>
           </h1>
           <p class="hero-sub">
-            Creando soluciones de alto impacto mediante la convergencia del ingenio tecnológico y la visión artística.
+            Ingeniero Artista quien crea soluciones con el ingenio tecnológico y la visión artística
           </p>
           <div class="scroll-hint">
-            <i data-lucide="arrow-down-from-line"></i> BAJA PARA MÁS <i data-lucide="arrow-down-from-line"></i>
+            <img src="/assets/icons/arrow-down.svg" class="hero-icon" alt="V" />
+
+            PERFIL + PROYECTOS
+
+            <img src="/assets/icons/arrow-down.svg" class="hero-icon" alt="V" />
           </div>
         </div>
       </section>
@@ -92,34 +136,32 @@
 
           <div class="p-content">
             <h2 class="p-title">MI PERFIL</h2>
+            <input type="checkbox" id="bio-toggle" hidden />
             <div class="p-bio">
               <p>
-                <strong>¡Hola, soy Tarquitet! 👋</strong><br /><br />
-                Mi nombre es David Josué Pinto, y soy Ingeniero en Multimedia. Mi trabajo como profesional nace de la
-                convergencia entre el
-                <strong>ingenio tecnológico y la creatividad artística</strong>. Esta fusión es la base sobre la que
-                construyo soluciones digitales de alto impacto. <br /><br />
-                Más que programar código complejo, mi fortaleza radica en
-                <strong>ser ese artista que ayude a crear nuevas experiencias</strong>. Tengo la capacidad técnica para
-                entender las herramientas, pero mi verdadero valor está en visualizar el resultado final y trazar el
-                camino estético y funcional para conseguirlo.
+                <strong>¡Hola, soy David Josué Pinto Gómez! 👋</strong><br /><br />
+                También conocido como Tarquitet en internet. Soy Ingeniero en Multimedia, mi trabajo nace donde la
+                <strong>lógica de la ingeniería se encuentra con la sensibilidad artística</strong>. Más que un
+                desarrollador, soy un <strong>arquitecto de experiencias digitales</strong>.
               </p>
 
               <p>
-                Me distingo por mi <strong>inventiva y capacidad de resolución</strong>. Entiendo que tener buenas ideas
-                es solo el comienzo; mi enfoque es <strong>pragmático:</strong> priorizo la funcionalidad y la ejecución
-                real sobre la compleja teoría, explorando la forma más eficiente de plasmnar la creatividad y
-                convertirla en <strong>productos tangibles, viables y visualmente potentes</strong>.
+                Mi fortaleza no se limita a la complejidad técnica, sino a la <strong>claridad visual</strong>. Trazo el
+                camino más eficiente entre una gran idea y su ejecución final. Me enfoco en solucionar problemas con un
+                enfoque <strong>pragmático</strong>, priorizando la funcionalidad real para plasmar la creatividad en
+                <strong>productos acabados de alta calidad</strong>.
               </p>
 
               <p>
-                Me considero un profesional en constante evolución. Por ello, mi filosofía es
-                <strong>"Always to the next level!"</strong>. Dispuesto y disponible para aprender, rompiendo barreras y
-                dominando nuevas herramientas para elevar la calidad de mis productos. Busco retos que exijan visión
-                creativa y orden estratégico, comprometiéndome con resultados que destaquen por su
-                <strong>eficiencia, innovación y calidad visual.</strong>
+                Me define la mentalidad <strong>"Always to the next level"</strong>. Soy un profesional en constante
+                evolución, siempre aprendiendo y rompiendo barreras para superar las expectativas estéticas y técnicas.
+                Busco retos que exijan innovación, estrategia y <strong>calidad visual</strong>.
               </p>
             </div>
+            <label for="bio-toggle" id="read-more-btn" class="bio-btn-css">
+              <span class="text-more">&lt; LEER MÁS &gt;</span>
+              <span class="text-less">&gt; LEER MENOS &lt;</span>
+            </label>
 
             <div class="p-stats">
               <div class="stat">
@@ -165,62 +207,18 @@
           </div>
         </div>
       </section>
-
-      <div class="sticky-container" id="work-section">
-        <div class="sticky-viewport">
-          <div class="h-card intro">
-            <span class="sect-idx">01</span>
-            <h2>DEV //<br />CODER</h2>
-            <p>Desarrollo + Web</p>
-          </div>
-
-          <div class="horizontal-track">
-            <div id="prof-inject" class="track-content"></div>
-          </div>
+      <section class="hero-divider">
+        <div class="hd-content">
+          <h2 class="hd-title">
+            <span class="hd-row big-text">SERVICIOS</span>
+            <span class="hd-row mid-text">&</span>
+            <span class="hd-row accent-text">PROYECTOS</span>
+          </h2>
+          <p class="hd-sub">> ENTREGADOS / FINALIZADOS</p>
         </div>
-      </div>
+      </section>
 
-      <div class="sticky-container" id="video-section">
-        <div class="sticky-viewport">
-          <div class="h-card intro">
-            <span class="sect-idx">02</span>
-            <h2>VIDEOS<br />EDIT</h2>
-            <p>Producción Audiovisual</p>
-          </div>
-
-          <div class="horizontal-track">
-            <div id="video-inject" class="track-content"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sticky-container" id="ux-section">
-        <div class="sticky-viewport">
-          <div class="h-card intro">
-            <span class="sect-idx">03</span>
-            <h2>DISEÑO<br />UI / UX</h2>
-            <p>Figma / Photoshop / Illustrator</p>
-          </div>
-
-          <div class="horizontal-track">
-            <div id="ux-inject" class="track-content"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sticky-container" id="media-section">
-        <div class="sticky-viewport">
-          <div class="h-card intro">
-            <span class="sect-idx">04</span>
-            <h2>VISUAL<br />MEDIA</h2>
-            <p>Dibujos e Ilustraciones</p>
-          </div>
-
-          <div class="horizontal-track">
-            <div id="media-inject" class="track-content"></div>
-          </div>
-        </div>
-      </div>
+      <div id="dynamic-sections-root"></div>
 
       <section class="database-section" id="archive-section">
         <div class="db-header">
@@ -229,33 +227,31 @@
         </div>
 
         <div class="db-interface">
+          <input type="radio" name="hist-tab" id="radio-prof" checked style="display: none" />
+          <input type="radio" name="hist-tab" id="radio-personal" style="display: none" />
+          <input type="radio" name="hist-tab" id="radio-univ" style="display: none" />
+
           <div class="db-menu">
-            <button class="db-btn active" data-cat="prof">PROFESIONAL</button>
-            <button class="db-btn" data-cat="personal">PERSONAL</button>
-            <button class="db-btn" data-cat="univ">UNIVERSITARIO</button>
+            <label for="radio-prof" class="db-btn">PROFESIONAL</label>
+            <label for="radio-personal" class="db-btn">PERSONAL</label>
+            <label for="radio-univ" class="db-btn">UNIVERSITARIO</label>
           </div>
 
           <div class="db-viewer">
-            <div class="db-list active" id="list-prof"></div>
-            <div class="db-list" id="list-personal"></div>
-            <div class="db-list" id="list-univ"></div>
+            <div class="db-list" id="list-prof" data-lenis-prevent></div>
+            <div class="db-list" id="list-personal" data-lenis-prevent></div>
+            <div class="db-list" id="list-univ" data-lenis-prevent></div>
           </div>
         </div>
       </section>
 
       <footer id="contact">
         <div class="footer-container">
-          <div class="footer-cta-group">
-            <span id="lbl-download"></span>
-
-            <div class="btn-trio" id="footer-downloads-inject"></div>
-          </div>
-
           <div class="theme-selector-area">
             <span class="theme-label" id="lbl-theme"></span>
 
             <div class="theme-grid">
-              <button class="theme-btn active" data-theme="theme-bauhaus" title="Bauhaus Light"></button>
+              <button class="theme-btn" data-theme="theme-bauhaus" title="Bauhaus Light"></button>
               <button class="theme-btn" data-theme="theme-fire" title="System Red"></button>
               <button class="theme-btn" data-theme="theme-pop" title="Vogue Pop"></button>
               <button class="theme-btn" data-theme="theme-industrial" title="Industrial"></button>
@@ -271,10 +267,41 @@
       </footer>
     </main>
 
+    <template id="uni-card-template">
+      <div class="uni-card">
+        <div class="uni-img-box">
+          <div class="card-badges-overlay"></div>
+
+          <a class="card-link-wrapper" target="_blank">
+            <img src="" alt="" class="card-img" loading="lazy" />
+          </a>
+        </div>
+
+        <div class="uni-info">
+          <h3 class="uni-title">_</h3>
+
+          <div class="uni-date"></div>
+
+          <a href="" target="_blank" class="uni-link card-cta">_</a>
+        </div>
+      </div>
+    </template>
+    <template id="see-more-template">
+      <a href="#archive-section" class="uni-card">
+        <div class="card-see-more">
+          <div class="see-more-content">
+            <span class="see-more-sub">EXPLORAR TODO</span>
+            <span class="see-more-text">HISTÓRICO</span>
+            <div class="see-more-icon"><i data-lucide="arrow-right"></i></div>
+          </div>
+        </div>
+      </a>
+    </template>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <script src="../js/utils.js"></script>
-    <script src="../js/projects.js"></script>
-    <script src="../js/cv_data.js"></script>
-    <script src="../js/script_v2.js"></script>
+    <script src="../common/js/utils.min.js"></script>
+    <script src="../common/js/projects-opti.min.js"></script>
+    <script src="../common/js/cv_data.min.js"></script>
+
+    <script type="module" src="./js/main-opti.min.js"></script>
   </body>
 </html>

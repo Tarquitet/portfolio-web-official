@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>David Pinto - CV Harvard (EN)</title>
+
+    <link rel="icon" type="image/png" href="../../assets/ico/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../../assets/ico/favicon.svg" />
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/ico/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Tarqutiet" />
+    <link rel="manifest" href="../../assets/ico/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="./css/cv-harvard.css" />
+  </head>
+  <body>
+    <div class="page" id="invoice">
+      <header>
+        <div id="cv-name" class="h1-name"></div>
+        <div class="contact-bar" id="cv-contact-bar"></div>
+      </header>
+
+      <section>
+        <div class="section-title" id="lbl-profile"></div>
+        <p id="cv-summary" class="body-txt"></p>
+      </section>
+
+      <section>
+        <div class="section-title" id="lbl-education"></div>
+        <div id="cv-education-list"></div>
+      </section>
+
+      <section>
+        <div class="section-title" id="lbl-projects"></div>
+        <div id="cv-projects-list"></div>
+      </section>
+
+      <section>
+        <div class="section-title" id="lbl-skills-master"></div>
+        <div class="skills-grid">
+          <div class="skill-cat" id="lbl-soft"></div>
+          <div id="cv-soft-skills"></div>
+
+          <div class="skill-cat" id="lbl-tech"></div>
+          <div id="cv-tech-skills"></div>
+
+          <div class="skill-cat" id="lbl-software-cat"></div>
+          <div id="cv-software-list"></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title" id="lbl-languages"></div>
+        <div id="cv-languages-list" class="body-txt"></div>
+      </section>
+    </div>
+
+    <script src="../../common/js/cv_data-en.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="./js/cv-harvard.js"></script>
+  </body>
+</html>

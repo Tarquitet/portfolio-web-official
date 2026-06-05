@@ -1,12 +1,17 @@
 # Redirigir el dominio pelado y el www directamente al subdominio oficial
-https://tarquitet.com/* https://web.tarquitet.com/:splat 301
-https://www.tarquitet.com/* https://web.tarquitet.com/:splat 301
+
+https://tarquitet.com/_ https://web.tarquitet.com/:splat 301
+https://www.tarquitet.com/_ https://web.tarquitet.com/:splat 301
 
 # Forzar HTTPS
+
 http://web.tarquitet.com/* https://web.tarquitet.com/:splat 301
 
 # Redirigir la versión vieja
-/ver1/* https://web.tarquitet.com/ 301
+
+#/ver1/\* https://web.tarquitet.com/ 301
 
 # Regla SPA
-/* /index.html 200
+
+#/_ /index.html 200
+/_ /ver2/:splat 200

@@ -1,0 +1,104 @@
+document.addEventListener('DOMContentLoaded',()=>{if(!window.cvData||!window.Utils){console.error('❌ Error Crítico: cvData o Utils no cargaron.');return;}const cv=window.cvData;const labels=cv.labels||{};const currentYear=new Date().getFullYear();const getSectionTitle=(id,fallback)=>{const sections=cv.sections||[];const projectSections=sections.filter((s)=>s.injectTarget);const index=projectSections.findIndex((s)=>s.id===id);const s=projectSections[index];if(!s)return fallback||'';const numPrefix=(index+1).toString().padStart(2,'0');const raw=s.title||'';const cleaned=window.Utils.stripHtmlToText?window.Utils.stripHtmlToText(raw):raw .replace(/<br\s*\/?>/gi,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();return `${numPrefix} / ${cleaned.toUpperCase()}`;};const coverSrc=window.Utils.getSmartPath('cover_art.webp','PORTFOLIO');const backSrc=coverSrc;const container=document.getElementById('magazine-target');if(!container){console.error('❌ Error: No se encontró #magazine-target');return;}let totalPageCount=0;const addPage=(hasFooter=true)=>{if(hasFooter)totalPageCount++;const sec=document.createElement('section');sec.className='magazine-page';const footerHtml=hasFooter?`<div class="mag-footer">
+           <span>TARQUITET // ${currentYear}</span>
+           <span>PAG. ${totalPageCount.toString().padStart(2, '0')}</span>
+         </div>`:'';sec.innerHTML=`<div class="page-content" style="${hasFooter ? '' : 'height:100%'}"></div>${footerHtml}`;container.appendChild(sec);return sec.querySelector('.page-content');};const getIcon=(type,key)=>{const t=(key||'').toLowerCase();const iconPath=cv.config&&cv.config.iconsPath?cv.config.iconsPath:'../assets/icons/';const toolsList=[...(cv.software||[]),...(cv.tickerItems||[])];const soft=toolsList.find((s)=>t.includes(s.name.toLowerCase())||s.name.toLowerCase().includes(t));const buildIcon=(iconName)=>{const url=`${iconPath}${iconName}.svg`;return `<span style="-webkit-mask: url(${url}) no-repeat center; -webkit-mask-size: contain; mask: url(${url}) no-repeat center; mask-size: contain; background-color: currentColor; width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px; transform: translateY(-1px);"></span>`;};if(soft&&soft.icon)return buildIcon(soft.icon);if(type==='art')return buildIcon('palette');if(t.includes('web')||t.includes('front')||t.includes('python')||t.includes('script')){return buildIcon('code');}return `<span style="font-weight:900; margin-right:4px; color:currentColor; font-family:var(--f-code);">></span>`;};const renderSection=(items,label,groupKey)=>{if(!items||!items.length)return;const groups={};items.forEach((p)=>{const keys=p[groupKey];const k=keys&&keys.length>0?keys[0]:'General';if(!groups[k])groups[k]=[];groups[k].push(p);});let page=addPage(true);let count=0;let newSec=true;for(const[subCat,elements]of Object.entries(groups)){if(newSec){page.innerHTML+=`<div class="section-label">${label}</div>`;newSec=false;}const iconType=groupKey==='tags'?'art':'tool';const ribbonHtml=`<div class="sub-ribbon">${getIcon(iconType, subCat)}<span> ${subCat.toUpperCase()}</span></div>`;page.innerHTML+=ribbonHtml;elements.forEach((item)=>{if(count>=4){page=addPage(true);page.innerHTML+=`<div class="section-label">${label} (CONT.)</div>`+ribbonHtml;count=0;}const category=groupKey==='tags'?'ART':item.category;const imgSrc=window.Utils.getSmartPath(item.image||item.fileName,category);const toolsSafe=item.tools||[];const meta=groupKey==='tags'?`// ${item.date || ''}`:`// ${toolsSafe.join(' / ')}`;page.innerHTML+=`
+            <article class="project-container">
+                <div class="img-block">
+                    <img src="${imgSrc}" alt="${item.title}" onerror="window.Utils.handleImgError(this)">
+                </div>
+                <div class="info-block">
+                    <div class="p-title-ribbon">${item.title}</div>
+                    <div class="info-card">
+                        <div class="p-meta">${meta}</div>
+                        <p class="p-desc">${item.desc}</p>
+                    </div>
+                </div>
+            </article>`;count++;});}};const p1=addPage(false);const roleText=cv.basics.role?cv.basics.role.toUpperCase():'MULTIMEDIA ENGINEER';p1.innerHTML=`
+    <div class="cover-layout">
+      <div class="cover-vertical">> TARQUITET</div>
+      
+      <div class="cover-main">
+        <div class="cover-img">
+            <img src="${coverSrc}" alt="Cover" style="width:100%; height:100%; object-fit:cover;" onerror="window.Utils.handleImgError(this)">
+            
+            <div class="mag-overlay">
+                <div style="text-align:right; font-family:var(--f-code); color:#fff; font-size:9pt; opacity:0.8;">
+                    ISSUE NO. 01 // ${currentYear}
+                </div>
+
+                <div>
+                    <div class="mag-headline">THE<br>ARCHITECT</div>
+                    <div class="mag-sublines">> ${roleText}</div>
+                    
+                    <div class="barcode-strip">
+                        <div class="css-barcode"></div>
+                        <div style="text-align:right; color:#fff; font-family:var(--f-code); font-size:8pt;">
+                            $ PRICELESS<br>EDITION: GLOBAL
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="border-top:4px solid var(--text); padding-top:10px; display:flex; justify-content:space-between; align-items:flex-end;">
+          <div>
+             <div style="font-weight:900; font-size:14pt; line-height:1.1;">${cv.basics.name.replace('<br>', ' ')}</div>
+             <div style="font-family:var(--f-code); font-size:9pt; margin-top:4px; opacity:0.7;">PORTFOLIO DOCUMENT</div>
+          </div>
+          <div style="text-align:right;">
+             <div style="background:var(--text); color:var(--bg); padding:4px 8px; font-weight:bold; font-size:9pt;">
+                CONFIDENTIAL
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>`;const port=(window.mainPortfolio||[]).filter((p)=>p.category!=='VIDEO'&&p.context!=='UNIVERSITY');const gallery=window.galleryData||[];renderSection(port.filter((p)=>p.category==='DEV'),getSectionTitle('dev-section'),'tools',);renderSection(port.filter((p)=>p.category==='DESIGN'),getSectionTitle('ux-section'),'tools',);renderSection(gallery,getSectionTitle('visual-arts-section','03 / VISUAL ARTS'),'tags');const pLast=addPage(false);const allowedNetworks=['linkedin','github','@'];const professionalContacts=cv.contact.filter((c)=>{const combined=(c.text+c.link).toLowerCase();return allowedNetworks.some((keyword)=>combined.includes(keyword));});const linksHtml=professionalContacts .map((c)=>{let icon='>';const txt=c.text.toLowerCase();if(txt.includes('@'))icon='@';if(c.link.includes('linkedin'))icon='IN';if(c.link.includes('github'))icon='GIT';const isLink=c.link&&c.link!=='-';const tag=isLink?'a':'div';const href=isLink?`href="${c.link}" target="_blank"`:`onclick="window.Utils.copyText('${c.text}', this)"`;const cursor=isLink?'pointer':'copy';return `
+        <${tag} ${href} style="display:flex; justify-content:space-between; align-items:center; font-family:var(--f-code); font-size:10pt; color:var(--bg); text-decoration:none; border-bottom:1px solid rgba(242,240,233,0.2); padding:12px 0; cursor:${cursor}; transition:0.2s;">
+            <span style="opacity:0.9; font-weight:bold;">${icon} // ${c.text.toUpperCase()}</span>
+            <span style="opacity:0.5;">↗</span>
+        </${tag}>`;}).join('');const letsTalk=cv.labels.letsTalk||"LET'S TALK.";const rights=cv.labels.rights||'ALL RIGHTS RESERVED.';const hire=cv.labels.hire||'AVAILABLE FOR HIRE';const shutdown=cv.labels.shutdown||'SYSTEM SHUTDOWN';pLast.innerHTML=`
+    <div style="display:flex; flex-direction:column; height:100%; position:relative;">
+
+        <div style="flex:1; border:2px solid var(--text); overflow:hidden; position:relative; background:#000;">
+            <img src="${backSrc}" alt="Back Cover" style="width:100%; height:100%; object-fit:cover; opacity:0.5;" onerror="window.Utils.handleImgError(this)">
+
+            <div style="position:absolute; bottom:55px; left:20px; color:#fff; font-family:var(--f-code); font-size:8pt; opacity:0.8;">
+                /// ${shutdown}<br> /// EXECUTION COMPLETE
+            </div>
+            
+            <div style="position:absolute; bottom:55px; right:20px; background:var(--accent); color:#fff; padding:5px 10px; font-family:var(--f-code); font-size:8pt; font-weight:bold;">
+                ● ${hire} </div>
+        </div>
+
+        <div class="back-thank-you" style="padding-top:30px;">
+
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:30px;">
+                <h1 class="back-title" style="font-size:45pt; margin:0; line-height:0.9;">${letsTalk.replace(' ', '<br>')}</h1>
+
+                <div style="text-align:right; font-family:var(--f-code); color:var(--bg); opacity:0.5; font-size:8pt;">
+                    ${cv.basics.name}<br>
+                    ${roleText} </div>
+            </div>
+
+            <div style="margin-bottom:30px;">
+                ${linksHtml}
+            </div>
+
+            <div style="border-top: 1px solid rgba(242,240,233,0.3); padding-top: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; font-family: var(--f-code); font-size: 10pt; color: var(--bg); text-align: left; opacity: 1;">
+                
+                <div style="line-height: 1.5;">
+                    <a href="https://web.tarquitet.com" target="_blank" style="color: #ffffff; text-decoration: none; font-weight: 900; font-size: 13pt; border-bottom: 2px solid var(--accent); padding-bottom: 2px; display: inline-block; margin-bottom: 4px;">
+                        WEB.TARQUITET.COM
+                    </a><br>
+                    <span style="opacity: 0.9;">PORTFOLIO_V2 // BOGOTÁ, COLOMBIA</span>
+                </div>
+
+                <div style="text-align: right; line-height: 1.5; opacity: 0.9;">
+                    © ${currentYear} ${rights}<br>
+                    <span style="font-weight: bold; color: var(--accent);">END OF FILE.</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>`;if(window.Utils&&window.Utils.initIcons)window.Utils.initIcons();document.body.classList.add('pdf-ready');});

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es" data-theme="theme-bauhaus">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Web Portfolio of Tarquitet" />
+    <meta
+      name="keywords"
+      content="HTML, CSS, JavaScript, Multimedia, Video, Editor, Video Editor, Code, Developer, Minecraft, Youtube, Python, AI, Figma, Photoshop, Davinci Resolve, OBS Studio, Web Development, UI, UX, Design, Graphic Design, Illustrator, Tarquitet"
+    />
+    <meta name="author" content="Tarquitet - David Josue Pinto Gómez" />
+    <title>TARQUITET=TRUE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Manrope:wght@300;600;800&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="../common/css/styles_v2.css" />
+  </head>
+
+  <body class="loading">
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-circle" id="cursor-circle"></div>
+
+    <div class="preloader" id="preloader">
+      <div class="loader-content">
+        <div class="liquid-number" id="load-num">0</div>
+
+        <div class="loader-bar">
+          <div class="bar-fill" id="bar-fill"></div>
+        </div>
+
+        <div class="loader-text" id="random-text">INICIALIZANDO...</div>
+      </div>
+    </div>
+
+    <div class="ui-frame">
+      <a href="#" class="brand">TARQUITET<span class="blink">_</span></a>
+      <nav class="nav-minimal">
+        <a href="#profile-section">PERFIL</a>
+        <div class="nav-group">
+          <span class="nav-trigger">TRABAJOS</span>
+          <div class="nav-dropdown">
+            <a href="#work-section">DESARROLLO</a>
+            <a href="#video-section">VIDEO</a>
+            <a href="#ux-section">DISEÑO</a>
+            <a href="#media-section">DIBUJOS</a>
+          </div>
+        </div>
+        <a href="#archive-section">HISTÓRICO</a>
+        <a href="#contact">CONTACTO</a>
+      </nav>
+      <div class="status-indicator"><span class="status-dot"></span> EN LÍNEA</div>
+    </div>
+
+    <main>
+      <section class="hero">
+        <div class="ticker-center-wrap">
+          <div class="ticker-track" id="hero-ticker-1"></div>
+          <div class="ticker-track reverse" id="hero-ticker-2"></div>
+        </div>
+
+        <div class="hero-center">
+          <h1 class="title-main">
+            <span class="row interactive-brand" id="hero-trigger">TARQUITET</span>
+            <span class="row">IS = TO</span>
+            <span class="row accent-row">> <span class="typing-text"></span><span class="cursor">|</span> </span>
+          </h1>
+          <p class="hero-sub">
+            Creando soluciones de alto impacto mediante la convergencia del ingenio tecnológico y la visión artística.
+          </p>
+          <div class="scroll-hint">
+            <i data-lucide="arrow-down-from-line"></i> BAJA PARA MÁS <i data-lucide="arrow-down-from-line"></i>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-section" id="profile-section">
+        <div class="tech-ticker-section">
+          <div class="tech-ticker-wrap">
+            <div class="tech-track"></div>
+          </div>
+        </div>
+
+        <div class="profile-grid">
+          <div class="p-visual" id="profile-trigger"></div>
+
+          <div class="p-content">
+            <h2 class="p-title">MI PERFIL</h2>
+            <div class="p-bio">
+              <p>
+                <strong>¡Hola, soy Tarquitet! 👋</strong><br /><br />
+                Mi nombre es David Josué Pinto, y soy Ingeniero en Multimedia. Mi trabajo como profesional nace de la
+                convergencia entre el
+                <strong>ingenio tecnológico y la creatividad artística</strong>. Esta fusión es la base sobre la que
+                construyo soluciones digitales de alto impacto. <br /><br />
+                Más que programar código complejo, mi fortaleza radica en
+                <strong>ser ese artista que ayude a crear nuevas experiencias</strong>. Tengo la capacidad técnica para
+                entender las herramientas, pero mi verdadero valor está en visualizar el resultado final y trazar el
+                camino estético y funcional para conseguirlo.
+              </p>
+
+              <p>
+                Me distingo por mi <strong>inventiva y capacidad de resolución</strong>. Entiendo que tener buenas ideas
+                es solo el comienzo; mi enfoque es <strong>pragmático:</strong> priorizo la funcionalidad y la ejecución
+                real sobre la compleja teoría, explorando la forma más eficiente de plasmnar la creatividad y
+                convertirla en <strong>productos tangibles, viables y visualmente potentes</strong>.
+              </p>
+
+              <p>
+                Me considero un profesional en constante evolución. Por ello, mi filosofía es
+                <strong>"Always to the next level!"</strong>. Dispuesto y disponible para aprender, rompiendo barreras y
+                dominando nuevas herramientas para elevar la calidad de mis productos. Busco retos que exijan visión
+                creativa y orden estratégico, comprometiéndome con resultados que destaquen por su
+                <strong>eficiencia, innovación y calidad visual.</strong>
+              </p>
+            </div>
+
+            <div class="p-stats">
+              <div class="stat">
+                <span class="label" id="lang-lbl-1"></span>
+                <span class="val" id="lang-val-1"></span>
+              </div>
+
+              <div class="stat interactive" id="open-duo">
+                <span class="label" id="lang-lbl-2"></span>
+                <span class="val" id="lang-val-2"></span>
+              </div>
+
+              <dialog id="duo-modal" class="native-modal">
+                <div class="modal-inner">
+                  <h3 class="modal-title" id="duo-title"></h3>
+                  <p class="modal-text" id="duo-desc"></p>
+                  <div class="duo-bar-wrap">
+                    <div class="duo-bar-fill" id="duo-bar" style="width: 0%"></div>
+                  </div>
+                  <span class="duo-score" id="duo-score">...</span>
+                  <form method="dialog"><button class="btn-sys">> CERRAR <</button></form>
+                </div>
+              </dialog>
+            </div>
+          </div>
+        </div>
+
+        <div class="specs-table-container">
+          <div class="spec-column">
+            <div class="spec-header">
+              <span class="sh-label">TYPE_A</span>
+              <h3>HARD SKILLS</h3>
+            </div>
+            <ul class="spec-list" id="list-hard"></ul>
+          </div>
+
+          <div class="spec-column">
+            <div class="spec-header">
+              <span class="sh-label">TYPE_B</span>
+              <h3>SOFT SKILLS</h3>
+            </div>
+            <ul class="spec-list" id="list-soft"></ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="sticky-container" id="work-section">
+        <div class="sticky-viewport">
+          <div class="h-card intro">
+            <span class="sect-idx">01</span>
+            <h2>DEV //<br />CODER</h2>
+            <p>Desarrollo + Web</p>
+          </div>
+
+          <div class="horizontal-track">
+            <div id="prof-inject" class="track-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-container" id="video-section">
+        <div class="sticky-viewport">
+          <div class="h-card intro">
+            <span class="sect-idx">02</span>
+            <h2>VIDEOS<br />EDIT</h2>
+            <p>Producción Audiovisual</p>
+          </div>
+
+          <div class="horizontal-track">
+            <div id="video-inject" class="track-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-container" id="ux-section">
+        <div class="sticky-viewport">
+          <div class="h-card intro">
+            <span class="sect-idx">03</span>
+            <h2>DISEÑO<br />UI / UX</h2>
+            <p>Figma / Photoshop / Illustrator</p>
+          </div>
+
+          <div class="horizontal-track">
+            <div id="ux-inject" class="track-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-container" id="media-section">
+        <div class="sticky-viewport">
+          <div class="h-card intro">
+            <span class="sect-idx">04</span>
+            <h2>VISUAL<br />MEDIA</h2>
+            <p>Dibujos e Ilustraciones</p>
+          </div>
+
+          <div class="horizontal-track">
+            <div id="media-inject" class="track-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <section class="database-section" id="archive-section">
+        <div class="db-header">
+          <h2>HISTÓRICO</h2>
+          <span class="sys-text">ACCEDIENDO A ANTERIORES TRABAJOS...</span>
+        </div>
+
+        <div class="db-interface">
+          <div class="db-menu">
+            <button class="db-btn active" data-cat="prof">PROFESIONAL</button>
+            <button class="db-btn" data-cat="personal">PERSONAL</button>
+            <button class="db-btn" data-cat="univ">UNIVERSITARIO</button>
+          </div>
+
+          <div class="db-viewer">
+            <div class="db-list active" id="list-prof"></div>
+            <div class="db-list" id="list-personal"></div>
+            <div class="db-list" id="list-univ"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer id="contact">
+        <div class="footer-container">
+          <div class="footer-cta-group">
+            <span id="lbl-download"></span>
+
+            <div class="btn-trio" id="footer-downloads-inject"></div>
+          </div>
+
+          <div class="theme-selector-area">
+            <span class="theme-label" id="lbl-theme"></span>
+
+            <div class="theme-grid">
+              <button class="theme-btn active" data-theme="theme-bauhaus" title="Bauhaus Light"></button>
+              <button class="theme-btn" data-theme="theme-fire" title="System Red"></button>
+              <button class="theme-btn" data-theme="theme-pop" title="Vogue Pop"></button>
+              <button class="theme-btn" data-theme="theme-industrial" title="Industrial"></button>
+              <button class="theme-btn" data-theme="theme-cyber" title="Cyber Blue"></button>
+            </div>
+          </div>
+          <span class="footer-section-label" id="lbl-contact"></span>
+          <div class="contact-grid" id="contact-inject"></div>
+
+          <div class="footer-bottom">TARQUITET © <span id="footer-year"></span></div>
+        </div>
+        <div id="toast">COPIADO AL PORTAPAPELES</div>
+      </footer>
+    </main>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="../common/js/utils.js"></script>
+    <script src="../common/js/projects.js"></script>
+    <script src="../common/js/cv_data.js"></script>
+    <script src="./js/script_v2.js"></script>
+  </body>
+</html>

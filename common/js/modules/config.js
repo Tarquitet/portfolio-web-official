@@ -1,0 +1,25 @@
+export const CONFIG = {
+  DOM: {
+    loader: 'preloader',
+    sectionsRoot: 'dynamic-sections-root',
+    injects: {
+      prof: 'prof-inject',
+      video: 'video-inject',
+      ux: 'ux-inject',
+      media: 'media-inject',
+    },
+    lists: {
+      prof: 'list-prof',
+      personal: 'list-personal',
+      univ: 'list-univ',
+    },
+    tickers: { t1: 'hero-ticker-1', t2: 'hero-ticker-2' },
+    footerYear: 'footer-year',
+    toast: 'toast',
+  },
+  API: {
+    youtubeChannel: 'UCbUqReTGxLD78ohs97ylepA',
+    rssBase: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=',
+  },
+  // SECTIONS moved to window.cvData.sections
+};
