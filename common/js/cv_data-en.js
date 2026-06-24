@@ -1,9 +1,9 @@
 window.cvData = {
   config: {
-    profilePath: '../assets/images/profile/',
-    pdfPath: '../assets/pdf/',
-    portfolioPath: '../assets/images/portfolio/',
-    iconsPath: '../assets/icons/',
+    profilePath: '../../assets/images/profile/',
+    pdfPath: '../../assets/pdf/',
+    portfolioPath: '../../assets/images/portfolio/',
+    iconsPath: '../../assets/icons/',
   },
   labels: {
     contact: 'Contact',

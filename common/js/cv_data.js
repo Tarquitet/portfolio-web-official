@@ -1,10 +1,10 @@
 window.cvData = {
   // Configuration settings for paths and others
   config: {
-    profilePath: '../assets/images/profile/',
-    pdfPath: '../assets/pdf/',
-    portfolioPath: '../assets/images/portfolio/',
-    iconsPath: '../assets/icons/',
+    profilePath: '../../assets/images/profile/',
+    pdfPath: '../../assets/pdf/',
+    portfolioPath: '../../assets/images/portfolio/',
+    iconsPath: '../../assets/icons/',
   },
   // Labels for different sections
   labels: {

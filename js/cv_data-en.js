@@ -52,7 +52,7 @@ window.cvData = {
     {
       id: 'dev-section',
       title: 'DEVELOP<br/>CODER',
-      subtitle: 'WEB | SCRIPTS | AUTOMATIZACIÓN | BD',
+      subtitle: 'WEB | SCRIPTS | AUTOMATIZACIÓN',
       injectTarget: 'prof-inject',
       inMenu: true,
       menuTitle: 'DEVELOP',
@@ -61,7 +61,7 @@ window.cvData = {
     {
       id: 'video-section',
       title: 'VIDEOS<br/>EDIT',
-      subtitle: 'YOUTUBE | SHORTS | REELS | TIK TOK',
+      subtitle: 'YOUTUBE | SHORTS',
       injectTarget: 'video-inject',
       inMenu: true,
       menuTitle: 'VIDEO',
@@ -77,12 +77,12 @@ window.cvData = {
       menuGroup: 'SERVICIOS',
     },
     {
-      id: 'https://art.tarquitet.com',
+      id: 'https://art.tarquitet.com', // La URL externa directamente
       title: 'COMISIONES',
       inMenu: true,
       menuTitle: 'ARTE',
-      menuGroup: 'SERVICIOS',
-      isOnlyLink: true,
+      menuGroup: 'SERVICIOS', // Se inyecta en el dropdown de servicios
+      isOnlyLink: true, // CRUCIAL: No crea sección 01, 02, etc. en la web
     },
     {
       id: 'archive-section',
@@ -105,8 +105,7 @@ window.cvData = {
     name: 'David Josué Pinto Gómez',
     role: 'Multimedia Engineer',
     imageName: 'profile.webp',
-    summary:
-      'Multimedia Engineer specialized in Digital Production and UX/UI Design, with a focus on the creation of strategic and innovative solutions. Expert in the use of Adobe Creative Suite and frontend development, with proven ability to manage complex projects from the technical phase to post-production. Focused on the use of AI tools and agile methodologies to optimize workflows and achieve metric objectives.',
+    summary: 'Multimedia Engineer specialized in Digital Production and UX/UI Design, with a focus on the creation of strategic and innovative solutions. Expert in the use of Adobe Creative Suite and frontend development, with proven ability to manage complex projects from the technical phase to post-production. Focused on the use of AI tools and agile methodologies to optimize workflows and achieve metric objectives.',
   },
   // Contact details
   contact: [
@@ -234,9 +233,5 @@ window.cvData = {
     'ENGINEER ',
     'PROMPT WRITTER ',
     'COOL IDEAS ',
-    'MINECRAFTER ',
-    'CATS LOVER ',
-    'FOXES LOVER ',
-    'JESUS FOLLOWER ',
   ],
 };

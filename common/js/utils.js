@@ -20,9 +20,9 @@ window.Utils = {
     if (category === 'PORTFOLIO') basePath = cvConfig.portfolioPath || projConfig.DEFAULT || basePath;
     else if (category === 'PROFILE') basePath = cvConfig.profilePath || basePath;
     else if (category === 'ART')
-      basePath = '../assets/images/ilustraciones/'; // Ajusta si tu ruta es diferente
-    else if (category === 'DESIGN') basePath = '../assets/images/design/';
-    else if (category === 'DEV') basePath = '../assets/images/dev/';
+      basePath = '/assets/images/ilustraciones/'; // Ajusta si tu ruta es diferente
+    else if (category === 'DESIGN') basePath = '/assets/images/design/';
+    else if (category === 'DEV') basePath = '/assets/images/dev/';
     else if (projConfig[category]) basePath = projConfig[category];
     else basePath = projConfig.DEFAULT || basePath;
 
