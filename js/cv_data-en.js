@@ -8,17 +8,17 @@ window.cvData = {
   },
   // Labels for different sections
   labels: {
-    contact: 'Contact',
-    languages: 'Languages',
-    softSkills: 'Skills',
-    techSkills: 'Techniques',
-    profile: 'Profile',
-    education: 'Training',
-    projects: 'Projects',
-    stack: 'Technological Stack',
-    footerTheme: 'SELECT A TOPIC',
-    footerContact: 'CONTACT + NETWORKS',
-    skillsTitle: 'Skills and Technologies',
+    contact: 'Contacto',
+    languages: 'Idiomas',
+    softSkills: 'Habilidades',
+    techSkills: 'Técnicas',
+    profile: 'Perfil',
+    education: 'Formación',
+    projects: 'Proyectos',
+    stack: 'Stack Tecnológico',
+    footerTheme: 'SELECCIONA UN TEMA',
+    footerContact: 'CONTACTO + REDES',
+    skillsTitle: 'Habilidades y Tecnologías',
     software: 'Software',
     letsTalk: "LET'S TALK.", // Para la contraportada del PDF
     confidential: 'CONFIDENTIAL',
@@ -32,7 +32,7 @@ window.cvData = {
   // ... tus otras secciones
   {
     id: 'https://mi-otra-web.com', // La URL externa directamente
-    title: 'MY OTHER WEBSITE',
+    title: 'MI OTRA WEB',
     inMenu: true,
     menuTitle: 'OTRA WEB',
     menuGroup: 'SERVICIOS', // Se inyecta en el dropdown de servicios
@@ -69,7 +69,7 @@ window.cvData = {
     },
     {
       id: 'ux-section',
-      title: 'DESIGN<br/>RENDERS',
+      title: 'DISEÑO<br/>RENDERS',
       subtitle: 'Miniaturas | 3D | Logos | Fondos',
       injectTarget: 'ux-inject',
       inMenu: true,
@@ -102,16 +102,16 @@ window.cvData = {
   ],
   // Basic info about profile (me)
   basics: {
-    name: 'David Josué Pinto Gómez',
-    role: 'Multimedia Engineer',
+    name: 'David Josué<br>Pinto Gómez',
+    role: 'Ingeniero en Multimedia',
     imageName: 'profile.webp',
-    summary: 'Multimedia Engineer specialized in Digital Production and UX/UI Design, with a focus on the creation of strategic and innovative solutions. Expert in the use of Adobe Creative Suite and frontend development, with proven ability to manage complex projects from the technical phase to post-production. Focused on the use of AI tools and agile methodologies to optimize workflows and achieve metric objectives.',
+    summary: 'Ingeniero en Multimedia especializado en Producción Digital y Diseño UX/UI, con enfoque en la creación de soluciones estratégicas e innovadoras. Experto en el manejo de Adobe Creative Suite y desarrollo frontend, con capacidad comprobada para gestionar proyectos complejos desde la fase técnica hasta la postproducción. Enfocado en el uso de herramientas de IA y metodologías ágiles para optimizar flujos de trabajo y alcanzar objetivos métricos.',
   },
   // Contact details
   contact: [
     // --- COLUMNA IZQUIERDA (PROFESIONAL) ---
     { icon: 'mail', text: 'contact@tarquitet.com', link: '-', type: 'PROFESSIONAL' },
-    { icon: 'globe', text: 'Web Portfolio', link: 'https://web.tarquitet.com', type: 'PROFESSIONAL' },
+    { icon: 'globe', text: 'Portafolio Web', link: 'https://web.tarquitet.com', type: 'PROFESSIONAL' },
     { icon: 'linkedin', text: 'Linkedin', link: 'https://linkedin.com/in/pinto-gomez-david', type: 'PROFESSIONAL' },
     { icon: 'github', text: 'GitHub', link: 'https://github.com/tarquitet', type: 'PROFESSIONAL' },
 
@@ -126,13 +126,13 @@ window.cvData = {
   // Languages data
   languages: [
     {
-      name: 'Spanish',
-      level: 'Native',
+      name: 'Español',
+      level: 'Nativo',
       code: 'ES',
       percent: 100,
     },
     {
-      name: 'English',
+      name: 'Inglés',
       score: 130, //PENDIENTE HACER REAL ESE PUNTAJE - EXAMENES Y A ESTUDIAR MÁS
       maxScore: 300,
 
@@ -164,45 +164,45 @@ window.cvData = {
   // Education history
   education: [
     {
-      title: 'NEW GRANADA MILITARY UNIVERSITY',
+      title: 'UNIVERSIDAD MILITAR NUEVA GRANADA',
       date: '2020 - 2026',
-      degree: 'Multimedia Engineer.',
-      desc: 'Focus on development, design and audiovisual media.',
+      degree: 'Ingeniero en Multimedia.',
+      desc: 'Enfoque en desarrollo, diseño y medios audiovisuales.',
     },
     // Elimina la entrada del colegio para ganar espacio y profesionalismo
     /*{
-      title: 'SANTA ANA SCHOOL',
+      title: 'COLEGIO SANTA ANA',
       date: '2006 - 2019',
-      degree: 'Academic Bachelor with emphasis in Systems.',
+      degree: 'Bachiller Académico con énfasis en Sistemas.',
       desc: '',
     },*/
   ],
   // Projects completed
   projects: [
     {
-      title: 'Website - Truth & Faith',
-      stack: 'HTML5 / CSS3 / UX Design',
-      desc: 'Development of a responsive web platform for ministerial content, prioritizing readability and intuitive navigation for various demographic groups.',
+      title: 'Página Web - Verdad & Fe',
+      stack: 'HTML5 / CSS3 / Diseño UX',
+      desc: 'Desarrollo de plataforma web responsive para contenido ministerial, priorizando la legibilidad y la navegación intuitiva para diversos grupos demográficos.',
     },
     {
-      title: '3D Video Game Prototype - UMNG',
+      title: 'Prototipo de Videojuego 3D - UMNG',
       stack: 'Unreal Engine / Blueprints',
-      desc: 'Experimental 3D platform video game developed in Unreal Engine using Blueprints for the Diploma in Video Game Development.',
+      desc: 'Videojuego experimental de plataformas en 3D desarrollado en Unreal Engine utilizando Blueprints para el Diplomado en Desarrollo de VideoJuegos.',
     },
     {
-      title: 'Professional Portfolio - Tarquitet',
-      stack: 'JS/HTML5/CSS3',
-      desc: 'Personal portfolio development in Vanilla JavaScript, achieving a 95% reduction in the loading weight of multimedia assets through advanced compression techniques without depending on external libraries.',
+      title: 'Portafolio Profesional - Tarquitet',
+      stack: 'JS / HTML5 / CSS3',
+      desc: 'Desarrollo de portafolio personal en Vanilla JavaScript, logrando una reducción del 95% en el peso de carga de activos multimedia mediante técnicas avanzadas de compresión sin depender de librerías externas.',
     },
   ],
   // Software and tools
   software: [
-    { name: 'photoshop', icon: 'photoshop' },
+    { name: 'Photoshop', icon: 'photoshop' },
     { name: 'Unity 3D', icon: 'unity' },
     { name: 'Figma', icon: 'figma' },
-    { name: 'VSCode', icon: 'vscode' },
+    { name: 'VS Code', icon: 'vscode' },
     { name: 'GitHub', icon: 'github' },
-    { name: 'web dev', icon: 'code' },
+    { name: 'Web Dev', icon: 'code' },
     { name: 'Davinci Resolve', icon: 'davinci' },
     { name: 'OBS Studio', icon: 'obs' },
     { name: 'Miro', icon: 'miro' },

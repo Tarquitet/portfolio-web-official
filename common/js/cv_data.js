@@ -1,7 +1,7 @@
 window.cvData = {
   // Configuration settings for paths and others
   config: {
-    profilePath: '../../assets/images/profile/',
+    profilePath: '../assets/images/profile/',
     pdfPath: '../../assets/pdf/',
     portfolioPath: '../../assets/images/portfolio/',
     iconsPath: '../../assets/icons/',
@@ -25,6 +25,7 @@ window.cvData = {
     hire: 'AVAILABLE FOR HIRE',
     shutdown: 'SYSTEM SHUTDOWN',
     rights: 'ALL RIGHTS RESERVED.',
+    certificates: 'Certificados',
   },
   // Sections configuration (moved from modules/config.js)
   /*
@@ -106,7 +107,7 @@ window.cvData = {
     role: 'Ingeniero en Multimedia',
     imageName: 'profile.webp',
     summary:
-      'Ingeniero en Multimedia especializado en Producción Digital y Diseño UX/UI, con enfoque en la creación de soluciones estratégicas e innovadoras. Experto en el manejo de Adobe Creative Suite y desarrollo frontend, con capacidad comprobada para gestionar proyectos complejos desde la fase técnica hasta la postproducción. Enfocado en el uso de herramientas de IA y metodologías ágiles para optimizar flujos de trabajo y alcanzar objetivos métricos.',
+      'Ingeniero en Multimedia enfocado en Producción Digital, UX/UI, herramientas con IA y metodologías ágiles para optimizar flujos de trabajo y alcanzar objetivos métricos. Capacitado en Adobe Creative Suite, desarrollo frontend y gestión de proyectos desde la fase técnica hasta la postproducción.',
   },
   // Contact details
   contact: [
@@ -159,7 +160,7 @@ window.cvData = {
   // Skills data - soft, tech, hard
   skills: {
     soft: ['Creatividad e Innovación', 'Pensamiento Analítico', 'Trabajo en Equipo', 'Comunicación Estratégica'],
-    hard: ['Gestión de Proyectos', 'Lógica de Programación', 'Postproducción Audiovisual', 'Estrategia Digital'],
+    hard: ['Gestión de Proyectos', 'Lógica de Programación', 'Estrategia Digital'],
     tech: ['Postproducción Audiovisual', 'Diseño Web (UX/UI)', 'Desarrollo de Videojuegos', 'Ilustración Digital'],
   },
   // Education history
@@ -168,6 +169,7 @@ window.cvData = {
       title: 'UNIVERSIDAD MILITAR NUEVA GRANADA',
       date: '2020 - 2026',
       degree: 'Ingeniero en Multimedia.',
+      gpa: 'GPA: 3.89',
       desc: 'Enfoque en desarrollo, diseño y medios audiovisuales.',
     },
     // Elimina la entrada del colegio para ganar espacio y profesionalismo
@@ -181,19 +183,24 @@ window.cvData = {
   // Projects completed
   projects: [
     {
-      title: 'Página Web - Verdad & Fe',
-      stack: 'HTML5 / CSS3 / Diseño UX',
-      desc: 'Desarrollo de plataforma web responsive para contenido ministerial, priorizando la legibilidad y la navegación intuitiva para diversos grupos demográficos.',
+      title: 'Portafolio Profesional - Tarquitet',
+      stack: 'Vanilla JS / HTML5 / CSS3',
+      desc: 'Sitio web personal optimizado hasta un 95% sin frameworks complejos.',
+    },
+    {
+      title: 'Sitio Web Oficial - Builtechraft SMP',
+      stack: 'Astro / GitHub Actions / UX Design',
+      desc: 'Diseño responsive, flujos de integración y despliegue continuo (CI/CD).',
+    },
+    {
+      title: 'Pipeline de Datos JSON - Sheets a GitHub',
+      stack: 'Google Apps Script / JSON / GitHub API',
+      desc: 'Automatización de datos usando Google Sheets como CMS y jsDelivr de carga rápida y ligera.',
     },
     {
       title: 'Prototipo de Videojuego 3D - UMNG',
       stack: 'Unreal Engine / Blueprints',
-      desc: 'Videojuego experimental de plataformas en 3D desarrollado en Unreal Engine utilizando Blueprints para el Diplomado en Desarrollo de VideoJuegos.',
-    },
-    {
-      title: 'Portafolio Profesional - Tarquitet',
-      stack: 'JS / HTML5 / CSS3',
-      desc: 'Desarrollo de portafolio personal en Vanilla JavaScript, logrando una reducción del 95% en el peso de carga de activos multimedia mediante técnicas avanzadas de compresión sin depender de librerías externas.',
+      desc: 'Prototipo de plataformas 3D con Blueprints para el Diplomado en Desarrollo de Videojuegos.',
     },
   ],
   // Software and tools
@@ -204,12 +211,19 @@ window.cvData = {
     { name: 'VS Code', icon: 'vscode' },
     { name: 'GitHub', icon: 'github' },
     { name: 'Web Dev', icon: 'code' },
+    { name: 'Python (Scripts)', icon: 'code' }, // <-- AGREGADO: Muestra que sabes Python
+    { name: 'Google Apps Script', icon: 'code' }, // <-- AGREGADO: Validación del proyecto JSON
     { name: 'Davinci Resolve', icon: 'davinci' },
     { name: 'OBS Studio', icon: 'obs' },
     { name: 'Miro', icon: 'miro' },
     { name: 'Chat GPT', icon: 'chatgpt' },
     { name: 'Gemini', icon: 'gemini' },
     { name: 'Autodesk Maya', icon: 'maya' },
+    { name: 'Word', icon: 'word' },
+    { name: 'Excel', icon: 'excel' },
+    { name: 'Google Sheets', icon: 'sheets' },
+    { name: 'Google Docs', icon: 'docs' },
+    { name: 'Google Slides', icon: 'slides' },
   ],
   // Ticker after profile items
   tickerItems: [
@@ -234,5 +248,25 @@ window.cvData = {
     'ENGINEER ',
     'PROMPT WRITTER ',
     'COOL IDEAS ',
+  ],
+  certificates: [
+    {
+      title: 'Diplomado en Desarrollo y Producción de Videojuegos',
+      institution: 'Universidad Militar Nueva Granada',
+      date: '2025',
+      desc: 'Proceso de desarrollo de videojuegos en entornos profesionales.',
+    },
+    {
+      title: 'Ruta de Aprendizaje: IA sin Límites',
+      institution: 'Alcaldía de Bogotá',
+      date: '2026',
+      desc: 'Implementación de herramientas de Inteligencia Artificial para optimizar flujos de trabajo.',
+    },
+    {
+      title: 'Estrategias Pedagógicas para el Desarrollo del Pensamiento',
+      institution: 'SENA',
+      date: '2026',
+      desc: 'Metodologías y técnicas pedagógicas para fomentar el pensamiento crítico.',
+    },
   ],
 };

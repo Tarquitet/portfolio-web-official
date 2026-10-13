@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!d) return console.error('No se encontró cv_data.js');
   document.getElementById('lbl-profile').textContent = d.labels.profile;
   document.getElementById('lbl-education').textContent = d.labels.education;
+  document.getElementById('lbl-certificates').textContent = d.labels.certificates;
   document.getElementById('lbl-projects').textContent = d.labels.projects;
   document.getElementById('lbl-soft').textContent = d.labels.softSkills + ':';
   document.getElementById('lbl-tech').textContent = d.labels.techSkills + ':';
@@ -28,11 +29,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const eduContainer = document.getElementById('cv-education-list');
   if (eduContainer && d.education) {
     d.education.forEach((edu) => {
+      /*eduContainer.innerHTML += `
+        <div class="entry">
+          <div class="entry-header"><span>${edu.title}</span> <span>${edu.date}</span></div>
+          <div class="entry-sub">
+            <span>${edu.degree}</span>
+            ${edu.gpa ? `<span>${edu.gpa}</span>` : ''}
+          </div>
+          ${edu.desc ? `<div class="entry-desc">${edu.desc}</div>` : ''}
+        </div>`;*/
       eduContainer.innerHTML += `
+        <div class="entry">
+          <div class="entry-header"><span>${edu.title}</span> <span>${edu.date}</span></div>
+          <div class="entry-sub">
+            <span>${edu.degree}</span>
+            ${edu.gpa ? `<span>${edu.gpa}</span>` : ''}
+          </div>
+        </div>`;
+    });
+  }
+  const certContainer = document.getElementById('cv-certificates-list');
+  if (certContainer && d.certificates) {
+    d.certificates.forEach((cert) => {
+      certContainer.innerHTML += `
           <div class="entry">
-            <div class="entry-header"><span>${edu.title}</span> <span>${edu.date}</span></div>
-            <div class="entry-sub"><span>${edu.degree}</span></div>
-            ${edu.desc ? `<div class="entry-desc">${edu.desc}</div>` : ''}
+            <div class="entry-header">
+              <span>${cert.title}</span> 
+              <span>${cert.date}</span>
+            </div>
+            <div class="entry-sub"><span>${cert.institution}</span></div>
+            ${cert.desc ? `<div class="entry-desc">${cert.desc}</div>` : ''}
           </div>`;
     });
   }
@@ -53,8 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
       el.textContent = text;
     }
   };
-  renderList('cv-soft-skills', d.skills.soft);
-  renderList('cv-hard-skills', d.skills.hard);
+
+  // 1. COMBINAMOS soft y hard en un solo arreglo en tiempo de ejecución
+  const allGeneralSkills = [...(d.skills.soft || []), ...(d.skills.hard || [])];
+
+  // 2. Renderizamos todo junto en el contenedor de "soft" (que ahora representa todas las generales)
+  renderList('cv-soft-skills', allGeneralSkills);
+
+  // 3. Renderizamos las técnicas y el software como siempre
   renderList('cv-tech-skills', d.skills.tech);
   renderList('cv-software-list', d.software);
   const getLangLevel = (lang) => {
